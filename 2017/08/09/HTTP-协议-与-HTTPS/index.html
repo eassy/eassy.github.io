@@ -1,0 +1,1027 @@
+<!--
+	作者：Sariay
+	时间：2018-09-25
+	描述：There may be a bug, but don't worry, QiLing(器灵) says that it can work normally!
+-->
+<!DOCTYPE html>
+<html class="html-loading">
+		
+
+<head><meta name="generator" content="Hexo 3.8.0">
+	<meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+  <title>
+    
+      HTTP 协议 与 HTTPS | Eassy
+    
+  </title>
+  <meta name="author" content="eassy">
+  <meta name="keywords" content>
+  <meta name="description" content="人性就是用来质疑生活的">
+	<!-- favicon -->
+  <link rel="shortcut icon" href="/img/favicon.ico">
+
+  <!-- css -->
+  <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/Annie.css">
+  
+  <!-- jquery -->
+	<script src="/js/jquery.min.js"></script>
+
+  <!-- leancloud -->
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+<script src="/js/leancloud.js"></script>
+</head>
+	<body>
+		<!-- Preloader -->
+
+	<div id="preloader">
+		<div class="pre-container">
+			
+				<div class="spinner">
+					<div class="double-bounce1"></div>
+					<div class="double-bounce2"></div>
+				</div>
+						
+		</div>
+	</div>
+
+
+<!-- header -->
+<header class="fixbackground" data-img-mode="normal" data-normal-src="/img/1.jpg" data-random-max="110" data-random-src="https://sariay.github.io/Random-img/">
+	<div class="mask">
+		<!-- Logo and navigation -->
+		<div class="h-header">
+			<div id="logo">
+				<a href="/">
+						
+						<img src="/img/logo.png" alt="Logo">
+					
+				</a>
+			</div>
+			
+			<div id="navigation-show">
+				<ul>
+	
+		<li class="menu-home">
+			<a href="/" class="menu-item-home">主页</a>
+		</li>
+	
+		<li class="menu-archive">
+			<a href="/archives" class="menu-item-archive">归档</a>
+		</li>
+	
+		<li class="menu-categories">
+			<a href="/categories" class="menu-item-categories">分类</a>
+		</li>
+	
+		<li class="menu-tags">
+			<a href="/tags" class="menu-item-tags">标签</a>
+		</li>
+	
+		<li class="menu-about">
+			<a href="/about" class="menu-item-about">关于</a>
+		</li>
+	
+		<li class="menu-gallery">
+			<a href="/gallery" class="menu-item-gallery">相册</a>
+		</li>
+	
+
+	
+</ul>
+			</div>				
+		</div>
+
+		<!-- motto -->
+		<div class="h-body">	
+			
+				<p class="motto"></p>
+			
+		</div>
+		
+		<!-- others: such as time... -->			
+		<div class="h-footer">
+			<a href="javascript:;" id="read-more"><i class="fa fa-angle-double-down" aria-hidden="true"></i>
+			</a>
+
+			
+				<!-- 
+	This is only a demo, please go to "https://time.is" to set your city time! 
+-->
+<style type="text/css">
+	.header-date {
+		font-size: 1.6rem;
+		color: #fff;
+		position: absolute;
+		bottom: 5px;
+		right: 1rem;
+		writing-mode: tb-rl;
+	}	
+	
+	.header-date a {
+		border-bottom: none;
+	}
+
+	@media only screen and (max-width: 768 ) {
+		.header-date {
+			font-size: 1rem;
+		}			
+	}
+</style>
+<div class="header-date">
+	<a href="https://time.is/Beijing" id="time_is_link" rel="nofollow"></a>
+	<span id="Beijing_z43d"></span>
+</div>
+<script src="//widget.time.is/zh.js"></script>
+<script>
+	time_is_widget.init({
+		Beijing_z43d:{
+			template:"DATE", 
+			date_format:"year年 monthname dnum日"
+		}
+	});
+</script>
+			
+		</div>
+	</div>
+</header>
+
+<div id="navigation-hide">
+	<!-- Progress bar -->
+	<div id="progress-bar"></div>
+
+	<!-- Progress percent -->
+	<div id="progress-percentage"><h1>0.0%</h1></div>
+
+	<div class="toc-switch"><span class="switch-button">目录</span></div>
+
+	<!-- Page title -->
+	<p>
+		
+			当前文章&nbsp;:&nbsp;《HTTP 协议 与 HTTPS》
+		
+	</p>
+
+	<!-- Nav trigger for navigation-H-->
+	<a class="nav-trigger"><span></span></a>
+</div>
+
+<!-- Navigation in div(id="navigation-H") -->
+<nav class="nav-container" id="cd-nav">
+	<div class="nav-header">
+		<h3>Navigation</h3>
+		<a href="javascript:;" class="nav-close"></a>
+	</div>
+	<div class="nav-body">
+		<ul>
+	
+		<li class="menu-home">
+			<a href="/" class="menu-item-home">主页</a>
+		</li>
+	
+		<li class="menu-archive">
+			<a href="/archives" class="menu-item-archive">归档</a>
+		</li>
+	
+		<li class="menu-categories">
+			<a href="/categories" class="menu-item-categories">分类</a>
+		</li>
+	
+		<li class="menu-tags">
+			<a href="/tags" class="menu-item-tags">标签</a>
+		</li>
+	
+		<li class="menu-about">
+			<a href="/about" class="menu-item-about">关于</a>
+		</li>
+	
+		<li class="menu-gallery">
+			<a href="/gallery" class="menu-item-gallery">相册</a>
+		</li>
+	
+
+	
+</ul>
+	</div>
+	<div class="nav-footer">
+		<ul>
+	
+		<li>
+			<a href="http://github.com/" target="_blank">
+				<i class="fa fa-github"></i>
+			</a>
+		</li>
+	
+		<li>
+			<a href="http://github.com/" target="_blank">
+				<i class="fa fa-weibo"></i>
+			</a>
+		</li>
+	
+		<li>
+			<a href="http://github.com/" target="_blank">
+				<i class="fa fa-pinterest"></i>
+			</a>
+		</li>
+	
+		<li>
+			<a href="http://github.com/" target="_blank">
+				<i class="fa fa-instagram"></i>
+			</a>
+		</li>
+	
+		<li>
+			<a href="http://github.com/" target="_blank">
+				<i class="fa fa-twitter"></i>
+			</a>
+		</li>
+	
+		<li>
+			<a href="/atom.xml" target="_blank">
+				<i class="fa fa-rss"></i>
+			</a>
+		</li>
+			
+</ul>
+
+	</div>
+</nav>
+			
+		<!--main-->
+		<main>
+			<!--
+	时间：2018-11-17
+	描述：
+		插件名称：katelog.min.js
+		插件作者：KELEN
+		插件来源: https://github.com/KELEN/katelog
+-->
+
+	
+		<div class="layout-toc">
+			<div id="layout-toc">
+				<div class="k-catelog-list" id="catelog-list" data-title="文章目录"></div>
+			</div>
+		</div>
+
+		
+		<script src="/plugin/toc/katelog.min.js"></script>
+
+		
+	 
+
+<div class="layout-post">
+	<div id="layout-post">
+	<div class="article-title">
+		<i class="fa fa-paper-plane-o" aria-hidden="true"></i>
+		
+	<a href="/2017/08/09/HTTP-协议-与-HTTPS/" itemprop="url">
+		HTTP 协议 与 HTTPS
+	</a>
+
+	</div>
+
+	<div class="article-meta">
+		<span>
+			<i class="fa fa-calendar"></i>
+			
+
+
+	发布于
+
+	<a href="/2017/08/09/HTTP-协议-与-HTTPS/" itemprop="url">
+		<time datetime="2017-08-09T09:16:39.000Z" itemprop="datePublished">
+	  		2017-08-09
+	  </time>
+	</a>
+	&nbsp;
+
+
+
+
+
+			
+
+
+
+
+	更新于
+
+	<a href="/2017/08/09/HTTP-协议-与-HTTPS/" itemprop="url">
+		<time datetime="2017-08-09T09:16:39.000Z" itemprop="dateUpdated">
+	  		2018-11-19
+	  </time>
+	</a> 
+
+
+
+		</span>
+		<span>
+			<i class="fa fa-tags"></i>
+			
+	
+		<a href="/tags/编程/" class=" ">
+			编程
+		</a>
+	
+		
+		</span>
+		
+		
+
+
+
+	</div>
+
+	<div class="article-content" id="article-content">
+		<p>复习一下网络协议。 <a id="more"></a></p>
+<h2 id="TCP-UDP-协议"><a href="#TCP-UDP-协议" class="headerlink" title="TCP/UDP 协议"></a>TCP/UDP 协议</h2><h3 id="TCP-协议"><a href="#TCP-协议" class="headerlink" title="TCP 协议"></a>TCP 协议</h3><h4 id="面向连接"><a href="#面向连接" class="headerlink" title="面向连接"></a>面向连接</h4><p>TCP 协议是面向连接的，可靠的传输层协议，可以保证数据正确性和合法性，传输的可靠到达，流量控制。<br>在建立连接的时候，TCP 进行三次握手，释放连接的时候，进行四次挥手。  </p>
+<p>三次握手顺序如下：  </p>
+<ol>
+<li>客户端-&gt;服务端：我将发起连接。  服务端确定了自己的接收能力是 OK 的  </li>
+<li>服务端-&gt;客户端：我已经收到了你的请求。  客户端确定了自己的发送能力和接收能力  </li>
+<li>客户端-&gt;服务端：我接收到了你的回应，马上发送。 服务端确定了自己的发送能力。</li>
+</ol>
+<p>四次挥手：  </p>
+<ol>
+<li>客户端-&gt;服务端：我没有数据发送了，你先发送剩下的，完事告诉我。</li>
+<li>服务端-&gt;客户端：好的，我发送完了告诉你。</li>
+<li>服务端-&gt;客户端：我发送完了，你收到信息就可以断开连接了。</li>
+<li>客户端-&gt;服务端：好的，你也断开吧。客户端在等待一定时间保证网络上没有未到达的数据包后，断开连接。  </li>
+</ol>
+<p>为什么要四次挥手，因为客户端请求断开连接的时候，只是说明自己没有数据要发送了，但是自己还可以接受，服务端也可能还有数据没有发送完成。<br>所以 TCP 协议是面向连接的，它保证双方都有接受和发送能力。  </p>
+<h4 id="数据可靠性和流量拥塞控制"><a href="#数据可靠性和流量拥塞控制" class="headerlink" title="数据可靠性和流量拥塞控制"></a>数据可靠性和流量拥塞控制</h4><ol>
+<li>校验和 有一个校验和字段，发送方将所有报文分段反码相加，结果存在校验和字段中，接收方收到后同样进行计算，相同则正确。</li>
+<li>序列号 TCP 给每个字节都编号，进行去重、完整性、顺序性的应用。</li>
+<li>确认应答 每次收到请求，接收方都会进行确认，给发送方发送确认报文，里面的确认值表明这个值之前的数据都收到了。</li>
+<li>超时重传 经过一段时间后，发送方没有收到接收方的确认报文，会重新发送。</li>
+<li>流量控制 接收方收到报文后，进行确认应答时，会将自身缓冲区剩余大小放到窗口段中，设置0的话，发送方不再发送数据，同时等待窗口更新的通知，过了超时时间还没有收到的话，会发送窗口探测，查看窗口是否更新完成可以继续发送。</li>
+<li>拥塞控制、慢启动。还有一个拥塞窗口的概念，每次发送，都是发送流量控制窗口和拥塞窗口的最小值。每次拥塞窗口都是从1开始，指数级增长，慢慢发送的越来越多，超过阈值就进行线性增长，出现重传的话，阈值设置为当前拥塞窗口大小的一半，同时进行再次慢启动。</li>
+</ol>
+<h3 id="UDP-协议"><a href="#UDP-协议" class="headerlink" title="UDP 协议"></a>UDP 协议</h3><p>UDP 协议无法保证可靠性，顺序性，所以传输效率高，处理速度快，所以通常音频和视频数据，可以使用 UDP 协议。</p>
+<h2 id="HTTP-协议"><a href="#HTTP-协议" class="headerlink" title="HTTP 协议"></a>HTTP 协议</h2><p>工作在应用层，基于 TCP 协议实现。</p>
+<h3 id="cookie"><a href="#cookie" class="headerlink" title="cookie"></a>cookie</h3><p>简单来说，服务器在响应头中给浏览器发送 Set-Cookie 段，后期浏览器根据段中的配置，取出 cookie 回传给服务器。每次可以发送多个段，每个段中包含：</p>
+<pre><code>* 名称-值    cookie 的名称和值
+* Domain 域 = 域名    当前 cookie 可以被发送到哪些域或者子域下面 默认是当前域
+* Path = 路径    所属的路径
+* Expires = Date    过期时间未指定过期时间，代表生命周期为当前浏览器，关闭后删除，指定之前的时间，cookie 会立即删除。
+                 还有一点，假如未设置过期时间，存储在浏览器内存中，否则存储在硬盘上。
+* Secure    有这个字符串的话，代表只有 https 安全通信时才发送 cookie
+* HttpOnly 有这个字符串的话，代表此 cookie 只能用于 http 或 https 传输，脚本 js 等是不能访问的。</code></pre><p>浏览器回传给服务器的时候，在请求头发送 Cookie 段，只包含 名称=值 对，多个以分号相隔。<br>下面是一个例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">/// 服务器发送给浏览器，只注重 set-cookie 段</span><br><span class="line">HTTP/1.1 200 OK</span><br><span class="line"></span><br><span class="line">Content-type: text/html</span><br><span class="line"></span><br><span class="line">Set-Cookie: name=value</span><br><span class="line"></span><br><span class="line">Set-Cookie: name2=value2; Expires=Wed, 09Jun 2021 10:18:14 GMT</span><br><span class="line"></span><br><span class="line">/// 浏览器回传</span><br><span class="line">GET /spec.html HTTP/1.1</span><br><span class="line"></span><br><span class="line">Host: www.webryan.net</span><br><span class="line"></span><br><span class="line">Cookie: name=value; name2=value2</span><br><span class="line"></span><br><span class="line">Accept: */*</span><br></pre></td></tr></table></figure>
+
+<p>Cookie 可以做很多事情，因为浏览器已经保存起来了一些信息，比如用户账号缓存，记录用户行为，当然也有安全性缺失等缺点，比如 js 也可以更改存储的 cookie。</p>
+<h3 id="session"><a href="#session" class="headerlink" title="session"></a>session</h3><p>为了在 http 协议上，对客户保存状态，有两种方案，cookie 机制和 session 机制。  </p>
+<p>cookie 机制是在客户端保存状态的机制，而 session 是在服务端保持状态的一个机制。</p>
+<p>当需要为客户端创建一个 session 的时候，服务器会检查客户端请求头中是否包含一个 session-id ，假如有的话就说明以前创建过 session ，根据 session-id 去查找到对应的 session ，假如没有的话，生成一个 session 和与之对应的 session-id，并把 session-id 返回给客户端保存起来。<br>通常，这个 session-id ，是保存在客户端的 cookie 里面的，但是有时候，客户端会把 cookie 禁止掉，这时候可以将 session-id 放到 url 后面上传。<br>至于在 session 里面可以存储什么，这个也是多种多样的。</p>
+<h3 id="HTTP-队首阻塞"><a href="#HTTP-队首阻塞" class="headerlink" title="HTTP 队首阻塞"></a>HTTP 队首阻塞</h3><p>在一个 tcp 连接中，只有多次请求会放到一个队列中，只有上一个请求收到回应完成后，才能发送下一个请求，这样假如前面的数据过大，会引起后面请求被阻塞。</p>
+<h3 id="HTTP-2-0"><a href="#HTTP-2-0" class="headerlink" title="HTTP 2.0"></a>HTTP 2.0</h3><h4 id="帧-消息-流"><a href="#帧-消息-流" class="headerlink" title="帧 消息 流"></a>帧 消息 流</h4><p>一个帧是传输数据的最小单位，里面有数据，有所属流的标识<br>流可以理解成针对于每个资源的请求<br>一个消息可以理解为一次 HTTP 传输的数据，里面可能包含多个流的多个帧。<br>每次传输一个消息，会一次传输多个流的多个帧，乱序传输，收到后会再次组合，这样实现了多个流即多个资源的并行传输，解决了 http 可能会出现的队首阻塞，但是 tcp 层的阻塞没有处理。</p>
+<h4 id="传输的数据被编码为二进制"><a href="#传输的数据被编码为二进制" class="headerlink" title="传输的数据被编码为二进制"></a>传输的数据被编码为二进制</h4><p>数据被编码为二进制</p>
+<h4 id="多次连接复用一个-TCP-连接"><a href="#多次连接复用一个-TCP-连接" class="headerlink" title="多次连接复用一个 TCP 连接"></a>多次连接复用一个 TCP 连接</h4><p>建立一条 TCP 连接后，可能上面有多个数据流在并行传输。</p>
+<h4 id="首部压缩"><a href="#首部压缩" class="headerlink" title="首部压缩"></a>首部压缩</h4><p>不同于 http 1.x ，每次请求都有一个完整的 head 首部，http 2.0，保存着一个首部表，每次可能只对这个表进行键值对的更新，而且对于数据进行了压缩。</p>
+<h2 id="HTTPS：基于-HTTP-协议的加密实现"><a href="#HTTPS：基于-HTTP-协议的加密实现" class="headerlink" title="HTTPS：基于 HTTP 协议的加密实现"></a>HTTPS：基于 HTTP 协议的加密实现</h2><h3 id="HTTP-协议的短板"><a href="#HTTP-协议的短板" class="headerlink" title="HTTP 协议的短板"></a>HTTP 协议的短板</h3><ol>
+<li>因为 HTTP 协议是明文传输，所以有可能会被窃听</li>
+<li>无法验证同新方的身份，可能遭遇伪装</li>
+<li>无法证明报文的完整性，有可能已遭遇篡改</li>
+</ol>
+<h3 id="HTTPS-协议的解决方法"><a href="#HTTPS-协议的解决方法" class="headerlink" title="HTTPS 协议的解决方法"></a>HTTPS 协议的解决方法</h3><p>HTTPS 是 HTTP 通信接口部分使用 SSL 和 TLS 协议代替。<br>SSL 协议采用公开密钥加密的处理方式进行安全处理，HTTP 协议最开始直接和 TCP 通信，使用 SSL 后，变成先和 SSL 通信，再由 SSL 协议去和 TCP 进行通信。<br>采用 SSL 后，HTTPS 可以进行加密处理和认证，并进行完整性保护，即 HTTP + 加密 + 认证 + 完整性保护 = HTTPS。<br>所以说 HTTPS 并不是一种新的协议，而是 HTTP 采用 SSL 协议，SSL 协议提供这些加密等功能。</p>
+<h3 id="两种加密算法"><a href="#两种加密算法" class="headerlink" title="两种加密算法"></a>两种加密算法</h3><p>共享密钥加密 和 公开密钥加密</p>
+<ol>
+<li>共享密钥加密 也叫对称密钥加密，发送方和接收方都保存有一个密钥，加密和解密都用到密钥，但是如何传输密钥，传输过程中密钥也有可能会被监听窃取。</li>
+<li>共开密钥加密 也叫非对称密钥加密，使用公开密钥加密，发送方使用接收方公布的公开密钥进行加密，接收方使用自己保存的私钥进行解密。</li>
+</ol>
+<h3 id="HTTPS-的具体实现方式"><a href="#HTTPS-的具体实现方式" class="headerlink" title="HTTPS 的具体实现方式"></a>HTTPS 的具体实现方式</h3><p>HTTPS 实现共享密钥加密和公开密钥加密结合的混合加密机制。<br>在传输共享密钥阶段，使用公开密钥加密方式进行交换密钥，之后简历通信交换报文，则使用共享密钥加密方式。</p>
+<h3 id="如何证明公开密钥的正确性"><a href="#如何证明公开密钥的正确性" class="headerlink" title="如何证明公开密钥的正确性"></a>如何证明公开密钥的正确性</h3><p>但是即使使用公开密钥加密，也有问题，那就是在交换公开密钥的时候，也无法证明公开密钥就是真正的密钥，有可能真正的公开密钥被替换掉了。<br>为了解决这个问题，引入了第三方数字证书认证机构，处于客户端和服务器双方都可信赖的第三方机构的立场上。  </p>
+<ol>
+<li>首先，服务器 A 运营人员向数字证书认证机构提出公开密钥的申请，把自己的公开密钥 a 发送给数字证书认证机构。</li>
+<li>数字认证机构 B 用自己的私有密钥向服务器 A 的公开密钥 a 做数字签名，将这个公开密钥放入证书 b 。</li>
+<li>服务器 A 会将这个证书 b 发送给客户端，客户端使用认证机构的公开密钥 b1，对这个证书的数字签名做验证，即验签操作，假如正确，客户端就认为服务器 A 发过来的证书中的公开密钥，是可以信任的。然后客户端发送数据的时候，使用服务器的公开密钥对报文加密后发送，服务器使用自己的私有密钥对报文进行解密。</li>
+</ol>
+<p>这个过程有个前提，就是认证机构的 公开密钥 b1 ，是什么时候传输给客户端的，一般来说浏览器里事先导入了认证机构的公开密钥。</p>
+<h3 id="单向认证和双向认证"><a href="#单向认证和双向认证" class="headerlink" title="单向认证和双向认证"></a>单向认证和双向认证</h3><p>单向认证 客户端保存服务端的公钥，相当于只验证服务端是否安全。<br>双向认证 客服端保存服务端公钥，服务端保存客户端公钥，相互验证。</p>
+<h2 id="OC-如何实现-HTTPS"><a href="#OC-如何实现-HTTPS" class="headerlink" title="OC 如何实现 HTTPS"></a>OC 如何实现 HTTPS</h2><h3 id="使用-NSURLSession"><a href="#使用-NSURLSession" class="headerlink" title="使用 NSURLSession"></a>使用 NSURLSession</h3><p>当使用 NSURLSession 发起时，会回调下面的方法：    </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">-(void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didReceiveChallenge:(NSURLAuthenticationChallenge *)challenge completionHandler:(void (^)(NSURLSessionAuthChallengeDisposition, NSURLCredential * _Nullable))completionHandler</span><br><span class="line">&#123;</span><br><span class="line">    NSLog(@&quot;%@&quot;,challenge.protectionSpace);</span><br><span class="line"></span><br><span class="line">    if (![challenge.protectionSpace.authenticationMethod isEqualToString:@&quot;NSURLAuthenticationMethodServerTrust&quot;]) </span><br><span class="line">    	return;</span><br><span class="line">    /*</span><br><span class="line">     NSURLSessionAuthChallengeUseCredential 使用证书</span><br><span class="line">     NSURLSessionAuthChallengePerformDefaultHandling  忽略证书 默认的做法</span><br><span class="line">     NSURLSessionAuthChallengeCancelAuthenticationChallenge 取消请求,忽略证书</span><br><span class="line">     NSURLSessionAuthChallengeRejectProtectionSpace 拒绝,忽略证书</span><br><span class="line">     */</span><br><span class="line"></span><br><span class="line">    NSURLCredential *credential = [NSURLCredential credentialForTrust:challenge.protectionSpace.serverTrust];</span><br><span class="line"></span><br><span class="line">    completionHandler(NSURLSessionAuthChallengeUseCredential,credential);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="使用-AF"><a href="#使用-AF" class="headerlink" title="使用 AF"></a>使用 AF</h3><p>AF 内部已经对 HTTPS 进行了处理，单向认证的时候:  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">//在你封装的网络工具类请求前初始化时增加以下代码</span><br><span class="line">AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];</span><br><span class="line">//设置证书模式，AFSSLPinningModeNone，代表前端包内不验证</span><br><span class="line">//在单向认证时，前端不放证书，服务器去验证</span><br><span class="line">AFSecurityPolicy *securityPolicy = [AFSecurityPolicy policyWithPinningMode:AFSSLPinningModeNone];</span><br><span class="line">// 如果是需要服务端验证证书，需要设置为YES</span><br><span class="line">securityPolicy.allowInvalidCertificates = YES;</span><br><span class="line">//validatesDomainName 是否需要验证域名，默认为YES；</span><br><span class="line">securityPolicy.validatesDomainName = NO;</span><br><span class="line">//设置验证模式</span><br><span class="line">manager.securityPolicy = securityPolicy;</span><br></pre></td></tr></table></figure>
+
+<p>双向认证的时候：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">//在你封装的网络工具类请求前初始化时增加以下代</span><br><span class="line">AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];</span><br><span class="line">//设置验证证书，该模式下许愿把证书打包进项目里，进行验证</span><br><span class="line">AFSecurityPolicy *securityPolicy = [AFSecurityPolicy policyWithPinningMode:AFSSLPinningModeCertificate];</span><br><span class="line">//证书的路径</span><br><span class="line">NSString *cerPath = [[NSBundle mainBundle] pathForResource:@&quot;xxx&quot; ofType:@&quot;.cer&quot;];</span><br><span class="line">NSData *dataSou = [NSData dataWithContentsOfFile:cerPath];</span><br><span class="line">NSSet *set = [NSSet setWithObjects:dataSou, nil];</span><br><span class="line">securityPolicy.allowInvalidCertificates = YES;</span><br><span class="line">securityPolicy.validatesDomainName = YES;</span><br><span class="line">[securityPolicy setPinnedCertificates:set];</span><br><span class="line">//将验证方式赋值给管理者</span><br><span class="line">manager.securityPolicy = securityPolicy;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Charles-如何进行的-HTTPS-抓包"><a href="#Charles-如何进行的-HTTPS-抓包" class="headerlink" title="Charles 如何进行的 HTTPS 抓包"></a>Charles 如何进行的 HTTPS 抓包</h2><p>Charles 抓取 HTTPS 的前提是客户端必须信任 Charles 证书。<br>使用 Charles 后：  </p>
+<ol>
+<li>Charles 作为中间人，代替客户端向服务端请求数据。</li>
+<li>服务端返回公钥证书后，Charles 将公钥保存，然后用自己的公钥制作证书，将证书发给客户端。</li>
+<li>客户端获取 Charles 公钥证书后，必须选择信任，不然会中断连接，然后将对称加密私钥通过 Charles 公钥进行加密后传给 Charles。</li>
+<li>Charles 用自己的 私钥进行解密，获取到 对称加密私钥，然后用服务器的公钥进行加密传给服务器。</li>
+<li>服务器用自己的私钥进行解密，获取到 对称加密私钥。</li>
+<li>至此 Charles 获取到了 对称加密密钥 和 服务器公钥，就可以进行发送数据和解密了。</li>
+</ol>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>相对于 HTTP 协议，HTTPS 会花费更多的时间，消耗更多的 CPU 资源，所以比较好的方式是在需要更安全的地方，使用 HTTPS 做数据传输。<br>单向认证更加灵活，客户端不需要把相应的证书打包进入 APP 内，这个证书是有过期时间的。<br>双向认证更加安全。</p>
+	
+	</div>
+	
+	<div id="current-post-cover" data-scr="/img/cart_cover.jpg"></div>
+
+	<!-- relate post, comment...-->
+	<div class="investment-container">
+		<div class="investment-header">
+			<div class="investment-title-1">
+				<div class="on">相关文章</div>
+				<div>评论</div>
+				<div>分享</div>
+			</div>
+			<div class="investment-title-2">	            
+				
+	<span>
+		<a href="javascript: window.scrollTo(0, 0);">返回顶部</a>
+		
+			<a href="/2018/11/14/18-11-14-面试复盘/" title="18.11.14 面试复盘" rel="prev">
+				&laquo;上一篇
+			</a>
+		
+		
+			<a href="/2017/05/12/字符编码-转/" title="字符编码(转)" rel="next">
+				下一篇&raquo;
+			</a>
+			
+	</span>
+
+
+      		
+			</div>	
+		</div>
+		
+		<div class="investment-content">
+			<div class="investment-content-list">
+				
+
+<div class="relate-post">
+	
+		<ul>
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2017/05/12/字符编码-转/" title="字符编码(转)">
+								字符编码(转)			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								五月 12日, 2017				
+							</p>
+							<p class="relate-post-content">
+								什么是字符集在介绍字符集之前，我们先了解下为什么要有字符集。我们在计算机屏幕上看到的是实体化的文字，而在计算机存储介质中存放的实际是二进制的比特流。那 么在这两者之间的转换规则就需要一个统一的标准，否则把我们的U盘插到老板的电脑上，文...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2017/05/12/字符编码-转/" title="字符编码(转)">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="字符编码(转)">
+							</a>
+						</div>
+					</li>											
+			
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2018/12/19/OAStackView/" title="OAStackView">
+								OAStackView			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								十二月 19日, 2018				
+							</p>
+							<p class="relate-post-content">
+								UIStackView 的理解UIStackView 是 iOS9 推出的新特性，允许我们线性的去布局一个界面，在之前没有用到过，但是新公司用到的地方挺多，所以写一篇文章介绍一下，也加深自己的理解。使用 UIStackView 布局，...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2018/12/19/OAStackView/" title="OAStackView">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="OAStackView">
+							</a>
+						</div>
+					</li>											
+			
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2018/12/17/NSURLProtocol/" title="NSURLProtocol">
+								NSURLProtocol			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								十二月 17日, 2018				
+							</p>
+							<p class="relate-post-content">
+								在 Apple 的文档 URL Loading System 中，详细介绍了一个请求是如何创建、发起、回传数据的，还包括了证书认证，cookie 等一系列的操作，但是好像唯独遗漏了一个特殊的类： NSURLProtocol ，其实在我...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2018/12/17/NSURLProtocol/" title="NSURLProtocol">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="NSURLProtocol">
+							</a>
+						</div>
+					</li>											
+			
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2018/12/07/iOS-下的-https-单向和双向认证/" title="iOS 下的 https 单向和双向认证">
+								iOS 下的 https 单向和双向认证			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								十二月 7日, 2018				
+							</p>
+							<p class="relate-post-content">
+								iOS 操作系统，已经对请求中的认证需求(有的文章中称为 挑战)，做了简单的处理。当我们使用NSURLSession发起一次请求时，假如服务端返回数据要求客户端进行需求认证，不管这次需求认证是 HTTP Basic 类型(例如要求输入...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2018/12/07/iOS-下的-https-单向和双向认证/" title="iOS 下的 https 单向和双向认证">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="iOS 下的 https 单向和双向认证">
+							</a>
+						</div>
+					</li>											
+			
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2018/12/04/Apple-文档Authentication-and-Credentials-翻译/" title="Apple 文档 Authentication and Credentials 的翻译">
+								Apple 文档 Authentication and Credentials 的翻译			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								十二月 4日, 2018				
+							</p>
+							<p class="relate-post-content">
+								对 Apple 的 认证和证书 开发文档的一个翻译 
+Handling an Authentication ChallengeRespond appropriately when a server demands authentica...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2018/12/04/Apple-文档Authentication-and-Credentials-翻译/" title="Apple 文档 Authentication and Credentials 的翻译">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="Apple 文档 Authentication and Credentials 的翻译">
+							</a>
+						</div>
+					</li>											
+			
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2018/12/04/最新-SDWebImage-解读/" title="最新 SDWebImage 解读">
+								最新 SDWebImage 解读			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								十二月 4日, 2018				
+							</p>
+							<p class="relate-post-content">
+								针对于 SDWebImage 4.0 版本的源码分析
+View 层负责 view 的 loading 控件管理，每个 view 的请求发起、取消入口。
+UIView+WebCacheOperation 分类负责管理每次请求产生的 SD...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2018/12/04/最新-SDWebImage-解读/" title="最新 SDWebImage 解读">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="最新 SDWebImage 解读">
+							</a>
+						</div>
+					</li>											
+			
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2018/11/20/RunLoop-CommonModes/" title="RunLoop-CommonModes">
+								RunLoop-CommonModes			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								十一月 20日, 2018				
+							</p>
+							<p class="relate-post-content">
+								RunLoop 的 CommonModes ，其实不是一个真正的 modes，而是一个伪 mode.. ，每个 _CFRunLoopRef 的数据结构大致是这样的：
+123456789101112131415161718 struct...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2018/11/20/RunLoop-CommonModes/" title="RunLoop-CommonModes">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="RunLoop-CommonModes">
+							</a>
+						</div>
+					</li>											
+			
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2018/11/15/NSCondition-锁/" title="NSCondition 锁">
+								NSCondition 锁			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								十一月 15日, 2018				
+							</p>
+							<p class="relate-post-content">
+								最近对于 NSCondition 感到有些疑惑，所以写点东西进行研究一下。 
+用法首先 NSCondition 有以下几个方法：
+12345- (void)wait;   让线程陷入睡眠，将锁的权利交出。- (BOOL)waitUnt...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2018/11/15/NSCondition-锁/" title="NSCondition 锁">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="NSCondition 锁">
+							</a>
+						</div>
+					</li>											
+			
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2018/11/15/18-11-15-面试复盘/" title="18.11.15 面试复盘">
+								18.11.15 面试复盘			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								十一月 15日, 2018				
+							</p>
+							<p class="relate-post-content">
+								今天这次记录是时间最短的一个，我提前 15 分钟到了面试地点，半个小时就面完了，面试官很温柔，应该是移动端负责人，非 iOS 出身，对技术的提问也是浅尝辄止，主要是考察被面试者的项目经验，逻辑思维等。 
+OC 的内存管理原理老生常谈，...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2018/11/15/18-11-15-面试复盘/" title="18.11.15 面试复盘">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="18.11.15 面试复盘">
+							</a>
+						</div>
+					</li>											
+			
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2018/11/15/18-11-13-面试复盘/" title="18.11.13 面试复盘">
+								18.11.13 面试复盘			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								十一月 15日, 2018				
+							</p>
+							<p class="relate-post-content">
+								这次面试主要针对基础，暴露了一部分更底层的问题，题目就只写我回答不好的。
+笔试题目
+assign 和 weak 的区别，延伸出来就是为什么 weak 可以自动置为 nil ，为什么 assign 不会？主要是 assign 为什么不会...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2018/11/15/18-11-13-面试复盘/" title="18.11.13 面试复盘">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="18.11.13 面试复盘">
+							</a>
+						</div>
+					</li>											
+			
+			
+		</ul>
+	
+</div>	
+			</div>
+			<div class="investment-content-list">
+				<div class="layout-comment">
+
+	
+
+		
+
+			<!-- I don't know !!!-->
+			<div>Please check the comment setting in config.yml of hexo-theme-Annie!</div>
+			
+		
+		
+	
+
+</div>
+			</div>
+			<div class="investment-content-list">
+				<div class="layout-share">
+	
+	
+
+		
+			
+			<!-- socialShare share -->
+			<div class="social-share"></div>
+
+<!--  css & js -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+<script async src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+			
+		
+		
+	
+</div>
+
+
+			</div>
+		</div>	
+	</div>
+	</div>
+</div>
+
+
+
+	<!-- leancloud -->
+	<!--
+	时间：2018-11-27
+	描述：
+		文章访问量：visitors
+		文章喜欢量：likes	
+		文章排行榜：topNPost
+		其他得说明：
+			01-Cookie相关的函数 
+				https://blog.csdn.net/somehow1002/article/details/78511541（Author：somehow1002）
+			02-visitors相关的函数 
+				https://blog.csdn.net/u013553529/article/details/63357382（Author：爱博客大伯）
+				https://notes.doublemine.me/2015-10-21-为NexT主题添加文章阅读量统计功能.html（Author：夏末）
+			03-topNPost相关的函数
+				https://hoxis.github.io/hexo-next-read-rank.html（Author：hoxis）
+			04-likes相关的函数，
+				参考了01 & 02进行简单的设计与实现
+-->
+
+
+	
+
+
+<!-- show math formula -->
+
+
+
+	 
+	<script src="/plugin/clipboard/clipboard.js"></script>
+	<script>
+		// Copy code !
+	    function codePreprocessing() {
+	        $("#article-content .highlight").each(function() {
+
+	            $(this).wrap('<div id="post-code"></div>');
+
+	        })
+
+	        $("#article-content #post-code").each(function() {
+
+	            $(this).prepend('<nav class="copy-nav"><span><i class="code-language"></i></span></nav>');
+
+	        })
+
+	        $("#article-content .copy-nav").each(function() {
+	            var temp = $(this).next().attr('class'),
+	                language = ((temp.length > 9) && (temp != null)) ? temp.substr(10) : "none"; //why 9? Need to check language?
+
+	            $(this).find('.code-language').text(language);
+
+	            $(this).append('<span class="copy-btn"><i class="fa fa-copy" aria-hidden="true"></i></span>');
+
+	        });
+	    }
+
+		function codeCopy() {
+		    $('#article-content #post-code').each(function(i) {
+		        var codeCopyId = 'codeCopy-' + i;
+
+		        var codeNode = $(this).find('.code'),
+		            copyButton = $(this).find('.copy-btn');
+
+		        codeNode.attr('id', codeCopyId);
+		        copyButton.attr('data-clipboard-target-id', codeCopyId);
+		    })
+
+		    
+			var clipboard = new ClipboardJS('.copy-btn', {
+					target: function(trigger) {
+						return document.getElementById(trigger.getAttribute('data-clipboard-target-id'));
+					}
+		      	});
+
+			//pure js
+			function showTooltip(elem, msg) {		   
+				elem.setAttribute('aria-label', msg);
+				elem.setAttribute('class', 'copy-btn copy-status');
+				setTimeout(function() {
+					elem.setAttribute('class', 'copy-btn');
+				}, 2000);
+			}
+
+			clipboard.on('success', function(e) {
+			    e.clearSelection();
+			    console.info('Action:', e.action);		   
+			    console.info('Trigger:', e.trigger);
+			    showTooltip(e.trigger, 'Copied!');
+			    
+			});
+			clipboard.on('error', function(e) {
+			    console.error('Action:', e.action);
+			    console.error('Trigger:', e.trigger);
+			});
+		
+
+		}
+
+		if ($('.layout-post').length) {
+		    codePreprocessing();
+		    codeCopy();
+		} 
+	</script>
+
+
+
+
+
+<link rel="stylesheet" href="/plugin/fancybox/jquery.fancybox.css">
+<script src="/plugin/fancybox/jquery.fancybox.js"></script>
+
+<script type="text/javascript">
+	var titleID = $('.article-title a'),
+		imageID = $('.article-content img'),
+		videoID = $('.article-content video');
+
+	var postTitle = titleID.text() ? titleID.text() : "No post title!";
+
+	imageID.each(function() {
+		var imgPath = $(this).attr('src'),
+			imgTitle = $(this).attr('alt') ? $(this).attr('alt') : "No image description!";
+
+		//给每个匹配的<img>元素打包, 即添加父元素<a>
+		$(this).wrap('<a data-fancybox="gallery" data-caption=" 《 ' + postTitle + ' 》 ' + imgTitle + ' "  href=" ' + imgPath + ' "> </a>');
+	});
+
+	videoID.each(function() {
+		var videoPath = $(this).attr('src');
+
+		//给每个匹配的<img>元素打包, 即添加父元素<a>
+		$(this).wrap('<a data-fancybox href=" ' + videoPath + ' "> </a>');
+	});
+	//TODO：支持html5 video
+
+	if($('#layout-post').length) {
+		$('[data-fancybox="gallery"]').fancybox({
+			loop: true,
+			buttons: [
+				"zoom",
+				"share",
+				"slideShow",
+				"fullScreen",
+				//"download",
+				"thumbs",
+				"close"
+			],
+			protect: false
+		});
+	}
+</script>
+		</main>
+
+		<!--footer-->
+		<footer>
+	<div class="social">
+		<ul>
+	
+		<li>
+			<a href="http://github.com/" target="_blank">
+				<i class="fa fa-github"></i>
+			</a>
+		</li>
+	
+		<li>
+			<a href="http://github.com/" target="_blank">
+				<i class="fa fa-weibo"></i>
+			</a>
+		</li>
+	
+		<li>
+			<a href="http://github.com/" target="_blank">
+				<i class="fa fa-pinterest"></i>
+			</a>
+		</li>
+	
+		<li>
+			<a href="http://github.com/" target="_blank">
+				<i class="fa fa-instagram"></i>
+			</a>
+		</li>
+	
+		<li>
+			<a href="http://github.com/" target="_blank">
+				<i class="fa fa-twitter"></i>
+			</a>
+		</li>
+	
+		<li>
+			<a href="/atom.xml" target="_blank">
+				<i class="fa fa-rss"></i>
+			</a>
+		</li>
+			
+</ul>
+
+	</div>
+		
+	<div class="copyright">
+		<p>
+			 
+				&copy;2017 - 2019, content by eassy. All Rights Reserved.
+			
+			
+			
+
+	<!-- busuanzi -->
+	<!-- busuanzi -->
+
+		
+	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+	
+
+		<span id="busuanzi_container_page_pv">
+	  		本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+		</span>
+
+	
+
+
+
+
+		</p>
+		<p>
+			<a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a> Theme <a href="https://github.com/Sariay/hexo-theme-Annie" title="Annie" target="_blank" rel="noopener">Annie</a> by Sariay.
+			<a href="javascript:zh_tran('s');" class="zh_click" id="zh_click_s">简体</a> 
+			<a href="javascript:zh_tran('t');" class="zh_click" id="zh_click_t">繁體</a>				
+		</p>
+	</div>		
+</footer>
+		
+	<!-- set '1' to show motto in all pages! -->
+
+	<script src="/plugin/motto/motto.js"></script>
+	
+	<script type="text/javascript">
+		$(".motto").html( getMingYanContent() );
+	</script>	
+
+
+
+
+
+<!-- love effect -->
+
+	<script src="/plugin/love/love.js"></script>
+
+
+<!-- back to top -->
+
+	
+	<div id="totop">
+  		<a href="javascript:;" name="TOTOP" class="fa fa-arrow-up"></a>
+	</div>
+
+
+
+
+<!-- site analysis -->
+
+
+	<!-- site-analysis -->
+	
+	
+	
+	
+	
+ 
+
+<script src="/plugin/vibrant/vibrant.js"></script>
+<script src="/plugin/chinese/chinese.js"></script>
+<script src="/plugin/imgLazyLoader/yall.min.js"></script>
+<script src="/plugin/imgResize/jquery.resizeimagetoparent.min.js"></script>
+<script src="/plugin/nicescroll/jquery.nicescroll.js"></script>
+<script src="/js/resizediv.js"></script>
+<script src="/js/main.js"></script>
+	</body>	
+</html>

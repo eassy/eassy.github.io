@@ -1,0 +1,983 @@
+<!--
+	作者：Sariay
+	时间：2018-09-25
+	描述：There may be a bug, but don't worry, QiLing(器灵) says that it can work normally!
+-->
+<!DOCTYPE html>
+<html class="html-loading">
+		
+
+<head><meta name="generator" content="Hexo 3.8.0">
+	<meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+  <title>
+    
+      最新 SDWebImage 解读 | Eassy
+    
+  </title>
+  <meta name="author" content="eassy">
+  <meta name="keywords" content>
+  <meta name="description" content="人性就是用来质疑生活的">
+	<!-- favicon -->
+  <link rel="shortcut icon" href="/img/favicon.ico">
+
+  <!-- css -->
+  <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/Annie.css">
+  
+  <!-- jquery -->
+	<script src="/js/jquery.min.js"></script>
+
+  <!-- leancloud -->
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+<script src="/js/leancloud.js"></script>
+</head>
+	<body>
+		<!-- Preloader -->
+
+	<div id="preloader">
+		<div class="pre-container">
+			
+				<div class="spinner">
+					<div class="double-bounce1"></div>
+					<div class="double-bounce2"></div>
+				</div>
+						
+		</div>
+	</div>
+
+
+<!-- header -->
+<header class="fixbackground" data-img-mode="normal" data-normal-src="/img/1.jpg" data-random-max="110" data-random-src="https://sariay.github.io/Random-img/">
+	<div class="mask">
+		<!-- Logo and navigation -->
+		<div class="h-header">
+			<div id="logo">
+				<a href="/">
+						
+						<img src="/img/logo.png" alt="Logo">
+					
+				</a>
+			</div>
+			
+			<div id="navigation-show">
+				<ul>
+	
+		<li class="menu-home">
+			<a href="/" class="menu-item-home">主页</a>
+		</li>
+	
+		<li class="menu-archive">
+			<a href="/archives" class="menu-item-archive">归档</a>
+		</li>
+	
+		<li class="menu-categories">
+			<a href="/categories" class="menu-item-categories">分类</a>
+		</li>
+	
+		<li class="menu-tags">
+			<a href="/tags" class="menu-item-tags">标签</a>
+		</li>
+	
+		<li class="menu-about">
+			<a href="/about" class="menu-item-about">关于</a>
+		</li>
+	
+		<li class="menu-gallery">
+			<a href="/gallery" class="menu-item-gallery">相册</a>
+		</li>
+	
+
+	
+</ul>
+			</div>				
+		</div>
+
+		<!-- motto -->
+		<div class="h-body">	
+			
+				<p class="motto"></p>
+			
+		</div>
+		
+		<!-- others: such as time... -->			
+		<div class="h-footer">
+			<a href="javascript:;" id="read-more"><i class="fa fa-angle-double-down" aria-hidden="true"></i>
+			</a>
+
+			
+				<!-- 
+	This is only a demo, please go to "https://time.is" to set your city time! 
+-->
+<style type="text/css">
+	.header-date {
+		font-size: 1.6rem;
+		color: #fff;
+		position: absolute;
+		bottom: 5px;
+		right: 1rem;
+		writing-mode: tb-rl;
+	}	
+	
+	.header-date a {
+		border-bottom: none;
+	}
+
+	@media only screen and (max-width: 768 ) {
+		.header-date {
+			font-size: 1rem;
+		}			
+	}
+</style>
+<div class="header-date">
+	<a href="https://time.is/Beijing" id="time_is_link" rel="nofollow"></a>
+	<span id="Beijing_z43d"></span>
+</div>
+<script src="//widget.time.is/zh.js"></script>
+<script>
+	time_is_widget.init({
+		Beijing_z43d:{
+			template:"DATE", 
+			date_format:"year年 monthname dnum日"
+		}
+	});
+</script>
+			
+		</div>
+	</div>
+</header>
+
+<div id="navigation-hide">
+	<!-- Progress bar -->
+	<div id="progress-bar"></div>
+
+	<!-- Progress percent -->
+	<div id="progress-percentage"><h1>0.0%</h1></div>
+
+	<div class="toc-switch"><span class="switch-button">目录</span></div>
+
+	<!-- Page title -->
+	<p>
+		
+			当前文章&nbsp;:&nbsp;《最新 SDWebImage 解读》
+		
+	</p>
+
+	<!-- Nav trigger for navigation-H-->
+	<a class="nav-trigger"><span></span></a>
+</div>
+
+<!-- Navigation in div(id="navigation-H") -->
+<nav class="nav-container" id="cd-nav">
+	<div class="nav-header">
+		<h3>Navigation</h3>
+		<a href="javascript:;" class="nav-close"></a>
+	</div>
+	<div class="nav-body">
+		<ul>
+	
+		<li class="menu-home">
+			<a href="/" class="menu-item-home">主页</a>
+		</li>
+	
+		<li class="menu-archive">
+			<a href="/archives" class="menu-item-archive">归档</a>
+		</li>
+	
+		<li class="menu-categories">
+			<a href="/categories" class="menu-item-categories">分类</a>
+		</li>
+	
+		<li class="menu-tags">
+			<a href="/tags" class="menu-item-tags">标签</a>
+		</li>
+	
+		<li class="menu-about">
+			<a href="/about" class="menu-item-about">关于</a>
+		</li>
+	
+		<li class="menu-gallery">
+			<a href="/gallery" class="menu-item-gallery">相册</a>
+		</li>
+	
+
+	
+</ul>
+	</div>
+	<div class="nav-footer">
+		<ul>
+	
+		<li>
+			<a href="http://github.com/" target="_blank">
+				<i class="fa fa-github"></i>
+			</a>
+		</li>
+	
+		<li>
+			<a href="http://github.com/" target="_blank">
+				<i class="fa fa-weibo"></i>
+			</a>
+		</li>
+	
+		<li>
+			<a href="http://github.com/" target="_blank">
+				<i class="fa fa-pinterest"></i>
+			</a>
+		</li>
+	
+		<li>
+			<a href="http://github.com/" target="_blank">
+				<i class="fa fa-instagram"></i>
+			</a>
+		</li>
+	
+		<li>
+			<a href="http://github.com/" target="_blank">
+				<i class="fa fa-twitter"></i>
+			</a>
+		</li>
+	
+		<li>
+			<a href="/atom.xml" target="_blank">
+				<i class="fa fa-rss"></i>
+			</a>
+		</li>
+			
+</ul>
+
+	</div>
+</nav>
+			
+		<!--main-->
+		<main>
+			<!--
+	时间：2018-11-17
+	描述：
+		插件名称：katelog.min.js
+		插件作者：KELEN
+		插件来源: https://github.com/KELEN/katelog
+-->
+
+	
+		<div class="layout-toc">
+			<div id="layout-toc">
+				<div class="k-catelog-list" id="catelog-list" data-title="文章目录"></div>
+			</div>
+		</div>
+
+		
+		<script src="/plugin/toc/katelog.min.js"></script>
+
+		
+	 
+
+<div class="layout-post">
+	<div id="layout-post">
+	<div class="article-title">
+		<i class="fa fa-paper-plane-o" aria-hidden="true"></i>
+		
+	<a href="/2018/12/04/最新-SDWebImage-解读/" itemprop="url">
+		最新 SDWebImage 解读
+	</a>
+
+	</div>
+
+	<div class="article-meta">
+		<span>
+			<i class="fa fa-calendar"></i>
+			
+
+
+	发布于
+
+	<a href="/2018/12/04/最新-SDWebImage-解读/" itemprop="url">
+		<time datetime="2018-12-04T11:23:38.000Z" itemprop="datePublished">
+	  		2018-12-04
+	  </time>
+	</a>
+	&nbsp;
+
+
+
+
+
+			
+
+
+
+
+	更新于
+
+	<a href="/2018/12/04/最新-SDWebImage-解读/" itemprop="url">
+		<time datetime="2018-12-04T11:23:38.000Z" itemprop="dateUpdated">
+	  		2018-12-07
+	  </time>
+	</a> 
+
+
+
+		</span>
+		<span>
+			<i class="fa fa-tags"></i>
+			
+	
+		<a href="/tags/iOS/" class=" ">
+			iOS
+		</a>
+	
+		
+		</span>
+		
+		
+
+
+
+	</div>
+
+	<div class="article-content" id="article-content">
+		<p>针对于 SDWebImage 4.0 版本的源码分析<a id="more"></a></p>
+<h3 id="View-层"><a href="#View-层" class="headerlink" title="View 层"></a>View 层</h3><p>负责 view 的 loading 控件管理，每个 view 的请求发起、取消入口。</p>
+<h4 id="UIView-WebCacheOperation-分类"><a href="#UIView-WebCacheOperation-分类" class="headerlink" title="UIView+WebCacheOperation 分类"></a>UIView+WebCacheOperation 分类</h4><p>负责管理每次请求产生的 <code>SDWebImageCombinedOperation</code>，可以将这些<code>operation</code>对象存储到自己关联的<code>NSMapTable</code>中，对外提供根据<code>key</code>添加、删除、取消某个<code>operation</code>的接口。</p>
+<h4 id="UIView-WebCache-分类"><a href="#UIView-WebCache-分类" class="headerlink" title="UIView+WebCache 分类"></a>UIView+WebCache 分类</h4><p>内部调用 <code>SDWebImageManager</code>类发起请求，请求前会调用<code>UIView+WebCacheOperation</code>中的方法，取消上次的请求，并将这次请求方法产生的 <code>SDWebImageCombinedOpreation</code> 对象存储起来、并且管理 loading 的控件。</p>
+<h3 id="Manager-层"><a href="#Manager-层" class="headerlink" title="Manager 层"></a>Manager 层</h3><h4 id="SDWebImageManager"><a href="#SDWebImageManager" class="headerlink" title="SDWebImageManager"></a>SDWebImageManager</h4><p>负责整体请求的管理，包括缓存、请求的发起、取消。<br>内部有如下属性：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">@interface SDWebImageManager ()</span><br><span class="line"></span><br><span class="line">/// cache 负责图片在缓存中的查找、将图片缓存到内存和磁盘中，压缩，解压操作。</span><br><span class="line">@property (strong, nonatomic, readwrite, nonnull) SDImageCache *imageCache;</span><br><span class="line">/// 负责图片的网络请求发起，取消等操作。</span><br><span class="line">@property (strong, nonatomic, readwrite, nonnull) SDWebImageDownloader *imageDownloader;</span><br><span class="line">/// 记录所有失败的网络请求。</span><br><span class="line">@property (strong, nonatomic, nonnull) NSMutableSet&lt;NSURL *&gt; *failedURLs;</span><br><span class="line">/// 负责多线程下的 failedUrls 的线程安全，信号量锁，值为 1</span><br><span class="line">@property (strong, nonatomic, nonnull) dispatch_semaphore_t failedURLsLock; // a lock to keep the access to `failedURLs` thread-safe</span><br><span class="line">/// 保存每次产生的 SDWebImageCombinedOperation 对象，并管理</span><br><span class="line">@property (strong, nonatomic, nonnull) NSMutableSet&lt;SDWebImageCombinedOperation *&gt; *runningOperations;</span><br><span class="line">/// 负责多线程下的 runningOperationsLock 线程安全，信号量锁，值为 1</span><br><span class="line">@property (strong, nonatomic, nonnull) dispatch_semaphore_t runningOperationsLock; // a lock to keep the access to `runningOperations` thread-safe</span><br><span class="line"></span><br><span class="line">@end</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>每次请求都先根据<code>url</code>查找是否在失败请求集合中，假如<code>url</code>为空或者 配置不是<code>SDWebImageRetryFailed</code>，且之前<code>url</code>请求失败过，那么直接返回失败。</li>
+<li>根据<code>url</code>查找内存、硬盘，有的话直接返回图片。</li>
+<li>发起请求，并将产生的<code>SDWebImageCombinedOpreation</code>存储到<code>runningOperations</code>中。</li>
+</ol>
+<h4 id="SDWebImageDownloader"><a href="#SDWebImageDownloader" class="headerlink" title="SDWebImageDownloader"></a>SDWebImageDownloader</h4><p>负责具体图片请求的发起。<br>内部属性如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">@interface SDWebImageDownloader () &lt;NSURLSessionTaskDelegate, NSURLSessionDataDelegate&gt;</span><br><span class="line"></span><br><span class="line">/// 是否解压下载下来的图片，默认是 YES，在子线程中解压，但是会消耗内存资源</span><br><span class="line">@property (assign, nonatomic) BOOL shouldDecompressImages;</span><br><span class="line"></span><br><span class="line">/// 可以设置下载队列的最大并发量，默认为 6</span><br><span class="line">@property (assign, nonatomic) NSInteger maxConcurrentDownloads;</span><br><span class="line"></span><br><span class="line">/// 当前下载队列中的任务数</span><br><span class="line">@property (readonly, nonatomic) NSUInteger currentDownloadCount;</span><br><span class="line"></span><br><span class="line">/// 下载超时时间，默认是 15 秒</span><br><span class="line">@property (assign, nonatomic) NSTimeInterval downloadTimeout;</span><br><span class="line"></span><br><span class="line"> /// 内部 NSURLSession 初始化使用到的 configuration</span><br><span class="line">@property (readonly, nonatomic, nonnull) NSURLSessionConfiguration *sessionConfiguration;</span><br><span class="line"></span><br><span class="line"> /// 下载任务的执行顺序，有先进先出，后进先出，默认先进先出，按添加顺序执行。</span><br><span class="line">@property (assign, nonatomic) SDWebImageDownloaderExecutionOrder executionOrder;</span><br><span class="line"></span><br><span class="line">/// 下载队列，默认最大并发量为 6</span><br><span class="line">@property (strong, nonatomic, nonnull) NSOperationQueue *downloadQueue;</span><br><span class="line"></span><br><span class="line">/// 上次发起的 operation ，当 executionOrder 为 后进先出时，会用到，上次 operation 的 dependency 为当前 operation</span><br><span class="line">@property (weak, nonatomic, nullable) NSOperation *lastAddedOperation;</span><br><span class="line"></span><br><span class="line">/// 每次请求根据该属性生成一个 NSOperation 对象，默认为 [SDWebImageDownloaderOperation class]。</span><br><span class="line">@property (assign, nonatomic, nullable) Class operationClass;</span><br><span class="line"></span><br><span class="line">/// 保存每次产生的 SDWebImageDownloaderOperation 对象，url 作为 key，也就是每个 url 只产生一个 SDWebImageDownloaderOperation 对象</span><br><span class="line">@property (strong, nonatomic, nonnull) NSMutableDictionary&lt;NSURL *, SDWebImageDownloaderOperation *&gt; *URLOperations;</span><br><span class="line"></span><br><span class="line">/// 存储请求头，有默认值，每次发起 request 用该字典初始化请求头</span><br><span class="line">@property (strong, nonatomic, nullable) SDHTTPHeadersMutableDictionary *HTTPHeaders;</span><br><span class="line"></span><br><span class="line">/// 信号量锁，值为 1，保证 URLOperations 多线程安全</span><br><span class="line">@property (strong, nonatomic, nonnull) dispatch_semaphore_t operationsLock; // a lock to keep the access to `URLOperations` thread-safe</span><br><span class="line"></span><br><span class="line">/// 请求头锁，值为 1，保证 HTTPHeaders 多线程安全</span><br><span class="line">@property (strong, nonatomic, nonnull) dispatch_semaphore_t headersLock; // a lock to keep the access to `HTTPHeaders` thread-safe</span><br><span class="line"></span><br><span class="line">/// 每次发起请求使用的 session ，delegate 为 self ，delegateQueue 为 nil，保证每个请求的回调会串行回调的。</span><br><span class="line">@property (strong, nonatomic) NSURLSession *session;</span><br><span class="line"></span><br><span class="line">@end</span><br></pre></td></tr></table></figure>
+
+<p>每次请求，都检查 <code>URLOperations</code>字典中是否有这个<code>url</code>对应的<code>operation</code>，有的话返回，没有的话生成一个新的<code>SDWebImageDownloaderOperation</code>对象并加入到下载队列<code>downloadQueue</code>中去发起请求，并且存储到<code>URLOperations</code>中。<br>这样，针对同一<code>url</code>的多次请求，只会生成一个<code>operation</code>对象，去下载，每次请求都会生成一个<code>SDWebImageDownloadToken</code>对象，保存有这次请求的回调<code>block</code>。  </p>
+<h4 id="SDImageCache"><a href="#SDImageCache" class="headerlink" title="SDImageCache"></a>SDImageCache</h4><p>针对于图片的内存、硬盘缓存、并进行压缩、解压缩操作。<br>相关属性如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">@interface SDImageCache ()</span><br><span class="line"></span><br><span class="line">#pragma mark - Properties</span><br><span class="line">/// 针对于内存的 缓存管理，继承自 NSCache，但是内部有个 NSMapTable 进行存储，url 作为 key，image 作为 value，其中 value 配置属性 为 weak，对内存不足进行了监听，会清除所有内存缓存。</span><br><span class="line">@property (strong, nonatomic, nonnull) SDMemoryCache *memCache;</span><br><span class="line"></span><br><span class="line">/// 硬盘存储路径，默认为 NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) 路径</span><br><span class="line">@property (strong, nonatomic, nonnull) NSString *diskCachePath;</span><br><span class="line"></span><br><span class="line">/// 允许我们进行预缓存图片，并存储到这个路径数组中，之后加载图片时会查找这些路径。</span><br><span class="line">@property (strong, nonatomic, nullable) NSMutableArray&lt;NSString *&gt; *customPaths;</span><br><span class="line"></span><br><span class="line">/// 图片读取队列，串行队列</span><br><span class="line">@property (strong, nonatomic, nullable) dispatch_queue_t ioQueue;</span><br><span class="line"></span><br><span class="line">/// 文件管理 manager</span><br><span class="line">@property (strong, nonatomic, nonnull) NSFileManager *fileManager;</span><br><span class="line"></span><br><span class="line">@end</span><br></pre></td></tr></table></figure>
+
+<p>这个类支持对图片进行存储，查找，压缩，解压缩，其中压缩解压缩操作使用了<code>CoreGraphics</code>库中的方法。</p>
+<h3 id="Operation-层"><a href="#Operation-层" class="headerlink" title="Operation 层"></a>Operation 层</h3><h4 id="SDWebImageCombinedOpreation"><a href="#SDWebImageCombinedOpreation" class="headerlink" title="SDWebImageCombinedOpreation"></a>SDWebImageCombinedOpreation</h4><p>该对象继承自 NSObject ，只要是对某一图片请求进行取消操作，包括缓存和网络请求，属性和取消方法如下：   </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">@interface SDWebImageCombinedOperation : NSObject &lt;SDWebImageOperation&gt;</span><br><span class="line">/// 是否被取消</span><br><span class="line">@property (assign, nonatomic, getter = isCancelled) BOOL cancelled;</span><br><span class="line"></span><br><span class="line">/// 针对下请求管理</span><br><span class="line">@property (strong, nonatomic, nullable) SDWebImageDownloadToken *downloadToken;</span><br><span class="line"></span><br><span class="line">/// 针对缓存管理</span><br><span class="line">@property (strong, nonatomic, nullable) NSOperation *cacheOperation;</span><br><span class="line"></span><br><span class="line">/// 保存 downloadManager，引用其 downloader</span><br><span class="line">@property (weak, nonatomic, nullable) SDWebImageManager *manager;</span><br><span class="line"></span><br><span class="line">@end</span><br><span class="line"></span><br><span class="line">@implementation SDWebImageCombinedOperation</span><br><span class="line"></span><br><span class="line">- (void)cancel &#123;</span><br><span class="line">    @synchronized(self) &#123;</span><br><span class="line">        self.cancelled = YES;</span><br><span class="line">        if (self.cacheOperation) &#123;</span><br><span class="line">            [self.cacheOperation cancel];</span><br><span class="line">            self.cacheOperation = nil;</span><br><span class="line">        &#125;</span><br><span class="line">        if (self.downloadToken) &#123;</span><br><span class="line">            [self.manager.imageDownloader cancel:self.downloadToken];</span><br><span class="line">        &#125;</span><br><span class="line">        [self.manager safelyRemoveOperationFromRunning:self];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以看到，类中存储了<code>downloadToken</code>和<code>cacheOperation</code>对象，还有个<code>SDWebImageManager</code>对象，当进行取消操作时，分别对缓存和网络请求进行取消操作，并且将该对象从<code>SDWebImageManager</code>的<code>runningOperations</code>集合中移除。  </p>
+<h4 id="SDWebImageDownloaderOperation"><a href="#SDWebImageDownloaderOperation" class="headerlink" title="SDWebImageDownloaderOperation"></a>SDWebImageDownloaderOperation</h4><p>继承自<code>NSOperation</code>,主要负责某次网络请求的发起和取消等管理。内部属性如下：  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">@interface SDWebImageDownloaderOperation ()</span><br><span class="line"></span><br><span class="line">/// 存储着对同一 url 发起的多次请求时，所有的回调 block，里面是多个字典，每个字典有 progressBlock 和 completionBlock</span><br><span class="line">@property (strong, nonatomic, nonnull) NSMutableArray&lt;SDCallbacksDictionary *&gt; *callbackBlocks;</span><br><span class="line"></span><br><span class="line">/// 是否在执行</span><br><span class="line">@property (assign, nonatomic, getter = isExecuting) BOOL executing;</span><br><span class="line"></span><br><span class="line">/// 是否已结束</span><br><span class="line">@property (assign, nonatomic, getter = isFinished) BOOL finished;</span><br><span class="line"></span><br><span class="line">/// 存储网络返回的数据，每次网络回调时都拼接到该属性上</span><br><span class="line">@property (strong, nonatomic, nullable) NSMutableData *imageData;</span><br><span class="line"></span><br><span class="line">/// NSURLCache 中缓存的数据</span><br><span class="line">@property (copy, nonatomic, nullable) NSData *cachedData; // for `SDWebImageDownloaderIgnoreCachedResponse`</span><br><span class="line"></span><br><span class="line">/// 发起请求的默认 session ，由 SDImageDownloader 持有</span><br><span class="line">@property (weak, nonatomic, nullable) NSURLSession *unownedSession;</span><br><span class="line"></span><br><span class="line">/// 自定义 session 时，该 session 需要使用者手动创建</span><br><span class="line">@property (strong, nonatomic, nullable) NSURLSession *ownedSession;</span><br><span class="line"></span><br><span class="line">/// 网络请求对应的 dataTask，每个 url 最多对应一个 dataTask 对象。</span><br><span class="line">@property (strong, nonatomic, readwrite, nullable) NSURLSessionTask *dataTask;</span><br><span class="line"></span><br><span class="line">/// 保证 callbackBlocks 多线程安全的信号量锁</span><br><span class="line">@property (strong, nonatomic, nonnull) dispatch_semaphore_t callbacksLock; // a lock to keep the access to `callbackBlocks` thread-safe</span><br><span class="line"></span><br><span class="line">/// 压缩和解压缩时的串行队列</span><br><span class="line">@property (strong, nonatomic, nonnull) dispatch_queue_t coderQueue; // the queue to do image decoding</span><br><span class="line">#if SD_UIKIT</span><br><span class="line">/// 后台下载的 identifier</span><br><span class="line">@property (assign, nonatomic) UIBackgroundTaskIdentifier backgroundTaskId;</span><br><span class="line">#endif</span><br><span class="line">/// 解压工具</span><br><span class="line">@property (strong, nonatomic, nullable) id&lt;SDWebImageProgressiveCoder&gt; progressiveCoder;</span><br><span class="line"></span><br><span class="line">@end</span><br></pre></td></tr></table></figure>
+
+<p>针对于每次发起的图片网络请求，每个 url 都对应生成一个<code>SDWebImageDownloaderOperation</code>对象，这个类继承自<code>NSOperation</code>类，重写了<code>start</code>方法，通过外界传入的<code>request</code>和<code>session</code>，生成一个<code>NSURLSessionTask</code>对象，进行网络请求，同时，每个对象都有一个<code>callbackBlocks</code>数组，存储着对同一 url 请求的多个监听 block ，<em>每次对同一 url 进行请求，都会将 progressBlock 和 completedBlock 存储到一个字典中，再将字典加入到 callbackBlocks 数组中，请求回调时，SDImageDownloader 会根据 dataTask 的标识，调用相应的 DownloaderOperation 的回调方法，方法中，依次遍历数组中所有的 block 执行。</em></p>
+<h4 id="SDWebImageDownloadToken"><a href="#SDWebImageDownloadToken" class="headerlink" title="SDWebImageDownloadToken"></a>SDWebImageDownloadToken</h4><p>属性如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">/// 发起请求时的 图片 url ，标识每次请求</span><br><span class="line">@property (nonatomic, strong, nullable) NSURL *url;</span><br><span class="line"></span><br><span class="line">/// 字典类型，存储每次请求的回调 block</span><br><span class="line">@property (nonatomic, strong, nullable) id downloadOperationCancelToken;</span><br><span class="line"></span><br><span class="line">/// 网络请求</span><br><span class="line">@property (nonatomic, weak, nullable) NSOperation&lt;SDWebImageDownloaderOperationInterface&gt; *downloadOperation;</span><br></pre></td></tr></table></figure>
+
+<p>每次发起请求时创建一个 downloadToken 对象，保存有 url、回调 block 和 downloadOperation ，但是其实 downloadOperation 是没有直接用到的，实际查找的时候是根据 url 查找到的，不知道为什么非要保持有一个 downloadOperation 的引用呢？这是我没搞清楚的地方。<br>为了更清楚的理解，我画了一张 SDWebImage 的 <a href="https://github.com/eassy/LibraryImgs/blob/master/SDWebImage_UML/SDImage%20UML.jpg" target="_blank" rel="noopener">UML</a> 类图，简单的指出了每个类的关系。</p>
+<h2 id="hash-表"><a href="#hash-表" class="headerlink" title="hash 表"></a>hash 表</h2><p>hash 表组成由 一个数组 T，加上一个 hash 函数，这个 函数 将 key 映射成一个索引，表明值就存储到 T 的这个索引的位置上，一般来说，这个函数内部生成一个值 p，将 p 对 T 的长度 m 取余，得到索引值，从而保证了索引值在 0-m 之间。<br>最好的 hash 函数，保证得到的这个索引，尽可能的平均，但是也会发生冲突，比如两个不同的 key1，key2，得到的索引值是相同的，这时候要解决冲突：</p>
+<ol>
+<li>拉链法 发生冲突时，索引位置指向了一个链表，节点是键值，该链表依次向后排列，这样查找时，根据链表依次查找 与 key 相同的 节点。  </li>
+<li>开放寻址法 存储的时候根据一定的规则去找值为空的索引，最简单的是线性探测法，直接找到下一个位置判断是否为空，一直找到一个为空的索引位置。查找的时候，也是按照这个规则，一直查找到与 key 相同的索引，取出值。</li>
+</ol>
+<h2 id="NSDictionary-的底层实现"><a href="#NSDictionary-的底层实现" class="headerlink" title="NSDictionary 的底层实现"></a>NSDictionary 的底层实现</h2><p>NSDictionary 内部其实是用 NSMapTable 实现的，NSMapTable 结构体包括一系列的函数指针，比如 hash ，判断 key 是否相同，还包括一个链表指针，至于这个链表指针做什么用的，可能跟拉链法中处理冲突时相关。  </p>
+<h2 id="NSMapTable"><a href="#NSMapTable" class="headerlink" title="NSMapTable"></a>NSMapTable</h2><p>区别于 NSDictionary 的 key ，只能用 OC 对象(其实实现了 hash 和 isEqual 的其他对象也可以)，必须支持<code>NSCopying</code>协议，并且会对 key 进行 <code>copy</code> 操作，对 value 进行 <code>retain</code>操作，而 NSMapTable 可以允许设置 key 和 value 的操作类型，copy 还是 strong，还是 weak。</p>
+	
+	</div>
+	
+	<div id="current-post-cover" data-scr="/img/cart_cover.jpg"></div>
+
+	<!-- relate post, comment...-->
+	<div class="investment-container">
+		<div class="investment-header">
+			<div class="investment-title-1">
+				<div class="on">相关文章</div>
+				<div>评论</div>
+				<div>分享</div>
+			</div>
+			<div class="investment-title-2">	            
+				
+	<span>
+		<a href="javascript: window.scrollTo(0, 0);">返回顶部</a>
+		
+			<a href="/2018/12/04/Apple-文档Authentication-and-Credentials-翻译/" title="Apple 文档 Authentication and Credentials 的翻译" rel="prev">
+				&laquo;上一篇
+			</a>
+		
+		
+			<a href="/2018/11/20/RunLoop-CommonModes/" title="RunLoop-CommonModes" rel="next">
+				下一篇&raquo;
+			</a>
+			
+	</span>
+
+
+      		
+			</div>	
+		</div>
+		
+		<div class="investment-content">
+			<div class="investment-content-list">
+				
+
+<div class="relate-post">
+	
+		<ul>
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2018/12/19/OAStackView/" title="OAStackView">
+								OAStackView			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								十二月 19日, 2018				
+							</p>
+							<p class="relate-post-content">
+								UIStackView 的理解UIStackView 是 iOS9 推出的新特性，允许我们线性的去布局一个界面，在之前没有用到过，但是新公司用到的地方挺多，所以写一篇文章介绍一下，也加深自己的理解。使用 UIStackView 布局，...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2018/12/19/OAStackView/" title="OAStackView">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="OAStackView">
+							</a>
+						</div>
+					</li>											
+			
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2018/12/17/NSURLProtocol/" title="NSURLProtocol">
+								NSURLProtocol			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								十二月 17日, 2018				
+							</p>
+							<p class="relate-post-content">
+								在 Apple 的文档 URL Loading System 中，详细介绍了一个请求是如何创建、发起、回传数据的，还包括了证书认证，cookie 等一系列的操作，但是好像唯独遗漏了一个特殊的类： NSURLProtocol ，其实在我...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2018/12/17/NSURLProtocol/" title="NSURLProtocol">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="NSURLProtocol">
+							</a>
+						</div>
+					</li>											
+			
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2018/12/07/iOS-下的-https-单向和双向认证/" title="iOS 下的 https 单向和双向认证">
+								iOS 下的 https 单向和双向认证			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								十二月 7日, 2018				
+							</p>
+							<p class="relate-post-content">
+								iOS 操作系统，已经对请求中的认证需求(有的文章中称为 挑战)，做了简单的处理。当我们使用NSURLSession发起一次请求时，假如服务端返回数据要求客户端进行需求认证，不管这次需求认证是 HTTP Basic 类型(例如要求输入...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2018/12/07/iOS-下的-https-单向和双向认证/" title="iOS 下的 https 单向和双向认证">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="iOS 下的 https 单向和双向认证">
+							</a>
+						</div>
+					</li>											
+			
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2018/12/04/Apple-文档Authentication-and-Credentials-翻译/" title="Apple 文档 Authentication and Credentials 的翻译">
+								Apple 文档 Authentication and Credentials 的翻译			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								十二月 4日, 2018				
+							</p>
+							<p class="relate-post-content">
+								对 Apple 的 认证和证书 开发文档的一个翻译 
+Handling an Authentication ChallengeRespond appropriately when a server demands authentica...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2018/12/04/Apple-文档Authentication-and-Credentials-翻译/" title="Apple 文档 Authentication and Credentials 的翻译">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="Apple 文档 Authentication and Credentials 的翻译">
+							</a>
+						</div>
+					</li>											
+			
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2018/11/20/RunLoop-CommonModes/" title="RunLoop-CommonModes">
+								RunLoop-CommonModes			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								十一月 20日, 2018				
+							</p>
+							<p class="relate-post-content">
+								RunLoop 的 CommonModes ，其实不是一个真正的 modes，而是一个伪 mode.. ，每个 _CFRunLoopRef 的数据结构大致是这样的：
+123456789101112131415161718 struct...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2018/11/20/RunLoop-CommonModes/" title="RunLoop-CommonModes">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="RunLoop-CommonModes">
+							</a>
+						</div>
+					</li>											
+			
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2018/11/15/NSCondition-锁/" title="NSCondition 锁">
+								NSCondition 锁			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								十一月 15日, 2018				
+							</p>
+							<p class="relate-post-content">
+								最近对于 NSCondition 感到有些疑惑，所以写点东西进行研究一下。 
+用法首先 NSCondition 有以下几个方法：
+12345- (void)wait;   让线程陷入睡眠，将锁的权利交出。- (BOOL)waitUnt...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2018/11/15/NSCondition-锁/" title="NSCondition 锁">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="NSCondition 锁">
+							</a>
+						</div>
+					</li>											
+			
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2017/03/17/iOS-的渲染机制以及-UIView-的自动布局流程/" title="iOS 的渲染机制以及 UIView 的自动布局流程">
+								iOS 的渲染机制以及 UIView 的自动布局流程			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								三月 17日, 2017				
+							</p>
+							<p class="relate-post-content">
+								iOS 的界面渲染，是跟 RunLoop 分不开的，屏幕需要更新时，会调用 CPU 协同 GPU ，将界面数据渲染到屏幕上。。。
+界面渲染原理同 PC 相似，移动设备也包含屏幕刷新与显卡刷新的概念。iOS 的显示系统，是由 VSync...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2017/03/17/iOS-的渲染机制以及-UIView-的自动布局流程/" title="iOS 的渲染机制以及 UIView 的自动布局流程">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="iOS 的渲染机制以及 UIView 的自动布局流程">
+							</a>
+						</div>
+					</li>											
+			
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2017/02/21/封装一个转场动画库/" title="封装一个转场动画库">
+								封装一个转场动画库			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								二月 21日, 2017				
+							</p>
+							<p class="relate-post-content">
+								自从 iOS 7 以后，就可以自定义跳转动画了，苹果开放了相关的 API ，在这里做一个基本的总结。 
+原理 UIViewControllerTransitioningDelegate
+1234567891011121314@prot...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2017/02/21/封装一个转场动画库/" title="封装一个转场动画库">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="封装一个转场动画库">
+							</a>
+						</div>
+					</li>											
+			
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2017/02/04/创建-CocoaPods-库并上传/" title="创建 CocoaPods 库并上传">
+								创建 CocoaPods 库并上传			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								二月 4日, 2017				
+							</p>
+							<p class="relate-post-content">
+								公司会开发多个 App ，这样创建一个公共的 pod 库是很有必要的，索性昨天趁下班时创建了一个最简单的 pod 库，就把过程记下来吧。
+注册 pods trunk 账号这一步没有什么难度，在终端中注册就好了  
+1$ pod tru...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2017/02/04/创建-CocoaPods-库并上传/" title="创建 CocoaPods 库并上传">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="创建 CocoaPods 库并上传">
+							</a>
+						</div>
+					</li>											
+			
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2018/11/15/18-11-15-面试复盘/" title="18.11.15 面试复盘">
+								18.11.15 面试复盘			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								十一月 15日, 2018				
+							</p>
+							<p class="relate-post-content">
+								今天这次记录是时间最短的一个，我提前 15 分钟到了面试地点，半个小时就面完了，面试官很温柔，应该是移动端负责人，非 iOS 出身，对技术的提问也是浅尝辄止，主要是考察被面试者的项目经验，逻辑思维等。 
+OC 的内存管理原理老生常谈，...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2018/11/15/18-11-15-面试复盘/" title="18.11.15 面试复盘">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="18.11.15 面试复盘">
+							</a>
+						</div>
+					</li>											
+			
+			
+		</ul>
+	
+</div>	
+			</div>
+			<div class="investment-content-list">
+				<div class="layout-comment">
+
+	
+
+		
+
+			<!-- I don't know !!!-->
+			<div>Please check the comment setting in config.yml of hexo-theme-Annie!</div>
+			
+		
+		
+	
+
+</div>
+			</div>
+			<div class="investment-content-list">
+				<div class="layout-share">
+	
+	
+
+		
+			
+			<!-- socialShare share -->
+			<div class="social-share"></div>
+
+<!--  css & js -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+<script async src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+			
+		
+		
+	
+</div>
+
+
+			</div>
+		</div>	
+	</div>
+	</div>
+</div>
+
+
+
+	<!-- leancloud -->
+	<!--
+	时间：2018-11-27
+	描述：
+		文章访问量：visitors
+		文章喜欢量：likes	
+		文章排行榜：topNPost
+		其他得说明：
+			01-Cookie相关的函数 
+				https://blog.csdn.net/somehow1002/article/details/78511541（Author：somehow1002）
+			02-visitors相关的函数 
+				https://blog.csdn.net/u013553529/article/details/63357382（Author：爱博客大伯）
+				https://notes.doublemine.me/2015-10-21-为NexT主题添加文章阅读量统计功能.html（Author：夏末）
+			03-topNPost相关的函数
+				https://hoxis.github.io/hexo-next-read-rank.html（Author：hoxis）
+			04-likes相关的函数，
+				参考了01 & 02进行简单的设计与实现
+-->
+
+
+	
+
+
+<!-- show math formula -->
+
+
+
+	 
+	<script src="/plugin/clipboard/clipboard.js"></script>
+	<script>
+		// Copy code !
+	    function codePreprocessing() {
+	        $("#article-content .highlight").each(function() {
+
+	            $(this).wrap('<div id="post-code"></div>');
+
+	        })
+
+	        $("#article-content #post-code").each(function() {
+
+	            $(this).prepend('<nav class="copy-nav"><span><i class="code-language"></i></span></nav>');
+
+	        })
+
+	        $("#article-content .copy-nav").each(function() {
+	            var temp = $(this).next().attr('class'),
+	                language = ((temp.length > 9) && (temp != null)) ? temp.substr(10) : "none"; //why 9? Need to check language?
+
+	            $(this).find('.code-language').text(language);
+
+	            $(this).append('<span class="copy-btn"><i class="fa fa-copy" aria-hidden="true"></i></span>');
+
+	        });
+	    }
+
+		function codeCopy() {
+		    $('#article-content #post-code').each(function(i) {
+		        var codeCopyId = 'codeCopy-' + i;
+
+		        var codeNode = $(this).find('.code'),
+		            copyButton = $(this).find('.copy-btn');
+
+		        codeNode.attr('id', codeCopyId);
+		        copyButton.attr('data-clipboard-target-id', codeCopyId);
+		    })
+
+		    
+			var clipboard = new ClipboardJS('.copy-btn', {
+					target: function(trigger) {
+						return document.getElementById(trigger.getAttribute('data-clipboard-target-id'));
+					}
+		      	});
+
+			//pure js
+			function showTooltip(elem, msg) {		   
+				elem.setAttribute('aria-label', msg);
+				elem.setAttribute('class', 'copy-btn copy-status');
+				setTimeout(function() {
+					elem.setAttribute('class', 'copy-btn');
+				}, 2000);
+			}
+
+			clipboard.on('success', function(e) {
+			    e.clearSelection();
+			    console.info('Action:', e.action);		   
+			    console.info('Trigger:', e.trigger);
+			    showTooltip(e.trigger, 'Copied!');
+			    
+			});
+			clipboard.on('error', function(e) {
+			    console.error('Action:', e.action);
+			    console.error('Trigger:', e.trigger);
+			});
+		
+
+		}
+
+		if ($('.layout-post').length) {
+		    codePreprocessing();
+		    codeCopy();
+		} 
+	</script>
+
+
+
+
+
+<link rel="stylesheet" href="/plugin/fancybox/jquery.fancybox.css">
+<script src="/plugin/fancybox/jquery.fancybox.js"></script>
+
+<script type="text/javascript">
+	var titleID = $('.article-title a'),
+		imageID = $('.article-content img'),
+		videoID = $('.article-content video');
+
+	var postTitle = titleID.text() ? titleID.text() : "No post title!";
+
+	imageID.each(function() {
+		var imgPath = $(this).attr('src'),
+			imgTitle = $(this).attr('alt') ? $(this).attr('alt') : "No image description!";
+
+		//给每个匹配的<img>元素打包, 即添加父元素<a>
+		$(this).wrap('<a data-fancybox="gallery" data-caption=" 《 ' + postTitle + ' 》 ' + imgTitle + ' "  href=" ' + imgPath + ' "> </a>');
+	});
+
+	videoID.each(function() {
+		var videoPath = $(this).attr('src');
+
+		//给每个匹配的<img>元素打包, 即添加父元素<a>
+		$(this).wrap('<a data-fancybox href=" ' + videoPath + ' "> </a>');
+	});
+	//TODO：支持html5 video
+
+	if($('#layout-post').length) {
+		$('[data-fancybox="gallery"]').fancybox({
+			loop: true,
+			buttons: [
+				"zoom",
+				"share",
+				"slideShow",
+				"fullScreen",
+				//"download",
+				"thumbs",
+				"close"
+			],
+			protect: false
+		});
+	}
+</script>
+		</main>
+
+		<!--footer-->
+		<footer>
+	<div class="social">
+		<ul>
+	
+		<li>
+			<a href="http://github.com/" target="_blank">
+				<i class="fa fa-github"></i>
+			</a>
+		</li>
+	
+		<li>
+			<a href="http://github.com/" target="_blank">
+				<i class="fa fa-weibo"></i>
+			</a>
+		</li>
+	
+		<li>
+			<a href="http://github.com/" target="_blank">
+				<i class="fa fa-pinterest"></i>
+			</a>
+		</li>
+	
+		<li>
+			<a href="http://github.com/" target="_blank">
+				<i class="fa fa-instagram"></i>
+			</a>
+		</li>
+	
+		<li>
+			<a href="http://github.com/" target="_blank">
+				<i class="fa fa-twitter"></i>
+			</a>
+		</li>
+	
+		<li>
+			<a href="/atom.xml" target="_blank">
+				<i class="fa fa-rss"></i>
+			</a>
+		</li>
+			
+</ul>
+
+	</div>
+		
+	<div class="copyright">
+		<p>
+			 
+				&copy;2017 - 2019, content by eassy. All Rights Reserved.
+			
+			
+			
+
+	<!-- busuanzi -->
+	<!-- busuanzi -->
+
+		
+	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+	
+
+		<span id="busuanzi_container_page_pv">
+	  		本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+		</span>
+
+	
+
+
+
+
+		</p>
+		<p>
+			<a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a> Theme <a href="https://github.com/Sariay/hexo-theme-Annie" title="Annie" target="_blank" rel="noopener">Annie</a> by Sariay.
+			<a href="javascript:zh_tran('s');" class="zh_click" id="zh_click_s">简体</a> 
+			<a href="javascript:zh_tran('t');" class="zh_click" id="zh_click_t">繁體</a>				
+		</p>
+	</div>		
+</footer>
+		
+	<!-- set '1' to show motto in all pages! -->
+
+	<script src="/plugin/motto/motto.js"></script>
+	
+	<script type="text/javascript">
+		$(".motto").html( getMingYanContent() );
+	</script>	
+
+
+
+
+
+<!-- love effect -->
+
+	<script src="/plugin/love/love.js"></script>
+
+
+<!-- back to top -->
+
+	
+	<div id="totop">
+  		<a href="javascript:;" name="TOTOP" class="fa fa-arrow-up"></a>
+	</div>
+
+
+
+
+<!-- site analysis -->
+
+
+	<!-- site-analysis -->
+	
+	
+	
+	
+	
+ 
+
+<script src="/plugin/vibrant/vibrant.js"></script>
+<script src="/plugin/chinese/chinese.js"></script>
+<script src="/plugin/imgLazyLoader/yall.min.js"></script>
+<script src="/plugin/imgResize/jquery.resizeimagetoparent.min.js"></script>
+<script src="/plugin/nicescroll/jquery.nicescroll.js"></script>
+<script src="/js/resizediv.js"></script>
+<script src="/js/main.js"></script>
+	</body>	
+</html>

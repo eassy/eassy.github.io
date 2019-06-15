@@ -1,0 +1,989 @@
+<!--
+	作者：Sariay
+	时间：2018-09-25
+	描述：There may be a bug, but don't worry, QiLing(器灵) says that it can work normally!
+-->
+<!DOCTYPE html>
+<html class="html-loading">
+		
+
+<head><meta name="generator" content="Hexo 3.8.0">
+	<meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+  <title>
+    
+      iOS 下的 https 单向和双向认证 | Eassy
+    
+  </title>
+  <meta name="author" content="eassy">
+  <meta name="keywords" content>
+  <meta name="description" content="人性就是用来质疑生活的">
+	<!-- favicon -->
+  <link rel="shortcut icon" href="/img/favicon.ico">
+
+  <!-- css -->
+  <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/Annie.css">
+  
+  <!-- jquery -->
+	<script src="/js/jquery.min.js"></script>
+
+  <!-- leancloud -->
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+<script src="/js/leancloud.js"></script>
+</head>
+	<body>
+		<!-- Preloader -->
+
+	<div id="preloader">
+		<div class="pre-container">
+			
+				<div class="spinner">
+					<div class="double-bounce1"></div>
+					<div class="double-bounce2"></div>
+				</div>
+						
+		</div>
+	</div>
+
+
+<!-- header -->
+<header class="fixbackground" data-img-mode="normal" data-normal-src="/img/1.jpg" data-random-max="110" data-random-src="https://sariay.github.io/Random-img/">
+	<div class="mask">
+		<!-- Logo and navigation -->
+		<div class="h-header">
+			<div id="logo">
+				<a href="/">
+						
+						<img src="/img/logo.png" alt="Logo">
+					
+				</a>
+			</div>
+			
+			<div id="navigation-show">
+				<ul>
+	
+		<li class="menu-home">
+			<a href="/" class="menu-item-home">主页</a>
+		</li>
+	
+		<li class="menu-archive">
+			<a href="/archives" class="menu-item-archive">归档</a>
+		</li>
+	
+		<li class="menu-categories">
+			<a href="/categories" class="menu-item-categories">分类</a>
+		</li>
+	
+		<li class="menu-tags">
+			<a href="/tags" class="menu-item-tags">标签</a>
+		</li>
+	
+		<li class="menu-about">
+			<a href="/about" class="menu-item-about">关于</a>
+		</li>
+	
+		<li class="menu-gallery">
+			<a href="/gallery" class="menu-item-gallery">相册</a>
+		</li>
+	
+
+	
+</ul>
+			</div>				
+		</div>
+
+		<!-- motto -->
+		<div class="h-body">	
+			
+				<p class="motto"></p>
+			
+		</div>
+		
+		<!-- others: such as time... -->			
+		<div class="h-footer">
+			<a href="javascript:;" id="read-more"><i class="fa fa-angle-double-down" aria-hidden="true"></i>
+			</a>
+
+			
+				<!-- 
+	This is only a demo, please go to "https://time.is" to set your city time! 
+-->
+<style type="text/css">
+	.header-date {
+		font-size: 1.6rem;
+		color: #fff;
+		position: absolute;
+		bottom: 5px;
+		right: 1rem;
+		writing-mode: tb-rl;
+	}	
+	
+	.header-date a {
+		border-bottom: none;
+	}
+
+	@media only screen and (max-width: 768 ) {
+		.header-date {
+			font-size: 1rem;
+		}			
+	}
+</style>
+<div class="header-date">
+	<a href="https://time.is/Beijing" id="time_is_link" rel="nofollow"></a>
+	<span id="Beijing_z43d"></span>
+</div>
+<script src="//widget.time.is/zh.js"></script>
+<script>
+	time_is_widget.init({
+		Beijing_z43d:{
+			template:"DATE", 
+			date_format:"year年 monthname dnum日"
+		}
+	});
+</script>
+			
+		</div>
+	</div>
+</header>
+
+<div id="navigation-hide">
+	<!-- Progress bar -->
+	<div id="progress-bar"></div>
+
+	<!-- Progress percent -->
+	<div id="progress-percentage"><h1>0.0%</h1></div>
+
+	<div class="toc-switch"><span class="switch-button">目录</span></div>
+
+	<!-- Page title -->
+	<p>
+		
+			当前文章&nbsp;:&nbsp;《iOS 下的 https 单向和双向认证》
+		
+	</p>
+
+	<!-- Nav trigger for navigation-H-->
+	<a class="nav-trigger"><span></span></a>
+</div>
+
+<!-- Navigation in div(id="navigation-H") -->
+<nav class="nav-container" id="cd-nav">
+	<div class="nav-header">
+		<h3>Navigation</h3>
+		<a href="javascript:;" class="nav-close"></a>
+	</div>
+	<div class="nav-body">
+		<ul>
+	
+		<li class="menu-home">
+			<a href="/" class="menu-item-home">主页</a>
+		</li>
+	
+		<li class="menu-archive">
+			<a href="/archives" class="menu-item-archive">归档</a>
+		</li>
+	
+		<li class="menu-categories">
+			<a href="/categories" class="menu-item-categories">分类</a>
+		</li>
+	
+		<li class="menu-tags">
+			<a href="/tags" class="menu-item-tags">标签</a>
+		</li>
+	
+		<li class="menu-about">
+			<a href="/about" class="menu-item-about">关于</a>
+		</li>
+	
+		<li class="menu-gallery">
+			<a href="/gallery" class="menu-item-gallery">相册</a>
+		</li>
+	
+
+	
+</ul>
+	</div>
+	<div class="nav-footer">
+		<ul>
+	
+		<li>
+			<a href="http://github.com/" target="_blank">
+				<i class="fa fa-github"></i>
+			</a>
+		</li>
+	
+		<li>
+			<a href="http://github.com/" target="_blank">
+				<i class="fa fa-weibo"></i>
+			</a>
+		</li>
+	
+		<li>
+			<a href="http://github.com/" target="_blank">
+				<i class="fa fa-pinterest"></i>
+			</a>
+		</li>
+	
+		<li>
+			<a href="http://github.com/" target="_blank">
+				<i class="fa fa-instagram"></i>
+			</a>
+		</li>
+	
+		<li>
+			<a href="http://github.com/" target="_blank">
+				<i class="fa fa-twitter"></i>
+			</a>
+		</li>
+	
+		<li>
+			<a href="/atom.xml" target="_blank">
+				<i class="fa fa-rss"></i>
+			</a>
+		</li>
+			
+</ul>
+
+	</div>
+</nav>
+			
+		<!--main-->
+		<main>
+			<!--
+	时间：2018-11-17
+	描述：
+		插件名称：katelog.min.js
+		插件作者：KELEN
+		插件来源: https://github.com/KELEN/katelog
+-->
+
+	
+		<div class="layout-toc">
+			<div id="layout-toc">
+				<div class="k-catelog-list" id="catelog-list" data-title="文章目录"></div>
+			</div>
+		</div>
+
+		
+		<script src="/plugin/toc/katelog.min.js"></script>
+
+		
+	 
+
+<div class="layout-post">
+	<div id="layout-post">
+	<div class="article-title">
+		<i class="fa fa-paper-plane-o" aria-hidden="true"></i>
+		
+	<a href="/2018/12/07/iOS-下的-https-单向和双向认证/" itemprop="url">
+		iOS 下的 https 单向和双向认证
+	</a>
+
+	</div>
+
+	<div class="article-meta">
+		<span>
+			<i class="fa fa-calendar"></i>
+			
+
+
+	发布于
+
+	<a href="/2018/12/07/iOS-下的-https-单向和双向认证/" itemprop="url">
+		<time datetime="2018-12-07T01:21:04.000Z" itemprop="datePublished">
+	  		2018-12-07
+	  </time>
+	</a>
+	&nbsp;
+
+
+
+
+
+			
+
+
+
+
+	更新于
+
+	<a href="/2018/12/07/iOS-下的-https-单向和双向认证/" itemprop="url">
+		<time datetime="2018-12-07T01:21:04.000Z" itemprop="dateUpdated">
+	  		2018-12-07
+	  </time>
+	</a> 
+
+
+
+		</span>
+		<span>
+			<i class="fa fa-tags"></i>
+			
+	
+		<a href="/tags/iOS/" class=" ">
+			iOS
+		</a>
+	
+		
+		</span>
+		
+		
+
+
+
+	</div>
+
+	<div class="article-content" id="article-content">
+		<p>iOS 操作系统，已经对请求中的认证需求(有的文章中称为 挑战)，做了简单的处理。当我们使用<code>NSURLSession</code>发起一次请求时，假如服务端返回数据要求客户端进行需求认证，不管这次需求认证是 HTTP Basic 类型(例如要求输入用户名/密码)、 ServerTrust 类型(对服务器的一个认证，单向认证)，或者是 ClientCertificate 类型(对客户端的认证，双向认证)，最终都会回调下面这个方法：  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">- (void)URLSession:(NSURLSession *)session</span><br><span class="line">didReceiveChallenge:(NSURLAuthenticationChallenge *)challenge</span><br><span class="line"> completionHandler:(void (^)(NSURLSessionAuthChallengeDisposition disposition, NSURLCredential *credential))completionHandler;</span><br></pre></td></tr></table></figure>
+
+<p>通过实现这个代理方法，我们可以使我们的 app 支持 https 请求，并且可以进行我们自定义的认证。一般来说，对于其他类型的需求认证，我们会让系统进行默认处理，只有我们需要验证服务端证书，或者双向认证时，我们才会实现这个代理方法。包括 AF 对于 https 请求的处理，也是针对于此方法的封装。  </p>
+<h2 id="相关基本概念"><a href="#相关基本概念" class="headerlink" title="相关基本概念"></a>相关基本概念</h2><p>不管 https 单向认证还是双向认证，都有两个目的：  </p>
+<ol>
+<li>协商对称加密密钥  </li>
+<li>数据加密传输  </li>
+</ol>
+<p>一般来说，所谓单向认证和双向认证的区别，只是在第一步，协商对称加密密钥时，服务器对于客户端是否做证书验证。<br>iOS 操作系统切入点是在 协商对称加密密钥 中的 身份验证阶段，通过回调代理方法，将控制权交给 app 。  </p>
+<p>代理方法传入的参数中，包含了这次认证需求的类型，包括 对服务器的认证(单向认证ServerTrust) 或者 对客户端证书的需求(ClientCertificate) 。我们在代理方法中可以验证服务器的证书，并通过调用传入的 <code>completionBlock</code> 来传入系统需要的参数。</p>
+<h3 id="单向认证"><a href="#单向认证" class="headerlink" title="单向认证"></a>单向认证</h3><p>先看一下单向认证的流程：  </p>
+<ol>
+<li>客户端 A 向 服务端 B 发起请求，传输了 A 所支持的 SSL/TLS 协议版本列表、支持的对称加密算法列表、随机数 a。</li>
+<li>B 选择一个 SSL/TLS 协议版本、对称加密算法、包含自己公钥的证书、随机数 b 发送给 A。</li>
+<li>A 对 B 发送的 证书 进行验证，包括 域名是否一致、证书是否过期吊销、证书是否可信。对于证书是否可信，设备中一般会有一个证书信任列表，存储了这些证书机构的公钥，证书中包含了对 B 公钥的加密，和机构对信息的签名，设备用机构的公钥进行验签，验证通过则代表 B 公钥的可信度。这时候 A 生成一个随机数，使用 B 公钥进行加密，传输给 B 。</li>
+<li>最后一步，B 用自己的私钥解密，得到 c ，这时候A he B 都得到了 a b c，使用 a b c 生成对称加密的密钥，后续中就使用这个密钥进行数据加密传输。</li>
+</ol>
+<p>在第 3 步，验证证书的时候，系统会回调代理方法，假如我们服务器的证书，是通过正规渠道申请的，即使不实现这个代理方法，系统也会对证书进行验证。<br>当我们使用自签证书时，系统的证书信任列表中没有这个证书相关信息，我们就必须实现这个代理方法，否则会报错。  </p>
+<h3 id="双向认证"><a href="#双向认证" class="headerlink" title="双向认证"></a>双向认证</h3><p>区别在于服务端会对客户端进行验证，主要是第 3 步 和 第 4 步</p>
+<ol>
+<li>~</li>
+<li>~</li>
+<li>A 对 B 的证书进行验证通过后，将信息使用自己的私钥进行加密，并将自己的证书一起传输到 B。</li>
+<li>B 对 A 发送过来的证书进行验证，通过后取出 A 的公钥，对信息进行解密，得到 c ，生成对称加密密钥。</li>
+</ol>
+<h2 id="具体实现"><a href="#具体实现" class="headerlink" title="具体实现"></a>具体实现</h2><h3 id="单向认证-1"><a href="#单向认证-1" class="headerlink" title="单向认证"></a>单向认证</h3><p>具体的代码如下，这里使用 AF ，其实都一样， AF 只不过做了简单的封装。  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">- (void)URLSession:(NSURLSession *)session</span><br><span class="line">didReceiveChallenge:(NSURLAuthenticationChallenge *)challenge</span><br><span class="line"> completionHandler:(void (^)(NSURLSessionAuthChallengeDisposition disposition, NSURLCredential *credential))completionHandler</span><br><span class="line">&#123;</span><br><span class="line">    NSURLSessionAuthChallengeDisposition disposition = NSURLSessionAuthChallengePerformDefaultHandling;</span><br><span class="line">    __block NSURLCredential *credential = nil;</span><br><span class="line"></span><br><span class="line">    if (self.sessionDidReceiveAuthenticationChallenge) &#123;</span><br><span class="line">    	 /// 允许使用者自定义处理方式，双向认证的时候会用到。</span><br><span class="line">        disposition = self.sessionDidReceiveAuthenticationChallenge(session, challenge, &amp;credential);</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        /// 判断这次认证需求的类型是否是 https 中的 对服务端认证，不是的话让系统进行默认处理。</span><br><span class="line">        if ([challenge.protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodServerTrust]) &#123;</span><br><span class="line">            if ([self.securityPolicy evaluateServerTrust:challenge.protectionSpace.serverTrust forDomain:challenge.protectionSpace.host]) &#123;</span><br><span class="line">                /// 上面这个方法是根据配置，对服务端证书进行认证，认证通过的话，创建证书并回调。</span><br><span class="line">                credential = [NSURLCredential credentialForTrust:challenge.protectionSpace.serverTrust];</span><br><span class="line">                if (credential) &#123;</span><br><span class="line">                    disposition = NSURLSessionAuthChallengeUseCredential;</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    disposition = NSURLSessionAuthChallengePerformDefaultHandling;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">            	   /// 认证没有通过，取消这次认证需求，请求随之取消。</span><br><span class="line">                disposition = NSURLSessionAuthChallengeCancelAuthenticationChallenge;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            disposition = NSURLSessionAuthChallengePerformDefaultHandling;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    if (completionHandler) &#123;</span><br><span class="line">        completionHandler(disposition, credential);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们再查看一下验证服务端证书的具体方法实现，首先要清楚的是，证书验证包括域名一致验证，证书有效验证，公钥验证。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><span class="line">- (BOOL)evaluateServerTrust:(SecTrustRef)serverTrust</span><br><span class="line">                  forDomain:(NSString *)domain</span><br><span class="line">&#123;</span><br><span class="line">    if (domain &amp;&amp; self.allowInvalidCertificates &amp;&amp; self.validatesDomainName &amp;&amp; (self.SSLPinningMode == AFSSLPinningModeNone || [self.pinnedCertificates count] == 0)) &#123;</span><br><span class="line">        // https://developer.apple.com/library/mac/documentation/NetworkingInternet/Conceptual/NetworkingTopics/Articles/OverridingSSLChainValidationCorrectly.html</span><br><span class="line">        //  According to the docs, you should only trust your provided certs for evaluation.</span><br><span class="line">        //  Pinned certificates are added to the trust. Without pinned certificates,</span><br><span class="line">        //  there is nothing to evaluate against.</span><br><span class="line">        //</span><br><span class="line">        //  From Apple Docs:</span><br><span class="line">        //          &quot;Do not implicitly trust self-signed certificates as anchors (kSecTrustOptionImplicitAnchors).</span><br><span class="line">        //           Instead, add your own (self-signed) CA certificate to the list of trusted anchors.&quot;</span><br><span class="line">        NSLog(@&quot;In order to validate a domain name for self signed certificates, you MUST use pinning.&quot;);</span><br><span class="line">        /// 假如我们配置的需要验证域名，那么 SSLPinningNode 就不能设置为 None，必须设置为其他类型。</span><br><span class="line">        return NO;</span><br><span class="line">    &#125;</span><br><span class="line">	/// 是否验证域名，假如验证域名，将域名添加到验证条件中。</span><br><span class="line">    NSMutableArray *policies = [NSMutableArray array];</span><br><span class="line">    if (self.validatesDomainName) &#123;</span><br><span class="line">        [policies addObject:(__bridge_transfer id)SecPolicyCreateSSL(true, (__bridge CFStringRef)domain)];</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        [policies addObject:(__bridge_transfer id)SecPolicyCreateBasicX509()];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    SecTrustSetPolicies(serverTrust, (__bridge CFArrayRef)policies);</span><br><span class="line">	/// 假如验证模式设置为 None ，代表无条件信任服务端，直接返回证书有效验证结果，假如我们选择允许无效证书，直接返回 YES，通过这次验证。</span><br><span class="line">    if (self.SSLPinningMode == AFSSLPinningModeNone) &#123;</span><br><span class="line">        return self.allowInvalidCertificates || AFServerTrustIsValid(serverTrust);</span><br><span class="line">    &#125; else if (!AFServerTrustIsValid(serverTrust) &amp;&amp; !self.allowInvalidCertificates) &#123;</span><br><span class="line">    	/// 假如证书无效，且不允许无效证书，返回 NO。</span><br><span class="line">        return NO;</span><br><span class="line">    &#125;</span><br><span class="line">	/// 针对不同验证模式进行不同处理</span><br><span class="line">    switch (self.SSLPinningMode) &#123;</span><br><span class="line">        case AFSSLPinningModeNone:</span><br><span class="line">        /// 不验证，上面已经进行了处理。</span><br><span class="line">        default:</span><br><span class="line">            return NO;</span><br><span class="line">        case AFSSLPinningModeCertificate: &#123;</span><br><span class="line">        	/// 验证证书模式，对证书中的全部内容进行验证，会验证证书有效性，证书是否一致。</span><br><span class="line">            NSMutableArray *pinnedCertificates = [NSMutableArray array];</span><br><span class="line">            for (NSData *certificateData in self.pinnedCertificates) &#123;</span><br><span class="line">                [pinnedCertificates addObject:(__bridge_transfer id)SecCertificateCreateWithData(NULL, (__bridge CFDataRef)certificateData)];</span><br><span class="line">            &#125;</span><br><span class="line">            /// 设置比对锚点证书数组</span><br><span class="line">            SecTrustSetAnchorCertificates(serverTrust, (__bridge CFArrayRef)pinnedCertificates);</span><br><span class="line">			/// 验证证书有效性</span><br><span class="line">            if (!AFServerTrustIsValid(serverTrust)) &#123;</span><br><span class="line">                return NO;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            // obtain the chain after being validated, which *should* contain the pinned certificate in the last position (if it&apos;s the Root CA)</span><br><span class="line">            /// 验证是否证书一致，我们设置的证书数组中，包含其中一个即可。</span><br><span class="line">            NSArray *serverCertificates = AFCertificateTrustChainForServerTrust(serverTrust);</span><br><span class="line">            </span><br><span class="line">            for (NSData *trustChainCertificate in [serverCertificates reverseObjectEnumerator]) &#123;</span><br><span class="line">                if ([self.pinnedCertificates containsObject:trustChainCertificate]) &#123;</span><br><span class="line">                    return YES;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            return NO;</span><br><span class="line">        &#125;</span><br><span class="line">        case AFSSLPinningModePublicKey: &#123;</span><br><span class="line">	        /// 验证公钥模式，只进行证书的公钥一致性验证。</span><br><span class="line">            NSUInteger trustedPublicKeyCount = 0;</span><br><span class="line">            NSArray *publicKeys = AFPublicKeyTrustChainForServerTrust(serverTrust);</span><br><span class="line">			/// 获取证书中的公钥数组，与自己设置的证书中的公钥数组进行比对，有一个相同即可。</span><br><span class="line">            for (id trustChainPublicKey in publicKeys) &#123;</span><br><span class="line">                for (id pinnedPublicKey in self.pinnedPublicKeys) &#123;</span><br><span class="line">                    if (AFSecKeyIsEqualToKey((__bridge SecKeyRef)trustChainPublicKey, (__bridge SecKeyRef)pinnedPublicKey)) &#123;</span><br><span class="line">                        trustedPublicKeyCount += 1;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            return trustedPublicKeyCount &gt; 0;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    return NO;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以看到，我们使用 AF 进行 https 请求时。</p>
+<ol>
+<li><p>假如我们想无条件的信任服务器的证书，就将 <code>manager.securityPolicy.SSLPinningMode = AFSSLPinningModeNone</code>，<code>manager.securityPolicy.allowInvalidCertificates = NO</code> ，这样服务端要求进行 服务端证书认证 时，是直接信任的。<br>直接信任服务端的证书，会有 中间人攻击 的隐患，我们使用 Charles 进行 HTTPS 抓包时，对于 客户端 ，Charles 是服务端，对于 服务端，Charles 是客户端，客户端收到的 证书认证中，证书 是 Charles 的证书，系统会通过认证。  </p>
+</li>
+<li><p>假如我们需要验证服务端证书，就在开发期间导入 证书，可以选择证书验证模式或者 公钥验证模式，AF 自动去帮我们验证证书或者公钥一致性。</p>
+</li>
+</ol>
+<h3 id="双向认证-1"><a href="#双向认证-1" class="headerlink" title="双向认证"></a>双向认证</h3><p>AF 中，似乎只默认处理了单向认证也就是针对于 服务端的认证需求，但是也允许我们自己处理认证需求，通过设置 <code>manager.sessionDidReceiveAuthenticationChallenge</code> ，具体代码如下：  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line">/// 设置 manager 的 认证需求处理 block</span><br><span class="line">    @weakify(manager);</span><br><span class="line">    @weakify(self);</span><br><span class="line">    [manager setSessionDidReceiveAuthenticationChallengeBlock:^NSURLSessionAuthChallengeDisposition(NSURLSession * _Nonnull session, NSURLAuthenticationChallenge * _Nonnull challenge, NSURLCredential *__autoreleasing  _Nullable * _Nullable credential) &#123;</span><br><span class="line">        NSURLSessionAuthChallengeDisposition disposition = NSURLSessionAuthChallengePerformDefaultHandling;</span><br><span class="line">        if ([challenge.protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodServerTrust]) &#123;</span><br><span class="line">            /// 针对于服务端 证书验证，还是走 AF 的配置进行处理。</span><br><span class="line">            if ([manager_weak_.securityPolicy evaluateServerTrust:challenge.protectionSpace.serverTrust forDomain:challenge.protectionSpace.host]) &#123;</span><br><span class="line">                *credential = [NSURLCredential credentialForTrust:challenge.protectionSpace.serverTrust];</span><br><span class="line">                if (credential) &#123;</span><br><span class="line">                    disposition = NSURLSessionAuthChallengeUseCredential;</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    disposition = NSURLSessionAuthChallengePerformDefaultHandling;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                disposition = NSURLSessionAuthChallengeCancelAuthenticationChallenge;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        else if([challenge.protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodClientCertificate])</span><br><span class="line">        &#123;</span><br><span class="line">        	/// 针对于客户端的认证需求，通过事先导入的 p12 文件生成证书，传给系统。</span><br><span class="line">            SecIdentityRef identity = NULL;</span><br><span class="line">            SecTrustRef trust = NULL;</span><br><span class="line">            NSString *p12 = [[NSBundle mainBundle] pathForResource:@&quot;client&quot;ofType:@&quot;p12&quot;];</span><br><span class="line">            NSFileManager *fileManager =[NSFileManager defaultManager];</span><br><span class="line">            </span><br><span class="line">            if(![fileManager fileExistsAtPath:p12])</span><br><span class="line">            &#123;</span><br><span class="line">                NSLog(@&quot;client.p12:not exist&quot;);</span><br><span class="line">            &#125;</span><br><span class="line">            else</span><br><span class="line">            &#123;</span><br><span class="line">                NSData *PKCS12Data = [NSData dataWithContentsOfFile:p12];</span><br><span class="line">                </span><br><span class="line">                if ([[self_weak_ class] extractIdentity:&amp;identity andTrust:&amp;trust fromPKCS12Data:PKCS12Data])</span><br><span class="line">                &#123;</span><br><span class="line">                    SecCertificateRef certificate = NULL;</span><br><span class="line">                    SecIdentityCopyCertificate(identity, &amp;certificate);</span><br><span class="line">                    const void*certs[] = &#123;certificate&#125;;</span><br><span class="line">                    CFArrayRef certArray =CFArrayCreate(kCFAllocatorDefault, certs,1,NULL);</span><br><span class="line">                    *credential =[NSURLCredential credentialWithIdentity:identity certificates:(__bridge  NSArray*)certArray persistence:NSURLCredentialPersistencePermanent];</span><br><span class="line">                    disposition =NSURLSessionAuthChallengeUseCredential;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">        &#125;</span><br><span class="line">        else</span><br><span class="line">        &#123;</span><br><span class="line">            disposition = NSURLSessionAuthChallengePerformDefaultHandling;</span><br><span class="line">        &#125;</span><br><span class="line">        return disposition;</span><br><span class="line">    &#125;];</span><br><span class="line">    </span><br><span class="line">/// 根据 NSData 生成证书的方法</span><br><span class="line">+ (BOOL)extractIdentity:(SecIdentityRef*)outIdentity andTrust:(SecTrustRef *)outTrust fromPKCS12Data:(NSData *)inPKCS12Data &#123;</span><br><span class="line">    OSStatus securityError = errSecSuccess;</span><br><span class="line">    //client certificate password</span><br><span class="line">    NSDictionary*optionsDictionary = [NSDictionary dictionaryWithObject:@&quot;your p12 file pwd&quot;</span><br><span class="line">                                                                 forKey:(__bridge id)kSecImportExportPassphrase];</span><br><span class="line">    </span><br><span class="line">    CFArrayRef items = CFArrayCreate(NULL, 0, 0, NULL);</span><br><span class="line">    securityError = SecPKCS12Import((__bridge CFDataRef)inPKCS12Data,(__bridge CFDictionaryRef)optionsDictionary,&amp;items);</span><br><span class="line">    </span><br><span class="line">    if(securityError == 0) &#123;</span><br><span class="line">        CFDictionaryRef myIdentityAndTrust =CFArrayGetValueAtIndex(items,0);</span><br><span class="line">        const void*tempIdentity =NULL;</span><br><span class="line">        tempIdentity= CFDictionaryGetValue (myIdentityAndTrust,kSecImportItemIdentity);</span><br><span class="line">        *outIdentity = (SecIdentityRef)tempIdentity;</span><br><span class="line">        const void*tempTrust =NULL;</span><br><span class="line">        tempTrust = CFDictionaryGetValue(myIdentityAndTrust,kSecImportItemTrust);</span><br><span class="line">        *outTrust = (SecTrustRef)tempTrust;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        NSLog(@&quot;Failedwith error code %d&quot;,(int)securityError);</span><br><span class="line">        return NO;</span><br><span class="line">    &#125;</span><br><span class="line">    return YES;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>双向认证中，我们依然要对服务端证书进行认证，以及对其他的 认证需求类型，指定进行系统默认的处理；但是主要的是针对客户端认证代码，利用我们实现导入的证书文件，生成了一个证书交给了系统，让系统为我们进行进一步的处理。</p>
+	
+	</div>
+	
+	<div id="current-post-cover" data-scr="/img/cart_cover.jpg"></div>
+
+	<!-- relate post, comment...-->
+	<div class="investment-container">
+		<div class="investment-header">
+			<div class="investment-title-1">
+				<div class="on">相关文章</div>
+				<div>评论</div>
+				<div>分享</div>
+			</div>
+			<div class="investment-title-2">	            
+				
+	<span>
+		<a href="javascript: window.scrollTo(0, 0);">返回顶部</a>
+		
+			<a href="/2018/12/17/NSURLProtocol/" title="NSURLProtocol" rel="prev">
+				&laquo;上一篇
+			</a>
+		
+		
+			<a href="/2018/12/04/Apple-文档Authentication-and-Credentials-翻译/" title="Apple 文档 Authentication and Credentials 的翻译" rel="next">
+				下一篇&raquo;
+			</a>
+			
+	</span>
+
+
+      		
+			</div>	
+		</div>
+		
+		<div class="investment-content">
+			<div class="investment-content-list">
+				
+
+<div class="relate-post">
+	
+		<ul>
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2018/12/19/OAStackView/" title="OAStackView">
+								OAStackView			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								十二月 19日, 2018				
+							</p>
+							<p class="relate-post-content">
+								UIStackView 的理解UIStackView 是 iOS9 推出的新特性，允许我们线性的去布局一个界面，在之前没有用到过，但是新公司用到的地方挺多，所以写一篇文章介绍一下，也加深自己的理解。使用 UIStackView 布局，...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2018/12/19/OAStackView/" title="OAStackView">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="OAStackView">
+							</a>
+						</div>
+					</li>											
+			
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2018/12/17/NSURLProtocol/" title="NSURLProtocol">
+								NSURLProtocol			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								十二月 17日, 2018				
+							</p>
+							<p class="relate-post-content">
+								在 Apple 的文档 URL Loading System 中，详细介绍了一个请求是如何创建、发起、回传数据的，还包括了证书认证，cookie 等一系列的操作，但是好像唯独遗漏了一个特殊的类： NSURLProtocol ，其实在我...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2018/12/17/NSURLProtocol/" title="NSURLProtocol">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="NSURLProtocol">
+							</a>
+						</div>
+					</li>											
+			
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2018/12/04/Apple-文档Authentication-and-Credentials-翻译/" title="Apple 文档 Authentication and Credentials 的翻译">
+								Apple 文档 Authentication and Credentials 的翻译			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								十二月 4日, 2018				
+							</p>
+							<p class="relate-post-content">
+								对 Apple 的 认证和证书 开发文档的一个翻译 
+Handling an Authentication ChallengeRespond appropriately when a server demands authentica...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2018/12/04/Apple-文档Authentication-and-Credentials-翻译/" title="Apple 文档 Authentication and Credentials 的翻译">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="Apple 文档 Authentication and Credentials 的翻译">
+							</a>
+						</div>
+					</li>											
+			
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2018/12/04/最新-SDWebImage-解读/" title="最新 SDWebImage 解读">
+								最新 SDWebImage 解读			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								十二月 4日, 2018				
+							</p>
+							<p class="relate-post-content">
+								针对于 SDWebImage 4.0 版本的源码分析
+View 层负责 view 的 loading 控件管理，每个 view 的请求发起、取消入口。
+UIView+WebCacheOperation 分类负责管理每次请求产生的 SD...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2018/12/04/最新-SDWebImage-解读/" title="最新 SDWebImage 解读">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="最新 SDWebImage 解读">
+							</a>
+						</div>
+					</li>											
+			
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2018/11/20/RunLoop-CommonModes/" title="RunLoop-CommonModes">
+								RunLoop-CommonModes			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								十一月 20日, 2018				
+							</p>
+							<p class="relate-post-content">
+								RunLoop 的 CommonModes ，其实不是一个真正的 modes，而是一个伪 mode.. ，每个 _CFRunLoopRef 的数据结构大致是这样的：
+123456789101112131415161718 struct...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2018/11/20/RunLoop-CommonModes/" title="RunLoop-CommonModes">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="RunLoop-CommonModes">
+							</a>
+						</div>
+					</li>											
+			
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2018/11/15/NSCondition-锁/" title="NSCondition 锁">
+								NSCondition 锁			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								十一月 15日, 2018				
+							</p>
+							<p class="relate-post-content">
+								最近对于 NSCondition 感到有些疑惑，所以写点东西进行研究一下。 
+用法首先 NSCondition 有以下几个方法：
+12345- (void)wait;   让线程陷入睡眠，将锁的权利交出。- (BOOL)waitUnt...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2018/11/15/NSCondition-锁/" title="NSCondition 锁">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="NSCondition 锁">
+							</a>
+						</div>
+					</li>											
+			
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2017/03/17/iOS-的渲染机制以及-UIView-的自动布局流程/" title="iOS 的渲染机制以及 UIView 的自动布局流程">
+								iOS 的渲染机制以及 UIView 的自动布局流程			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								三月 17日, 2017				
+							</p>
+							<p class="relate-post-content">
+								iOS 的界面渲染，是跟 RunLoop 分不开的，屏幕需要更新时，会调用 CPU 协同 GPU ，将界面数据渲染到屏幕上。。。
+界面渲染原理同 PC 相似，移动设备也包含屏幕刷新与显卡刷新的概念。iOS 的显示系统，是由 VSync...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2017/03/17/iOS-的渲染机制以及-UIView-的自动布局流程/" title="iOS 的渲染机制以及 UIView 的自动布局流程">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="iOS 的渲染机制以及 UIView 的自动布局流程">
+							</a>
+						</div>
+					</li>											
+			
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2017/02/21/封装一个转场动画库/" title="封装一个转场动画库">
+								封装一个转场动画库			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								二月 21日, 2017				
+							</p>
+							<p class="relate-post-content">
+								自从 iOS 7 以后，就可以自定义跳转动画了，苹果开放了相关的 API ，在这里做一个基本的总结。 
+原理 UIViewControllerTransitioningDelegate
+1234567891011121314@prot...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2017/02/21/封装一个转场动画库/" title="封装一个转场动画库">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="封装一个转场动画库">
+							</a>
+						</div>
+					</li>											
+			
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2017/02/04/创建-CocoaPods-库并上传/" title="创建 CocoaPods 库并上传">
+								创建 CocoaPods 库并上传			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								二月 4日, 2017				
+							</p>
+							<p class="relate-post-content">
+								公司会开发多个 App ，这样创建一个公共的 pod 库是很有必要的，索性昨天趁下班时创建了一个最简单的 pod 库，就把过程记下来吧。
+注册 pods trunk 账号这一步没有什么难度，在终端中注册就好了  
+1$ pod tru...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2017/02/04/创建-CocoaPods-库并上传/" title="创建 CocoaPods 库并上传">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="创建 CocoaPods 库并上传">
+							</a>
+						</div>
+					</li>											
+			
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2018/11/15/18-11-15-面试复盘/" title="18.11.15 面试复盘">
+								18.11.15 面试复盘			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								十一月 15日, 2018				
+							</p>
+							<p class="relate-post-content">
+								今天这次记录是时间最短的一个，我提前 15 分钟到了面试地点，半个小时就面完了，面试官很温柔，应该是移动端负责人，非 iOS 出身，对技术的提问也是浅尝辄止，主要是考察被面试者的项目经验，逻辑思维等。 
+OC 的内存管理原理老生常谈，...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2018/11/15/18-11-15-面试复盘/" title="18.11.15 面试复盘">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="18.11.15 面试复盘">
+							</a>
+						</div>
+					</li>											
+			
+			
+		</ul>
+	
+</div>	
+			</div>
+			<div class="investment-content-list">
+				<div class="layout-comment">
+
+	
+
+		
+
+			<!-- I don't know !!!-->
+			<div>Please check the comment setting in config.yml of hexo-theme-Annie!</div>
+			
+		
+		
+	
+
+</div>
+			</div>
+			<div class="investment-content-list">
+				<div class="layout-share">
+	
+	
+
+		
+			
+			<!-- socialShare share -->
+			<div class="social-share"></div>
+
+<!--  css & js -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+<script async src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+			
+		
+		
+	
+</div>
+
+
+			</div>
+		</div>	
+	</div>
+	</div>
+</div>
+
+
+
+	<!-- leancloud -->
+	<!--
+	时间：2018-11-27
+	描述：
+		文章访问量：visitors
+		文章喜欢量：likes	
+		文章排行榜：topNPost
+		其他得说明：
+			01-Cookie相关的函数 
+				https://blog.csdn.net/somehow1002/article/details/78511541（Author：somehow1002）
+			02-visitors相关的函数 
+				https://blog.csdn.net/u013553529/article/details/63357382（Author：爱博客大伯）
+				https://notes.doublemine.me/2015-10-21-为NexT主题添加文章阅读量统计功能.html（Author：夏末）
+			03-topNPost相关的函数
+				https://hoxis.github.io/hexo-next-read-rank.html（Author：hoxis）
+			04-likes相关的函数，
+				参考了01 & 02进行简单的设计与实现
+-->
+
+
+	
+
+
+<!-- show math formula -->
+
+
+
+	 
+	<script src="/plugin/clipboard/clipboard.js"></script>
+	<script>
+		// Copy code !
+	    function codePreprocessing() {
+	        $("#article-content .highlight").each(function() {
+
+	            $(this).wrap('<div id="post-code"></div>');
+
+	        })
+
+	        $("#article-content #post-code").each(function() {
+
+	            $(this).prepend('<nav class="copy-nav"><span><i class="code-language"></i></span></nav>');
+
+	        })
+
+	        $("#article-content .copy-nav").each(function() {
+	            var temp = $(this).next().attr('class'),
+	                language = ((temp.length > 9) && (temp != null)) ? temp.substr(10) : "none"; //why 9? Need to check language?
+
+	            $(this).find('.code-language').text(language);
+
+	            $(this).append('<span class="copy-btn"><i class="fa fa-copy" aria-hidden="true"></i></span>');
+
+	        });
+	    }
+
+		function codeCopy() {
+		    $('#article-content #post-code').each(function(i) {
+		        var codeCopyId = 'codeCopy-' + i;
+
+		        var codeNode = $(this).find('.code'),
+		            copyButton = $(this).find('.copy-btn');
+
+		        codeNode.attr('id', codeCopyId);
+		        copyButton.attr('data-clipboard-target-id', codeCopyId);
+		    })
+
+		    
+			var clipboard = new ClipboardJS('.copy-btn', {
+					target: function(trigger) {
+						return document.getElementById(trigger.getAttribute('data-clipboard-target-id'));
+					}
+		      	});
+
+			//pure js
+			function showTooltip(elem, msg) {		   
+				elem.setAttribute('aria-label', msg);
+				elem.setAttribute('class', 'copy-btn copy-status');
+				setTimeout(function() {
+					elem.setAttribute('class', 'copy-btn');
+				}, 2000);
+			}
+
+			clipboard.on('success', function(e) {
+			    e.clearSelection();
+			    console.info('Action:', e.action);		   
+			    console.info('Trigger:', e.trigger);
+			    showTooltip(e.trigger, 'Copied!');
+			    
+			});
+			clipboard.on('error', function(e) {
+			    console.error('Action:', e.action);
+			    console.error('Trigger:', e.trigger);
+			});
+		
+
+		}
+
+		if ($('.layout-post').length) {
+		    codePreprocessing();
+		    codeCopy();
+		} 
+	</script>
+
+
+
+
+
+<link rel="stylesheet" href="/plugin/fancybox/jquery.fancybox.css">
+<script src="/plugin/fancybox/jquery.fancybox.js"></script>
+
+<script type="text/javascript">
+	var titleID = $('.article-title a'),
+		imageID = $('.article-content img'),
+		videoID = $('.article-content video');
+
+	var postTitle = titleID.text() ? titleID.text() : "No post title!";
+
+	imageID.each(function() {
+		var imgPath = $(this).attr('src'),
+			imgTitle = $(this).attr('alt') ? $(this).attr('alt') : "No image description!";
+
+		//给每个匹配的<img>元素打包, 即添加父元素<a>
+		$(this).wrap('<a data-fancybox="gallery" data-caption=" 《 ' + postTitle + ' 》 ' + imgTitle + ' "  href=" ' + imgPath + ' "> </a>');
+	});
+
+	videoID.each(function() {
+		var videoPath = $(this).attr('src');
+
+		//给每个匹配的<img>元素打包, 即添加父元素<a>
+		$(this).wrap('<a data-fancybox href=" ' + videoPath + ' "> </a>');
+	});
+	//TODO：支持html5 video
+
+	if($('#layout-post').length) {
+		$('[data-fancybox="gallery"]').fancybox({
+			loop: true,
+			buttons: [
+				"zoom",
+				"share",
+				"slideShow",
+				"fullScreen",
+				//"download",
+				"thumbs",
+				"close"
+			],
+			protect: false
+		});
+	}
+</script>
+		</main>
+
+		<!--footer-->
+		<footer>
+	<div class="social">
+		<ul>
+	
+		<li>
+			<a href="http://github.com/" target="_blank">
+				<i class="fa fa-github"></i>
+			</a>
+		</li>
+	
+		<li>
+			<a href="http://github.com/" target="_blank">
+				<i class="fa fa-weibo"></i>
+			</a>
+		</li>
+	
+		<li>
+			<a href="http://github.com/" target="_blank">
+				<i class="fa fa-pinterest"></i>
+			</a>
+		</li>
+	
+		<li>
+			<a href="http://github.com/" target="_blank">
+				<i class="fa fa-instagram"></i>
+			</a>
+		</li>
+	
+		<li>
+			<a href="http://github.com/" target="_blank">
+				<i class="fa fa-twitter"></i>
+			</a>
+		</li>
+	
+		<li>
+			<a href="/atom.xml" target="_blank">
+				<i class="fa fa-rss"></i>
+			</a>
+		</li>
+			
+</ul>
+
+	</div>
+		
+	<div class="copyright">
+		<p>
+			 
+				&copy;2017 - 2019, content by eassy. All Rights Reserved.
+			
+			
+			
+
+	<!-- busuanzi -->
+	<!-- busuanzi -->
+
+		
+	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+	
+
+		<span id="busuanzi_container_page_pv">
+	  		本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+		</span>
+
+	
+
+
+
+
+		</p>
+		<p>
+			<a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a> Theme <a href="https://github.com/Sariay/hexo-theme-Annie" title="Annie" target="_blank" rel="noopener">Annie</a> by Sariay.
+			<a href="javascript:zh_tran('s');" class="zh_click" id="zh_click_s">简体</a> 
+			<a href="javascript:zh_tran('t');" class="zh_click" id="zh_click_t">繁體</a>				
+		</p>
+	</div>		
+</footer>
+		
+	<!-- set '1' to show motto in all pages! -->
+
+	<script src="/plugin/motto/motto.js"></script>
+	
+	<script type="text/javascript">
+		$(".motto").html( getMingYanContent() );
+	</script>	
+
+
+
+
+
+<!-- love effect -->
+
+	<script src="/plugin/love/love.js"></script>
+
+
+<!-- back to top -->
+
+	
+	<div id="totop">
+  		<a href="javascript:;" name="TOTOP" class="fa fa-arrow-up"></a>
+	</div>
+
+
+
+
+<!-- site analysis -->
+
+
+	<!-- site-analysis -->
+	
+	
+	
+	
+	
+ 
+
+<script src="/plugin/vibrant/vibrant.js"></script>
+<script src="/plugin/chinese/chinese.js"></script>
+<script src="/plugin/imgLazyLoader/yall.min.js"></script>
+<script src="/plugin/imgResize/jquery.resizeimagetoparent.min.js"></script>
+<script src="/plugin/nicescroll/jquery.nicescroll.js"></script>
+<script src="/js/resizediv.js"></script>
+<script src="/js/main.js"></script>
+	</body>	
+</html>

@@ -1,0 +1,963 @@
+<!--
+	作者：Sariay
+	时间：2018-09-25
+	描述：There may be a bug, but don't worry, QiLing(器灵) says that it can work normally!
+-->
+<!DOCTYPE html>
+<html class="html-loading">
+		
+
+<head><meta name="generator" content="Hexo 3.8.0">
+	<meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+  <title>
+    
+      一个简单的SceneKit场景 | Eassy
+    
+  </title>
+  <meta name="author" content="eassy">
+  <meta name="keywords" content>
+  <meta name="description" content="人性就是用来质疑生活的">
+	<!-- favicon -->
+  <link rel="shortcut icon" href="/img/favicon.ico">
+
+  <!-- css -->
+  <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/Annie.css">
+  
+  <!-- jquery -->
+	<script src="/js/jquery.min.js"></script>
+
+  <!-- leancloud -->
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+<script src="/js/leancloud.js"></script>
+</head>
+	<body>
+		<!-- Preloader -->
+
+	<div id="preloader">
+		<div class="pre-container">
+			
+				<div class="spinner">
+					<div class="double-bounce1"></div>
+					<div class="double-bounce2"></div>
+				</div>
+						
+		</div>
+	</div>
+
+
+<!-- header -->
+<header class="fixbackground" data-img-mode="normal" data-normal-src="/img/1.jpg" data-random-max="110" data-random-src="https://sariay.github.io/Random-img/">
+	<div class="mask">
+		<!-- Logo and navigation -->
+		<div class="h-header">
+			<div id="logo">
+				<a href="/">
+						
+						<img src="/img/logo.png" alt="Logo">
+					
+				</a>
+			</div>
+			
+			<div id="navigation-show">
+				<ul>
+	
+		<li class="menu-home">
+			<a href="/" class="menu-item-home">主页</a>
+		</li>
+	
+		<li class="menu-archive">
+			<a href="/archives" class="menu-item-archive">归档</a>
+		</li>
+	
+		<li class="menu-categories">
+			<a href="/categories" class="menu-item-categories">分类</a>
+		</li>
+	
+		<li class="menu-tags">
+			<a href="/tags" class="menu-item-tags">标签</a>
+		</li>
+	
+		<li class="menu-about">
+			<a href="/about" class="menu-item-about">关于</a>
+		</li>
+	
+		<li class="menu-gallery">
+			<a href="/gallery" class="menu-item-gallery">相册</a>
+		</li>
+	
+
+	
+</ul>
+			</div>				
+		</div>
+
+		<!-- motto -->
+		<div class="h-body">	
+			
+				<p class="motto"></p>
+			
+		</div>
+		
+		<!-- others: such as time... -->			
+		<div class="h-footer">
+			<a href="javascript:;" id="read-more"><i class="fa fa-angle-double-down" aria-hidden="true"></i>
+			</a>
+
+			
+				<!-- 
+	This is only a demo, please go to "https://time.is" to set your city time! 
+-->
+<style type="text/css">
+	.header-date {
+		font-size: 1.6rem;
+		color: #fff;
+		position: absolute;
+		bottom: 5px;
+		right: 1rem;
+		writing-mode: tb-rl;
+	}	
+	
+	.header-date a {
+		border-bottom: none;
+	}
+
+	@media only screen and (max-width: 768 ) {
+		.header-date {
+			font-size: 1rem;
+		}			
+	}
+</style>
+<div class="header-date">
+	<a href="https://time.is/Beijing" id="time_is_link" rel="nofollow"></a>
+	<span id="Beijing_z43d"></span>
+</div>
+<script src="//widget.time.is/zh.js"></script>
+<script>
+	time_is_widget.init({
+		Beijing_z43d:{
+			template:"DATE", 
+			date_format:"year年 monthname dnum日"
+		}
+	});
+</script>
+			
+		</div>
+	</div>
+</header>
+
+<div id="navigation-hide">
+	<!-- Progress bar -->
+	<div id="progress-bar"></div>
+
+	<!-- Progress percent -->
+	<div id="progress-percentage"><h1>0.0%</h1></div>
+
+	<div class="toc-switch"><span class="switch-button">目录</span></div>
+
+	<!-- Page title -->
+	<p>
+		
+			当前文章&nbsp;:&nbsp;《一个简单的SceneKit场景》
+		
+	</p>
+
+	<!-- Nav trigger for navigation-H-->
+	<a class="nav-trigger"><span></span></a>
+</div>
+
+<!-- Navigation in div(id="navigation-H") -->
+<nav class="nav-container" id="cd-nav">
+	<div class="nav-header">
+		<h3>Navigation</h3>
+		<a href="javascript:;" class="nav-close"></a>
+	</div>
+	<div class="nav-body">
+		<ul>
+	
+		<li class="menu-home">
+			<a href="/" class="menu-item-home">主页</a>
+		</li>
+	
+		<li class="menu-archive">
+			<a href="/archives" class="menu-item-archive">归档</a>
+		</li>
+	
+		<li class="menu-categories">
+			<a href="/categories" class="menu-item-categories">分类</a>
+		</li>
+	
+		<li class="menu-tags">
+			<a href="/tags" class="menu-item-tags">标签</a>
+		</li>
+	
+		<li class="menu-about">
+			<a href="/about" class="menu-item-about">关于</a>
+		</li>
+	
+		<li class="menu-gallery">
+			<a href="/gallery" class="menu-item-gallery">相册</a>
+		</li>
+	
+
+	
+</ul>
+	</div>
+	<div class="nav-footer">
+		<ul>
+	
+		<li>
+			<a href="http://github.com/" target="_blank">
+				<i class="fa fa-github"></i>
+			</a>
+		</li>
+	
+		<li>
+			<a href="http://github.com/" target="_blank">
+				<i class="fa fa-weibo"></i>
+			</a>
+		</li>
+	
+		<li>
+			<a href="http://github.com/" target="_blank">
+				<i class="fa fa-pinterest"></i>
+			</a>
+		</li>
+	
+		<li>
+			<a href="http://github.com/" target="_blank">
+				<i class="fa fa-instagram"></i>
+			</a>
+		</li>
+	
+		<li>
+			<a href="http://github.com/" target="_blank">
+				<i class="fa fa-twitter"></i>
+			</a>
+		</li>
+	
+		<li>
+			<a href="/atom.xml" target="_blank">
+				<i class="fa fa-rss"></i>
+			</a>
+		</li>
+			
+</ul>
+
+	</div>
+</nav>
+			
+		<!--main-->
+		<main>
+			<!--
+	时间：2018-11-17
+	描述：
+		插件名称：katelog.min.js
+		插件作者：KELEN
+		插件来源: https://github.com/KELEN/katelog
+-->
+
+	
+		<div class="layout-toc">
+			<div id="layout-toc">
+				<div class="k-catelog-list" id="catelog-list" data-title="文章目录"></div>
+			</div>
+		</div>
+
+		
+		<script src="/plugin/toc/katelog.min.js"></script>
+
+		
+	 
+
+<div class="layout-post">
+	<div id="layout-post">
+	<div class="article-title">
+		<i class="fa fa-paper-plane-o" aria-hidden="true"></i>
+		
+	<a href="/2017/03/16/一个简单的SceneKit场景/" itemprop="url">
+		一个简单的SceneKit场景
+	</a>
+
+	</div>
+
+	<div class="article-meta">
+		<span>
+			<i class="fa fa-calendar"></i>
+			
+
+
+	发布于
+
+	<a href="/2017/03/16/一个简单的SceneKit场景/" itemprop="url">
+		<time datetime="2017-03-16T08:03:56.000Z" itemprop="datePublished">
+	  		2017-03-16
+	  </time>
+	</a>
+	&nbsp;
+
+
+
+
+
+			
+
+
+
+
+	更新于
+
+	<a href="/2017/03/16/一个简单的SceneKit场景/" itemprop="url">
+		<time datetime="2017-03-16T08:03:56.000Z" itemprop="dateUpdated">
+	  		2017-03-16
+	  </time>
+	</a> 
+
+
+
+		</span>
+		<span>
+			<i class="fa fa-tags"></i>
+			
+	
+		<a href="/tags/OpenGL-ES/" class=" ">
+			OpenGL-ES
+		</a>
+	
+		
+		</span>
+		
+		
+
+
+
+	</div>
+
+	<div class="article-content" id="article-content">
+		<p>做了一个简单的 SceneKit 场景，即加载动画，并控制动画人物行走，保持摄像机跟随。。。。<a id="more"></a><br>最终效果: <img src="%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84SceneKit%E5%9C%BA%E6%99%AF/smapleGif.gif" alt><br>git 传送门 : <a><a href="https://github.com/eassy/TimoRun" target="_blank" rel="noopener">https://github.com/eassy/TimoRun</a></a></p>
+<h2 id="创建一个手柄控制板"><a href="#创建一个手柄控制板" class="headerlink" title="创建一个手柄控制板"></a>创建一个手柄控制板</h2><p>这是控制板最终的样式，中间的按钮只会在触碰的时候显示出来，而且随着手指的移动，中间的按钮在大圈范围内跟随移动。<img src="%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84SceneKit%E5%9C%BA%E6%99%AF/gamePad.png" alt><br>自定义一个 UIView ，利用 touchBegin 等一系列的事件检测方法，将触碰点捕捉到，同时判断触碰点是否在大圈范围内，在的话将按钮中心位置挪到触碰点处，不在的话，将按钮中心位置挪到跟触碰点在一个方向的大圈圆周这个点处。有难度的可能是计算按钮中心点最终所处的位置。  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></td><td class="code"><pre><span class="line">- (CGFloat)lengthFromA:(CGPoint)aPoint toB:(CGPoint)bPoint</span><br><span class="line">&#123;</span><br><span class="line">    return sqrt((aPoint.x - bPoint.x)*(aPoint.x-bPoint.x) + (aPoint.y-bPoint.y)*(aPoint.y-bPoint.y));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (void)touchesBegan:(NSSet&lt;UITouch *&gt; *)touches withEvent:(UIEvent *)event</span><br><span class="line">&#123;</span><br><span class="line">    self.pad.hidden = NO;</span><br><span class="line">    </span><br><span class="line">    CGPoint point = [[touches anyObject] locationInView:self];</span><br><span class="line">    </span><br><span class="line">    [self movePadCenterToPoint:point animation:NO complete:^&#123;</span><br><span class="line">        </span><br><span class="line">    &#125;];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (void)touchesMoved:(NSSet&lt;UITouch *&gt; *)touches withEvent:(UIEvent *)event</span><br><span class="line">&#123;</span><br><span class="line">    CGPoint point = [[touches anyObject] locationInView:self];</span><br><span class="line">    </span><br><span class="line">    [self movePadCenterToPoint:point animation:NO complete:^&#123;</span><br><span class="line">        </span><br><span class="line">    &#125;];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (void)touchesEnded:(NSSet&lt;UITouch *&gt; *)touches withEvent:(UIEvent *)event</span><br><span class="line">&#123;</span><br><span class="line">    </span><br><span class="line">    [self movePadCenterToPoint:CGPointMake(_bigRadius, _bigRadius) animation:YES complete:^&#123;</span><br><span class="line">        self.pad.hidden = YES;</span><br><span class="line">    &#125;];</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (void)touchesCancelled:(NSSet&lt;UITouch *&gt; *)touches withEvent:(UIEvent *)event</span><br><span class="line">&#123;</span><br><span class="line">    [self movePadCenterToPoint:CGPointMake(_bigRadius, _bigRadius) animation:YES complete:^&#123;</span><br><span class="line">        self.pad.hidden = YES;</span><br><span class="line">    &#125;];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (void)movePadCenterToPoint:(CGPoint)point animation:(BOOL)animation complete:(void(^)(void))completeBlock</span><br><span class="line">&#123;</span><br><span class="line">    CGFloat length = [self lengthFromA:point toB:CGPointMake(_bigRadius, _bigRadius)];</span><br><span class="line">    CGPoint finalPoint;</span><br><span class="line">    if (length &lt; _bigRadius - _smallRadius) &#123;</span><br><span class="line">        finalPoint = point;</span><br><span class="line">    &#125;</span><br><span class="line">    else&#123;</span><br><span class="line">        </span><br><span class="line">        //计算应该的 center</span><br><span class="line">        CGFloat a = (point.x - _bigRadius)/(point.y - _bigRadius);</span><br><span class="line">        CGFloat l = _bigRadius - _smallRadius;</span><br><span class="line">        </span><br><span class="line">        CGFloat offsetY = sqrt(l * l/(a * a + 1));</span><br><span class="line">        if (point.y &gt;= _bigRadius) &#123;</span><br><span class="line">            finalPoint.y = offsetY + _bigRadius;</span><br><span class="line">        &#125;</span><br><span class="line">        else&#123;</span><br><span class="line">            finalPoint.y = _bigRadius - offsetY;</span><br><span class="line">        &#125;</span><br><span class="line">        finalPoint.x = a * (finalPoint.y - _bigRadius) + _bigRadius;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    if (!isnan(finalPoint.x) &amp;&amp; !isnan(finalPoint.y)) &#123;</span><br><span class="line">        self.pad.center = finalPoint;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    if (completeBlock) &#123;</span><br><span class="line">        completeBlock();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    if ([self.delegate respondsToSelector:@selector(padControl:toPoint:)]) &#123;</span><br><span class="line">        [self.delegate padControl:self toPoint:CGPointMake(finalPoint.x - _bigRadius, finalPoint.y - _bigRadius)];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>计算公式不难，大圆中心点位置为 (_bigRadius,_bigRadius),设大圆中心点为(x1,y1),触碰点位置为(x2,y2),最终点为(x,y)，则可列公式:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">//bigRadius:大圆半径  smallRadius:小圆半径</span><br><span class="line">(x-x1)/(y-y1) = (x2-x1)/(y2-y1)</span><br><span class="line">(x-x1)² + (y-y1)² = (_bigRadius - smallRadius)²</span><br><span class="line">令 l = _bigRadius - _smallRadius;  </span><br><span class="line">   a = (point.x - _bigRadius)/(point.y - _bigRadius);</span><br><span class="line">由此可得 offsetY = |y-y1| = sqrt(l * l/(a * a + 1));</span><br><span class="line">再根据触碰点相对于中心点的方向信息，得出 finalY，最终得出 finalX</span><br></pre></td></tr></table></figure>
+
+<h2 id="加载文件中的动画和人物"><a href="#加载文件中的动画和人物" class="headerlink" title="加载文件中的动画和人物"></a>加载文件中的动画和人物</h2><p>因为资源文件是带动画的，所以取出来时要先 remove 掉，先保存，后 remove。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">- (void)makeTimo</span><br><span class="line">&#123;</span><br><span class="line">    SCNScene *timoScene = [SCNScene sceneNamed:@&quot;art.scnassets/TiMo.DAE&quot;];</span><br><span class="line">    </span><br><span class="line">    self.timoNode = [SCNNode node];</span><br><span class="line">    </span><br><span class="line">    for (SCNNode *childNode in timoScene.rootNode.childNodes) &#123;</span><br><span class="line">        </span><br><span class="line">        [self.timoNode addChildNode:childNode];</span><br><span class="line">        if (childNode.animationKeys.count) &#123;</span><br><span class="line">            self.walkAnimation = [childNode animationForKey:childNode.animationKeys[0]];</span><br><span class="line">            self.walkAnimation.speed = 1.5;</span><br><span class="line">            [childNode removeAllAnimations];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    self.timoNode.position = SCNVector3Make(0, 0.15, 0);</span><br><span class="line">    self.timoNode.scale = SCNVector3Make(0.2, 0.2, 0.2);</span><br><span class="line">    </span><br><span class="line">    SCNPhysicsBody *timoBody = [SCNPhysicsBody kinematicBody];</span><br><span class="line">    timoBody.mass = 10;</span><br><span class="line">    </span><br><span class="line">    self.timoNode.physicsBody = timoBody;</span><br><span class="line">    [self.mainScene.rootNode addChildNode:self.timoNode];</span><br><span class="line">     </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>物理身体的类型我设置成了 kinematicBody ，因为 设置成动态身体的话根本站不住。。。软趴趴倒在地上哈哈哈。可以看到我将动画保存了起来，然后 remove 掉了。</p>
+<h2 id="创建-Camera-和灯光"><a href="#创建-Camera-和灯光" class="headerlink" title="创建 Camera 和灯光"></a>创建 Camera 和灯光</h2><p>有两个 Camera ，一个是位置一直跟随人物移动的 camera，一个是一直面向人物，但是位置不变的，通过双击屏幕切换这两个视角。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">- (void)setupCamera</span><br><span class="line">&#123;</span><br><span class="line">    // create and add a camera to the scene</span><br><span class="line">    SCNNode *cameraNode = [SCNNode node];</span><br><span class="line">    cameraNode.camera = [SCNCamera camera];</span><br><span class="line">    [self.mainScene.rootNode addChildNode:cameraNode];</span><br><span class="line">    </span><br><span class="line">    // place the camera</span><br><span class="line">    cameraNode.position = SCNVector3Make(0, 50, 60);</span><br><span class="line">    cameraNode.rotation = SCNVector4Make(1, 0, 0, -M_PI / 6.f);</span><br><span class="line">    cameraNode.camera.zFar = 2000;</span><br><span class="line">    self.cameraNode = cameraNode;</span><br><span class="line">    </span><br><span class="line">    ((SCNView *)self.view).pointOfView = self.cameraNode;</span><br><span class="line">    </span><br><span class="line">    SCNNode *thirdCameraNode = [SCNNode node];</span><br><span class="line">    thirdCameraNode.camera = [SCNCamera camera];</span><br><span class="line">    [self.mainScene.rootNode addChildNode:thirdCameraNode];</span><br><span class="line">    thirdCameraNode.position = SCNVector3Make(0, 50, 120);</span><br><span class="line">    thirdCameraNode.rotation = SCNVector4Make(1, 0, 0, -M_PI / 6.f);</span><br><span class="line">    thirdCameraNode.camera.zFar = 2000;</span><br><span class="line">    SCNLookAtConstraint *constraint = [SCNLookAtConstraint lookAtConstraintWithTarget:self.timoNode];</span><br><span class="line">    thirdCameraNode.constraints = @[constraint];</span><br><span class="line">    self.thirdCameraNode = thirdCameraNode;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>初始的视角是跟随的摄像机。<br>我添加了一个环境光，八个聚焦灯(后面我超想用聚焦灯创建一个ktv那种球状灯的)，灯的方向都是照向地面。</p>
+<h2 id="创建环境"><a href="#创建环境" class="headerlink" title="创建环境"></a>创建环境</h2><h3 id="创建地板"><a href="#创建地板" class="headerlink" title="创建地板"></a>创建地板</h3><p>创建地板的时候并没有指定大小，好像默认无限大了？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">- (void)makeFloor</span><br><span class="line">&#123;</span><br><span class="line">    SCNNode*floor = [SCNNode node];</span><br><span class="line">    floor.geometry = [SCNFloor floor];</span><br><span class="line">    floor.geometry.firstMaterial.diffuse.contents = @&quot;art.scnassets/moss_diffuse.png&quot;;</span><br><span class="line">    floor.geometry.firstMaterial.diffuse.contentsTransform = SCNMatrix4MakeScale(2, 2, 1); //scale the wood texture</span><br><span class="line">    floor.geometry.firstMaterial.locksAmbientWithDiffuse = YES;</span><br><span class="line">    </span><br><span class="line">    SCNPhysicsBody *staticBody = [SCNPhysicsBody staticBody];</span><br><span class="line">    floor.physicsBody = staticBody;</span><br><span class="line">    </span><br><span class="line">    [self.mainScene.rootNode addChildNode:floor];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="创建四面墙"><a href="#创建四面墙" class="headerlink" title="创建四面墙"></a>创建四面墙</h3><p>创建两面墙，然后使用 clone ，rotate,position 等将墙放在合适的位置。每面墙都是静态躯体。</p>
+<h3 id="创建一个足球"><a href="#创建一个足球" class="headerlink" title="创建一个足球"></a>创建一个足球</h3><p>创建一个球，设置动态物理身体，然后可以被踢着走了~</p>
+	
+	</div>
+	
+	<div id="current-post-cover" data-scr="/img/cart_cover.jpg"></div>
+
+	<!-- relate post, comment...-->
+	<div class="investment-container">
+		<div class="investment-header">
+			<div class="investment-title-1">
+				<div class="on">相关文章</div>
+				<div>评论</div>
+				<div>分享</div>
+			</div>
+			<div class="investment-title-2">	            
+				
+	<span>
+		<a href="javascript: window.scrollTo(0, 0);">返回顶部</a>
+		
+			<a href="/2017/03/17/iOS-的渲染机制以及-UIView-的自动布局流程/" title="iOS 的渲染机制以及 UIView 的自动布局流程" rel="prev">
+				&laquo;上一篇
+			</a>
+		
+		
+			<a href="/2017/03/14/SceneKit开发/" title="SceneKit开发" rel="next">
+				下一篇&raquo;
+			</a>
+			
+	</span>
+
+
+      		
+			</div>	
+		</div>
+		
+		<div class="investment-content">
+			<div class="investment-content-list">
+				
+
+<div class="relate-post">
+	
+		<ul>
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2017/03/14/SceneKit开发/" title="SceneKit开发">
+								SceneKit开发			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								三月 14日, 2017				
+							</p>
+							<p class="relate-post-content">
+								SceneKit 是 Apple 提供的一个 3D 引擎解决方案，利用它我们不需要跟 OpenGL 打交道，而是直接面向类似于 UIKit 的 API。
+SceneKit 使用通过创建一个 SceneView ，然后指定其 scene...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2017/03/14/SceneKit开发/" title="SceneKit开发">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="SceneKit开发">
+							</a>
+						</div>
+					</li>											
+			
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2017/03/01/OpenGL-ES-7/" title="OpenGL ES 7-画立方体并贴图片">
+								OpenGL ES 7-画立方体并贴图片			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								三月 1日, 2017				
+							</p>
+							<p class="relate-post-content">
+								绘制立方体跟绘制矩形没什么区别，只是创建好6个面的顶点数组，然后遍历创建矩形就可以了。 
+创建顶点数组立方体的顶点数组，一共有 6 * 4 = 24 个元素。  
+12345678910111213141516171819202122...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2017/03/01/OpenGL-ES-7/" title="OpenGL ES 7-画立方体并贴图片">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="OpenGL ES 7-画立方体并贴图片">
+							</a>
+						</div>
+					</li>											
+			
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2017/02/28/OpenGL-ES-6/" title="OpenGL ES 6-加载图片">
+								OpenGL ES 6-加载图片			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								二月 28日, 2017				
+							</p>
+							<p class="relate-post-content">
+								关于加载图片，需要先将图片数据通过 cgContextRef 加载到内存中，然后再复制到 OpenGL 引擎中，开启纹理绘制。
+加载图片到 OpenGL 引擎使用 CocoaTouch 的 CGImageRef 和 CGContext...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2017/02/28/OpenGL-ES-6/" title="OpenGL ES 6-加载图片">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="OpenGL ES 6-加载图片">
+							</a>
+						</div>
+					</li>											
+			
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2017/02/28/OpenGL-ES-5/" title="OpenGL ES 5 渲染颜色">
+								OpenGL ES 5 渲染颜色			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								二月 28日, 2017				
+							</p>
+							<p class="relate-post-content">
+								同时显示三角形和矩形，同时移动它们，即坐标转换。将物体设置为多重颜色，即彩色。  
+模型转换在 OpenGL ES 中，对模型的转换有三种不同类型，分别是：1.Translate 移动模型的坐标，方法：glTranslate()2.R...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2017/02/28/OpenGL-ES-5/" title="OpenGL ES 5 渲染颜色">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="OpenGL ES 5 渲染颜色">
+							</a>
+						</div>
+					</li>											
+			
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2017/02/28/OpenGL-ES-4/" title="OpenGL ES 4 画矩形">
+								OpenGL ES 4 画矩形			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								二月 28日, 2017				
+							</p>
+							<p class="relate-post-content">
+								这次我们画一个矩形。与画三角形相差不大，我们绘制矩形实际上是通过绘制两次三角形来实现的，比如说有四个点，逆时针 0 1 2 3 ，那么我们通过绘制 0 1 2 和 0 2 3，或者通过绘制 0 1 3 和 0 2 3 都能讲这个矩形画...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2017/02/28/OpenGL-ES-4/" title="OpenGL ES 4 画矩形">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="OpenGL ES 4 画矩形">
+							</a>
+						</div>
+					</li>											
+			
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2017/02/28/OpenGL-ES-3/" title="OpenGL ES 3 画三角形">
+								OpenGL ES 3 画三角形			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								二月 28日, 2017				
+							</p>
+							<p class="relate-post-content">
+								教程我是根据西蒙的教程走的，他之前用的是 OpenGL 1，我们可以改为 OpenGL 2，只要别忘记初始化 context 时，版本选择 2 就好了。这次我们在屏幕上画一个 三角形。首先，我们清除一下缓冲区缓存：  
+1glClea...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2017/02/28/OpenGL-ES-3/" title="OpenGL ES 3 画三角形">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="OpenGL ES 3 画三角形">
+							</a>
+						</div>
+					</li>											
+			
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2017/02/28/OpenGL-ES-2/" title="OpenGL ES 2 前期准备">
+								OpenGL ES 2 前期准备			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								二月 28日, 2017				
+							</p>
+							<p class="relate-post-content">
+								准备了解一些基本用法，以及如何在项目中使用。
+在 iOS 中使用 OpenGL ES暂时还没了解 CocoaTouch 自带的 GLKit ,所以都是自写的 UIView 去渲染。引入 Frameworks ：  
+
+QuartzCo...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2017/02/28/OpenGL-ES-2/" title="OpenGL ES 2 前期准备">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="OpenGL ES 2 前期准备">
+							</a>
+						</div>
+					</li>											
+			
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2017/02/27/OpenGL-ES-1/" title="OpenGL ES 1 简单介绍">
+								OpenGL ES 1 简单介绍			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								二月 27日, 2017				
+							</p>
+							<p class="relate-post-content">
+								OpenGL ES 是访问现代嵌入式系统的 3D 图形加速硬件的一个标准。把几何数据转换为屏幕上的图像的过程叫做渲染。 GPU 控制的缓存是高效渲染的关键。容纳几何数据的缓存定义了要渲染的点、线段和三角形。OpenGL ES 3D 的...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2017/02/27/OpenGL-ES-1/" title="OpenGL ES 1 简单介绍">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="OpenGL ES 1 简单介绍">
+							</a>
+						</div>
+					</li>											
+			
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2018/12/19/OAStackView/" title="OAStackView">
+								OAStackView			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								十二月 19日, 2018				
+							</p>
+							<p class="relate-post-content">
+								UIStackView 的理解UIStackView 是 iOS9 推出的新特性，允许我们线性的去布局一个界面，在之前没有用到过，但是新公司用到的地方挺多，所以写一篇文章介绍一下，也加深自己的理解。使用 UIStackView 布局，...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2018/12/19/OAStackView/" title="OAStackView">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="OAStackView">
+							</a>
+						</div>
+					</li>											
+			
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2018/12/17/NSURLProtocol/" title="NSURLProtocol">
+								NSURLProtocol			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								十二月 17日, 2018				
+							</p>
+							<p class="relate-post-content">
+								在 Apple 的文档 URL Loading System 中，详细介绍了一个请求是如何创建、发起、回传数据的，还包括了证书认证，cookie 等一系列的操作，但是好像唯独遗漏了一个特殊的类： NSURLProtocol ，其实在我...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2018/12/17/NSURLProtocol/" title="NSURLProtocol">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="NSURLProtocol">
+							</a>
+						</div>
+					</li>											
+			
+			
+		</ul>
+	
+</div>	
+			</div>
+			<div class="investment-content-list">
+				<div class="layout-comment">
+
+	
+
+		
+
+			<!-- I don't know !!!-->
+			<div>Please check the comment setting in config.yml of hexo-theme-Annie!</div>
+			
+		
+		
+	
+
+</div>
+			</div>
+			<div class="investment-content-list">
+				<div class="layout-share">
+	
+	
+
+		
+			
+			<!-- socialShare share -->
+			<div class="social-share"></div>
+
+<!--  css & js -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+<script async src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+			
+		
+		
+	
+</div>
+
+
+			</div>
+		</div>	
+	</div>
+	</div>
+</div>
+
+
+
+	<!-- leancloud -->
+	<!--
+	时间：2018-11-27
+	描述：
+		文章访问量：visitors
+		文章喜欢量：likes	
+		文章排行榜：topNPost
+		其他得说明：
+			01-Cookie相关的函数 
+				https://blog.csdn.net/somehow1002/article/details/78511541（Author：somehow1002）
+			02-visitors相关的函数 
+				https://blog.csdn.net/u013553529/article/details/63357382（Author：爱博客大伯）
+				https://notes.doublemine.me/2015-10-21-为NexT主题添加文章阅读量统计功能.html（Author：夏末）
+			03-topNPost相关的函数
+				https://hoxis.github.io/hexo-next-read-rank.html（Author：hoxis）
+			04-likes相关的函数，
+				参考了01 & 02进行简单的设计与实现
+-->
+
+
+	
+
+
+<!-- show math formula -->
+
+
+
+	 
+	<script src="/plugin/clipboard/clipboard.js"></script>
+	<script>
+		// Copy code !
+	    function codePreprocessing() {
+	        $("#article-content .highlight").each(function() {
+
+	            $(this).wrap('<div id="post-code"></div>');
+
+	        })
+
+	        $("#article-content #post-code").each(function() {
+
+	            $(this).prepend('<nav class="copy-nav"><span><i class="code-language"></i></span></nav>');
+
+	        })
+
+	        $("#article-content .copy-nav").each(function() {
+	            var temp = $(this).next().attr('class'),
+	                language = ((temp.length > 9) && (temp != null)) ? temp.substr(10) : "none"; //why 9? Need to check language?
+
+	            $(this).find('.code-language').text(language);
+
+	            $(this).append('<span class="copy-btn"><i class="fa fa-copy" aria-hidden="true"></i></span>');
+
+	        });
+	    }
+
+		function codeCopy() {
+		    $('#article-content #post-code').each(function(i) {
+		        var codeCopyId = 'codeCopy-' + i;
+
+		        var codeNode = $(this).find('.code'),
+		            copyButton = $(this).find('.copy-btn');
+
+		        codeNode.attr('id', codeCopyId);
+		        copyButton.attr('data-clipboard-target-id', codeCopyId);
+		    })
+
+		    
+			var clipboard = new ClipboardJS('.copy-btn', {
+					target: function(trigger) {
+						return document.getElementById(trigger.getAttribute('data-clipboard-target-id'));
+					}
+		      	});
+
+			//pure js
+			function showTooltip(elem, msg) {		   
+				elem.setAttribute('aria-label', msg);
+				elem.setAttribute('class', 'copy-btn copy-status');
+				setTimeout(function() {
+					elem.setAttribute('class', 'copy-btn');
+				}, 2000);
+			}
+
+			clipboard.on('success', function(e) {
+			    e.clearSelection();
+			    console.info('Action:', e.action);		   
+			    console.info('Trigger:', e.trigger);
+			    showTooltip(e.trigger, 'Copied!');
+			    
+			});
+			clipboard.on('error', function(e) {
+			    console.error('Action:', e.action);
+			    console.error('Trigger:', e.trigger);
+			});
+		
+
+		}
+
+		if ($('.layout-post').length) {
+		    codePreprocessing();
+		    codeCopy();
+		} 
+	</script>
+
+
+
+
+
+<link rel="stylesheet" href="/plugin/fancybox/jquery.fancybox.css">
+<script src="/plugin/fancybox/jquery.fancybox.js"></script>
+
+<script type="text/javascript">
+	var titleID = $('.article-title a'),
+		imageID = $('.article-content img'),
+		videoID = $('.article-content video');
+
+	var postTitle = titleID.text() ? titleID.text() : "No post title!";
+
+	imageID.each(function() {
+		var imgPath = $(this).attr('src'),
+			imgTitle = $(this).attr('alt') ? $(this).attr('alt') : "No image description!";
+
+		//给每个匹配的<img>元素打包, 即添加父元素<a>
+		$(this).wrap('<a data-fancybox="gallery" data-caption=" 《 ' + postTitle + ' 》 ' + imgTitle + ' "  href=" ' + imgPath + ' "> </a>');
+	});
+
+	videoID.each(function() {
+		var videoPath = $(this).attr('src');
+
+		//给每个匹配的<img>元素打包, 即添加父元素<a>
+		$(this).wrap('<a data-fancybox href=" ' + videoPath + ' "> </a>');
+	});
+	//TODO：支持html5 video
+
+	if($('#layout-post').length) {
+		$('[data-fancybox="gallery"]').fancybox({
+			loop: true,
+			buttons: [
+				"zoom",
+				"share",
+				"slideShow",
+				"fullScreen",
+				//"download",
+				"thumbs",
+				"close"
+			],
+			protect: false
+		});
+	}
+</script>
+		</main>
+
+		<!--footer-->
+		<footer>
+	<div class="social">
+		<ul>
+	
+		<li>
+			<a href="http://github.com/" target="_blank">
+				<i class="fa fa-github"></i>
+			</a>
+		</li>
+	
+		<li>
+			<a href="http://github.com/" target="_blank">
+				<i class="fa fa-weibo"></i>
+			</a>
+		</li>
+	
+		<li>
+			<a href="http://github.com/" target="_blank">
+				<i class="fa fa-pinterest"></i>
+			</a>
+		</li>
+	
+		<li>
+			<a href="http://github.com/" target="_blank">
+				<i class="fa fa-instagram"></i>
+			</a>
+		</li>
+	
+		<li>
+			<a href="http://github.com/" target="_blank">
+				<i class="fa fa-twitter"></i>
+			</a>
+		</li>
+	
+		<li>
+			<a href="/atom.xml" target="_blank">
+				<i class="fa fa-rss"></i>
+			</a>
+		</li>
+			
+</ul>
+
+	</div>
+		
+	<div class="copyright">
+		<p>
+			 
+				&copy;2017 - 2019, content by eassy. All Rights Reserved.
+			
+			
+			
+
+	<!-- busuanzi -->
+	<!-- busuanzi -->
+
+		
+	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+	
+
+		<span id="busuanzi_container_page_pv">
+	  		本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+		</span>
+
+	
+
+
+
+
+		</p>
+		<p>
+			<a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a> Theme <a href="https://github.com/Sariay/hexo-theme-Annie" title="Annie" target="_blank" rel="noopener">Annie</a> by Sariay.
+			<a href="javascript:zh_tran('s');" class="zh_click" id="zh_click_s">简体</a> 
+			<a href="javascript:zh_tran('t');" class="zh_click" id="zh_click_t">繁體</a>				
+		</p>
+	</div>		
+</footer>
+		
+	<!-- set '1' to show motto in all pages! -->
+
+	<script src="/plugin/motto/motto.js"></script>
+	
+	<script type="text/javascript">
+		$(".motto").html( getMingYanContent() );
+	</script>	
+
+
+
+
+
+<!-- love effect -->
+
+	<script src="/plugin/love/love.js"></script>
+
+
+<!-- back to top -->
+
+	
+	<div id="totop">
+  		<a href="javascript:;" name="TOTOP" class="fa fa-arrow-up"></a>
+	</div>
+
+
+
+
+<!-- site analysis -->
+
+
+	<!-- site-analysis -->
+	
+	
+	
+	
+	
+ 
+
+<script src="/plugin/vibrant/vibrant.js"></script>
+<script src="/plugin/chinese/chinese.js"></script>
+<script src="/plugin/imgLazyLoader/yall.min.js"></script>
+<script src="/plugin/imgResize/jquery.resizeimagetoparent.min.js"></script>
+<script src="/plugin/nicescroll/jquery.nicescroll.js"></script>
+<script src="/js/resizediv.js"></script>
+<script src="/js/main.js"></script>
+	</body>	
+</html>

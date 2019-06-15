@@ -1,0 +1,1056 @@
+<!--
+	作者：Sariay
+	时间：2018-09-25
+	描述：There may be a bug, but don't worry, QiLing(器灵) says that it can work normally!
+-->
+<!DOCTYPE html>
+<html class="html-loading">
+		
+
+<head><meta name="generator" content="Hexo 3.8.0">
+	<meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+  <title>
+    
+      Apple 文档 Authentication and Credentials 的翻译 | Eassy
+    
+  </title>
+  <meta name="author" content="eassy">
+  <meta name="keywords" content>
+  <meta name="description" content="人性就是用来质疑生活的">
+	<!-- favicon -->
+  <link rel="shortcut icon" href="/img/favicon.ico">
+
+  <!-- css -->
+  <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/Annie.css">
+  
+  <!-- jquery -->
+	<script src="/js/jquery.min.js"></script>
+
+  <!-- leancloud -->
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+<script src="/js/leancloud.js"></script>
+</head>
+	<body>
+		<!-- Preloader -->
+
+	<div id="preloader">
+		<div class="pre-container">
+			
+				<div class="spinner">
+					<div class="double-bounce1"></div>
+					<div class="double-bounce2"></div>
+				</div>
+						
+		</div>
+	</div>
+
+
+<!-- header -->
+<header class="fixbackground" data-img-mode="normal" data-normal-src="/img/1.jpg" data-random-max="110" data-random-src="https://sariay.github.io/Random-img/">
+	<div class="mask">
+		<!-- Logo and navigation -->
+		<div class="h-header">
+			<div id="logo">
+				<a href="/">
+						
+						<img src="/img/logo.png" alt="Logo">
+					
+				</a>
+			</div>
+			
+			<div id="navigation-show">
+				<ul>
+	
+		<li class="menu-home">
+			<a href="/" class="menu-item-home">主页</a>
+		</li>
+	
+		<li class="menu-archive">
+			<a href="/archives" class="menu-item-archive">归档</a>
+		</li>
+	
+		<li class="menu-categories">
+			<a href="/categories" class="menu-item-categories">分类</a>
+		</li>
+	
+		<li class="menu-tags">
+			<a href="/tags" class="menu-item-tags">标签</a>
+		</li>
+	
+		<li class="menu-about">
+			<a href="/about" class="menu-item-about">关于</a>
+		</li>
+	
+		<li class="menu-gallery">
+			<a href="/gallery" class="menu-item-gallery">相册</a>
+		</li>
+	
+
+	
+</ul>
+			</div>				
+		</div>
+
+		<!-- motto -->
+		<div class="h-body">	
+			
+				<p class="motto"></p>
+			
+		</div>
+		
+		<!-- others: such as time... -->			
+		<div class="h-footer">
+			<a href="javascript:;" id="read-more"><i class="fa fa-angle-double-down" aria-hidden="true"></i>
+			</a>
+
+			
+				<!-- 
+	This is only a demo, please go to "https://time.is" to set your city time! 
+-->
+<style type="text/css">
+	.header-date {
+		font-size: 1.6rem;
+		color: #fff;
+		position: absolute;
+		bottom: 5px;
+		right: 1rem;
+		writing-mode: tb-rl;
+	}	
+	
+	.header-date a {
+		border-bottom: none;
+	}
+
+	@media only screen and (max-width: 768 ) {
+		.header-date {
+			font-size: 1rem;
+		}			
+	}
+</style>
+<div class="header-date">
+	<a href="https://time.is/Beijing" id="time_is_link" rel="nofollow"></a>
+	<span id="Beijing_z43d"></span>
+</div>
+<script src="//widget.time.is/zh.js"></script>
+<script>
+	time_is_widget.init({
+		Beijing_z43d:{
+			template:"DATE", 
+			date_format:"year年 monthname dnum日"
+		}
+	});
+</script>
+			
+		</div>
+	</div>
+</header>
+
+<div id="navigation-hide">
+	<!-- Progress bar -->
+	<div id="progress-bar"></div>
+
+	<!-- Progress percent -->
+	<div id="progress-percentage"><h1>0.0%</h1></div>
+
+	<div class="toc-switch"><span class="switch-button">目录</span></div>
+
+	<!-- Page title -->
+	<p>
+		
+			当前文章&nbsp;:&nbsp;《Apple 文档 Authentication and Credentials 的翻译》
+		
+	</p>
+
+	<!-- Nav trigger for navigation-H-->
+	<a class="nav-trigger"><span></span></a>
+</div>
+
+<!-- Navigation in div(id="navigation-H") -->
+<nav class="nav-container" id="cd-nav">
+	<div class="nav-header">
+		<h3>Navigation</h3>
+		<a href="javascript:;" class="nav-close"></a>
+	</div>
+	<div class="nav-body">
+		<ul>
+	
+		<li class="menu-home">
+			<a href="/" class="menu-item-home">主页</a>
+		</li>
+	
+		<li class="menu-archive">
+			<a href="/archives" class="menu-item-archive">归档</a>
+		</li>
+	
+		<li class="menu-categories">
+			<a href="/categories" class="menu-item-categories">分类</a>
+		</li>
+	
+		<li class="menu-tags">
+			<a href="/tags" class="menu-item-tags">标签</a>
+		</li>
+	
+		<li class="menu-about">
+			<a href="/about" class="menu-item-about">关于</a>
+		</li>
+	
+		<li class="menu-gallery">
+			<a href="/gallery" class="menu-item-gallery">相册</a>
+		</li>
+	
+
+	
+</ul>
+	</div>
+	<div class="nav-footer">
+		<ul>
+	
+		<li>
+			<a href="http://github.com/" target="_blank">
+				<i class="fa fa-github"></i>
+			</a>
+		</li>
+	
+		<li>
+			<a href="http://github.com/" target="_blank">
+				<i class="fa fa-weibo"></i>
+			</a>
+		</li>
+	
+		<li>
+			<a href="http://github.com/" target="_blank">
+				<i class="fa fa-pinterest"></i>
+			</a>
+		</li>
+	
+		<li>
+			<a href="http://github.com/" target="_blank">
+				<i class="fa fa-instagram"></i>
+			</a>
+		</li>
+	
+		<li>
+			<a href="http://github.com/" target="_blank">
+				<i class="fa fa-twitter"></i>
+			</a>
+		</li>
+	
+		<li>
+			<a href="/atom.xml" target="_blank">
+				<i class="fa fa-rss"></i>
+			</a>
+		</li>
+			
+</ul>
+
+	</div>
+</nav>
+			
+		<!--main-->
+		<main>
+			<!--
+	时间：2018-11-17
+	描述：
+		插件名称：katelog.min.js
+		插件作者：KELEN
+		插件来源: https://github.com/KELEN/katelog
+-->
+
+	
+		<div class="layout-toc">
+			<div id="layout-toc">
+				<div class="k-catelog-list" id="catelog-list" data-title="文章目录"></div>
+			</div>
+		</div>
+
+		
+		<script src="/plugin/toc/katelog.min.js"></script>
+
+		
+	 
+
+<div class="layout-post">
+	<div id="layout-post">
+	<div class="article-title">
+		<i class="fa fa-paper-plane-o" aria-hidden="true"></i>
+		
+	<a href="/2018/12/04/Apple-文档Authentication-and-Credentials-翻译/" itemprop="url">
+		Apple 文档 Authentication and Credentials 的翻译
+	</a>
+
+	</div>
+
+	<div class="article-meta">
+		<span>
+			<i class="fa fa-calendar"></i>
+			
+
+
+	发布于
+
+	<a href="/2018/12/04/Apple-文档Authentication-and-Credentials-翻译/" itemprop="url">
+		<time datetime="2018-12-04T11:53:08.000Z" itemprop="datePublished">
+	  		2018-12-04
+	  </time>
+	</a>
+	&nbsp;
+
+
+
+
+
+			
+
+
+
+
+	更新于
+
+	<a href="/2018/12/04/Apple-文档Authentication-and-Credentials-翻译/" itemprop="url">
+		<time datetime="2018-12-04T11:53:08.000Z" itemprop="dateUpdated">
+	  		2018-12-07
+	  </time>
+	</a> 
+
+
+
+		</span>
+		<span>
+			<i class="fa fa-tags"></i>
+			
+	
+		<a href="/tags/iOS/" class=" ">
+			iOS
+		</a>
+	
+		
+		</span>
+		
+		
+
+
+
+	</div>
+
+	<div class="article-content" id="article-content">
+		<p>对 Apple 的 认证和证书 开发文档的一个翻译 <a id="more"></a></p>
+<h2 id="Handling-an-Authentication-Challenge"><a href="#Handling-an-Authentication-Challenge" class="headerlink" title="Handling an Authentication Challenge"></a>Handling an Authentication Challenge</h2><p><strong>Respond appropriately when a server demands authentication for a URL request.</strong>  </p>
+<p><em>当服务器要求认证时，需要适当的进行处理。</em></p>
+<hr>
+<h3 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h3><p><strong>When your app makes a request with a NSURLSession Task,the server may respond with one or more demands for credentials before continuing. The session task attempts to handle this for you. IF it can’t ,it calls your session’s delegate to handle the challenges.</strong><br>当我们的 app 用 NSURLSession Task 发起一次请求之前，服务器可能返回需要认证的response，session task 会自动对其进行处理，假如处理不了，会回调NSURLSession 的 delegate ，让 delegate 进行处理。</p>
+<p><strong>Implement the delegate methods described in this article to answer challengs issues by a server that your app connects to. If you don’t implement a delegate, your request may be denied by the server, and you receive a response with HTTP status code 401(Forbidden)  instead of the data you expect.</strong><br>为了响应服务器对认证的需求，你必须在 app 中实现本文中提到的代理方法，否则请求将会被服务器拒绝，从而收到 401 错误。  </p>
+<h3 id="Determine-the-Appropriate-Delegate-Method"><a href="#Determine-the-Appropriate-Delegate-Method" class="headerlink" title="Determine the Appropriate Delegate Method"></a>Determine the Appropriate Delegate Method</h3><p>在代理方法进行合适的处理。  </p>
+<p><strong>Implement one or both delegate authentication methods,depending on the nature of the challenge(s) you receive.</strong><br>根据你的需求，实现其中以下一个或多个方法。  </p>
+<ul>
+<li><p><strong>Implement the <code>URLSession:didReceiveChallenge:completionHandler:</code>method of <code>NSURLSessionDelegate</code>to handle session-wide challenges. These ars challengs like Transport Layer Security(TLS) validation. Once you’ve successfully handled this kind of challenge, your action remains in effect for all tasks created from that NSURLSession.</strong> </p>
+<p>  处理 session 范围的认证需求，例如 TLS 认证，你需要实现<code>NSURLSessionDelegate</code> 代理中的<code>URLSession:didReceiveChallenge:completionHandler:</code>方法。一旦你实现了这个方法成功处理了这类认证需求，所有 <code>NSURLSession</code> 生成的 <code>task</code>都会应用这个方法进行处理。</p>
+</li>
+<li><p><strong>Implement the  <code>URLSession:task:didReceiveChallenge:completionHandler:</code>method of <code>NSURLSessionTaskDelegate</code> to handle task-specific challenges. These are challenges like demands for username/password authentication. Each task created from a given session may issue its own challenges.</strong></p>
+<p>  为了处理指定<code>task</code>的认证需求，你需要实现 <code>NSURLSessionTaskDelegate</code>中的<code>URLSession:task:didReceiveChallenge:completionHandler:</code>方法，这有点类似于关于 用户名/密码 的认证，每个<code>task</code>可能会有自己的认证需求。</p>
+</li>
+</ul>
+<p><strong>AS a simple example, consider what happens when you request an http URL protected by HTTP Basic authentication, as defined in RFC 7617. Because this is a task-specific challenge, you handle this by implementing <code>URLSession:task:didReceiveChallenge:completionHandler:</code></strong><br>举个简单的例子，当你发起一个需要进行 HTTP Basic authentication 的请求时，因为这属于一个 <code>task</code> 层面的认证需求，你需要实现<code>URLSession:task:didReceiveChallenge:completionHandler:</code> 方法。  </p>
+<blockquote>
+<p><strong>Note</strong>  </p>
+</blockquote>
+<p><strong>If you connect via https, you also receive a server trust challenge. See performing Manual Server Trust Authentication for information on handling this type of session-wide challenge.</strong></p>
+<blockquote>
+<p>如果你通过 https 进行网络连接，你也会收到认证回调，查看 Performing Manual Server Trust Authentication 文档对这一 session 级别的认证 进行详细了解</p>
+</blockquote>
+<h3 id="Determine-the-Type-of-Authentication-Challenge"><a href="#Determine-the-Type-of-Authentication-Challenge" class="headerlink" title="Determine the Type of Authentication Challenge"></a>Determine the Type of Authentication Challenge</h3><p>决定认证挑战的类型 </p>
+<p><strong>When you receive an authentication challenge, use your delegate method to determine the type of challenge. The delegate method receives a <code>NSURLAuthentication Challenge</code> instance that describes the challenge being issued. This instance contains a <code>protectionSpace</code> property whose <code>authenticationMethod</code> property indicates the kind of challenge being issued (such as a request for a username and password, or a client certificate). You use this value to determine whether you can handle the challenge.</strong><br>当你收到一个认证需求时，根据回调方法，可以获取到认证的类型。代理方法会返回一个 <code>NSURLAuthentication Challenge</code> 对象，描述了这个认证需求。这个对象包含了一个 <code>protectionSpace</code> 属性，这个属性中又包含有一个<code>authenticationMethod</code>属性，表明了这个需求的类型(比如用户名/密码，或者客户端证书)。你可以根据这个类型来判断是否回应这个认证需求。</p>
+<p><strong>You respond to the challenge by directly invoking the completion handler passed in to the challenge, passing an <code>NSURLSessionAuthChallengeDisposition</code> indicating your response to the challenge. You use the disposition argument to provide a credential, cancel the request, or allow the default handling to proceed, whichever is appropriate.</strong><br>通过调用方法回调的 completion block，可以对这次认证需求做出响应。在 completion block 中，传入不同的<code>NSURLSessionAuthChallengeDisposition</code>参数，代表了不同含义，例如提供一个证书、取消这次请求或者进行默认操作，这取决于你。  </p>
+<p><strong>Listing1 tests the authentication method to see if it is the expected type, HTTP Basic. If the authenticationMethod property indicates some other kind of challenge, it calls the completion handler with the <code>NSURLSessionAuthChallengePerformDefaultHandling</code> disposition. Telling the task to use its default handling may satisfy the challenge; otherwise, the task will move on to the next challenge in the response and call this delegate again. This process continues until the task reaches the HTTP Basic challenge that you expect to handle.</strong><br>下面的例1中，判断了这次认证需求的类型是否是 HTTP Basic，假如是其他的类型，使用默认的<code>NSURLSessionAuthChallengePerformDefaultHandling</code>进行处理，task 会遍历所有的认证需求，不断的回调该方法，直到类型是 HTTP Basic 的时候才会进行下一步处理</p>
+<p><strong>Listing 1<br>Checking the authentication method of an authentication challenge</strong>  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">let authMethod = challenge.protectionSpace.authenticationMethod</span><br><span class="line">guard authMethod == NSURLAuthenticationMethodHTTPBasic else &#123;</span><br><span class="line">    completionHandler(.performDefaultHandling, nil)</span><br><span class="line">    return</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Create-a-Credential-Instance"><a href="#Create-a-Credential-Instance" class="headerlink" title="Create a Credential Instance"></a>Create a Credential Instance</h3><p><strong>To successfully answer the challenge, you need to submit a credential appropriate to type of challenge you have received.  For HTTP Basic and HTTP Digest challenges, you provide a username and password. Listing 2 shows a helper method that attempts to create a <code>NSURLCredential</code> instance from user-interface fields, if they are filled in.</strong><br>为了成功的响应认证需求，你需要提交一个适合这次需求类型的证书。对于 HTTP Basic 和 HTTP Digest 认证需求来说，你需要提供一个 用户名和 密码。例2 展示了一个从用户界面的数据生成一个证书的例子。  </p>
+<p>*<em>Listing 2<br>Creating a URLCredential from user interface values<br>*</em></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">func credentialsFromUI() -&gt; URLCredential? &#123;</span><br><span class="line">    guard let username = usernameField.text, !username.isEmpty,</span><br><span class="line">        let password = passwordField.text, !password.isEmpty else &#123;</span><br><span class="line">            return nil</span><br><span class="line">    &#125;</span><br><span class="line">    return URLCredential(user: username, password: password,</span><br><span class="line">                         persistence: .forSession)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>In this example, the returned NSURLCredential has NSURLCredentialPersistenceForSession persistence, so it’s only stored by the NSURLSession instance that created the task. You would need to supply new NSURLCredential instances for tasks created by other session instances, and on future runs of the app.</strong><br>在这个例子中，这个证书的生命周期是<code>NSURLCredentialPersistenceForSession</code>，这代表了该证书只会作用于生成这个 task 的 session 中，对于其他 session 发起的 task ，你需要生成一个新的证书来应对。  </p>
+<h3 id="Call-the-Completion-Handler"><a href="#Call-the-Completion-Handler" class="headerlink" title="Call the Completion Handler"></a>Call the Completion Handler</h3><p><strong>Once you’ve tried to create a credential instance, you must call the completion handler to answer the challenge.</strong><br>生成证书后，必须回调 completion block ，来响应这次 认证需求</p>
+<ul>
+<li><p>If you can’t create a credential, or if the user explicitly canceled, call the completion handler and pass the <code>NSURLSessionAuthChallengeCancelAuthenticationChallenge</code> disposition.<br>  假如无法生成证书，或者用户明确的手动取消了，你可以在 block 中传入<code>NSURLSessionAuthChallengeCancelAuthenticationChallenge</code>参数。  </p>
+</li>
+<li><p>If you can create a credential instance, use the  <code>NSURLSessionAuthChallengeUseCredential</code>disposition to pass it to the completion handler.<br>假如可以生成证书，completion block 中传入 <code>NSURLSessionAuthChallengeUseCredential</code>参数</p>
+</li>
+</ul>
+<p><strong>Listing 3 shows both these options.</strong><br>例三处理了这两种情况</p>
+<p><strong>Listing 3<br>Invoking the authentication challenge completion Handler</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">guard let credential = credentialOrNil else &#123;</span><br><span class="line">    completionHandler(.cancelAuthenticationChallenge, nil)</span><br><span class="line">    return</span><br><span class="line">&#125;</span><br><span class="line">completionHandler(.useCredential, credential)</span><br></pre></td></tr></table></figure>
+
+<p><strong>If you supply a credential that is accepted by the server, the task begins uploading or downloading data.</strong><br>假如你传入的证书被服务器接受了，请求会继续进行。</p>
+<blockquote>
+<p><strong>Important</strong></p>
+</blockquote>
+<p><strong>You can pass the completion handler to other methods or temporarily store it in a property, for situations like waiting for the user to complete a username/password dialog. But eventually you must call the completion handler to complete the challenge and allow the task to proceed, even if you’re choosing to cancel, as seen in the failure case of Listing 3.</strong></p>
+<blockquote>
+<p>在必要的时候，你可以将 completion block 传到其他方法中，甚至可以存储起来，比如等待用户填写用户名和密码的时候；但是为了让请求继续进行，你必须回调这个 completion block ，即使你选择取消这次请求的时候，你也需要像上面 例3 中那样进行处理。</p>
+</blockquote>
+<h3 id="Handle-Failues-Gracefully"><a href="#Handle-Failues-Gracefully" class="headerlink" title="Handle Failues Gracefully"></a>Handle Failues Gracefully</h3><p><strong>If the credential is refused, the system calls your delegate method again. When this happens, the callback provides your rejected credential as the <code>proposedCredential</code> property of the <code>NSURLAuthenticationChallenge</code> parameter. The challenge instance also includes a <code>previousFailureCount</code> property, which indicates how many times the credential has been rejected. You can use these properties to determine what to do next. For example, if the <code>previousFailureCount</code> is greater than zero, you could use the user string of the <code>proposedCredential</code> to populate a user/password reentry UI.</strong><br>假如证书被服务器拒绝，系统会再次回调代理方法，并且将上次的证书作为 challenge 的 proposedCredential 参数返回。challenge 还有一个 previousFailureCount 的属性，代表了已经失败了多少次，你可以使用这些参数来决定下一步怎么做，例如，假如失败次数超过一次，你可以在 UI 上展示一个失败重新输入的提示。  </p>
+<h3 id="Topics"><a href="#Topics" class="headerlink" title="Topics"></a>Topics</h3><p><strong>Creating URL Credentials</strong><br><strong>Performing Manual Server Trust Authentication</strong></p>
+<h2 id="Performing-Manual-Server-Trust-Authentication"><a href="#Performing-Manual-Server-Trust-Authentication" class="headerlink" title="Performing Manual Server Trust Authentication"></a>Performing Manual Server Trust Authentication</h2><p><strong>Evaluate the server’s security credentials in your app.</strong>  </p>
+<p>在你的 app 中认证系统的安全证书。  </p>
+<hr>
+<h3 id="Overview-1"><a href="#Overview-1" class="headerlink" title="Overview"></a>Overview</h3><p><strong>When you use a secure connection (such as https) with a URL request, your <code>NSURLSessionDelegate</code> receives an authentication challenge with an authentication type of <code>NSURLAuthenticationMethodServerTrust</code>. Unlike other challenges where the server is asking your app to authenticate itself, this is an opportunity for you to authenticate the server’s credentials.</strong><br>当你使用安全连接(例如 https)进行请求时，你设置的 <code>NSURLSessionDelegate</code>会被回调，并传回一个认证需求类型为<code>NSURLAuthenticationMethodServerTrest</code>的 chanllenge。其他的认证需求，服务器会要求你的 app 认证自身，这个认证需求，可以让你对服务器进行认证的。</p>
+<blockquote>
+<p><strong>Tip</strong><br><strong>See Handling an Authentication Challenge for an introduction to authentication challenges.</strong></p>
+</blockquote>
+<h3 id="Determine-When-Manual-Server-Trust-Evaluation-Is-Appropriate"><a href="#Determine-When-Manual-Server-Trust-Evaluation-Is-Appropriate" class="headerlink" title="Determine When Manual Server Trust Evaluation Is Appropriate"></a>Determine When Manual Server Trust Evaluation Is Appropriate</h3><p>何时对 Server Trust 进行手动处理     </p>
+<p><strong>In most cases, you should let the URL Loading System’s default handling evaluate the server trust. You get this behavior when you either don’t have a delegate or don’t handle authentication challenges. However, performing your own evaluation may be useful for scenarios like the following:</strong><br>大多数情况下，你不需要实现代理方法，系统会进行默认的处理，但是在下面这些场景下，最好进行自定义的认证处理：</p>
+<ul>
+<li><p><strong>You want to accept server credentials that would otherwise be rejected by the system. For example, your app makes a secure connection to a development server that uses a self-signed certificate, which would ordinarily not match anything in the system’s trust store.</strong><br>有时候你必须接受系统证书，否则连接会失败。例如，你连接的服务器，使用的证书是自签的，通常情况下，这个服务器证书是没有预存到系统的新人列表中的，必须选择信任，否则连接会失败。</p>
+</li>
+<li><p><strong>You want to reject credentials that would otherwise be accepted by the system. For example, you want to “pin” your app to a set of specific keys or certificates under your control, rather than accept any valid credential.</strong><br>你希望你的 app 只访问某些拥有特定的证书的服务器，其他的请求一概拒绝。  </p>
+</li>
+</ul>
+<p><strong>Figure 1 illustrates how an app performs manual credential evaluation by providing a delegate method to handle the authentication challenge. This bypasses the default handling. Instead, the delegate directly compares the server certificate or its public key against a copy of the certificate or key (or a hash of either of these) stored in the app bundle itself. If the delegate decides the server credential is valid, it accepts the server trust and allows the connection to continue.</strong><br>图1 表示一个 app 进行认证需求的流程，系统通过回调代理方法，将 Server Trust 的公钥和证书交给代理，代理方法中，将公钥或者证书，跟存储在 app boundle 中的公钥和证书(或者 hash 表或者其他)进行对比，假如是一致的，那么代理方法通过回调 block ，同意接受服务器证书，然后继续请求。</p>
+<blockquote>
+<p><strong>Note</strong><br><strong><code>NSURLSession</code> enforces <code>App Transport Security (ATS)</code>, if it is enabled for the domain you are connecting to. This applies security requirements for the certificates, TLS version, and cipher used by the connection. You cannot loosen server trust requirements for an ATS-protected domain, but you can tighten them, using the manual evaluation technique shown in this article. See <code>NSAppTransportSecurity</code> in <code>Information Property List Key Reference</code> for further details.</strong> </p>
+<p><strong>NSURLSession 会使用 ATS 中的设置，这表明对于一个连接请求，它的 证书、TLS 版本和加密算法都是有要求的，虽然你无法避过 server trust 的认证需求，但是你可以单独的处理这些其他要求，阅读文档 Information Property List Key Reference 中的NSAppTransportSecurity 章节，获取更详细的信息。</strong></p>
+</blockquote>
+<h3 id="Handle-Server-Trust-Authentication-Challenges"><a href="#Handle-Server-Trust-Authentication-Challenges" class="headerlink" title="Handle Server Trust Authentication Challenges"></a>Handle Server Trust Authentication Challenges</h3><p>怎样对 server trust 认证需求进行具体处理。</p>
+<p><strong>To perform manual server trust authentication, implement the NSURLSessionDelegate method <code>URLSession:didReceiveChallenge:completionHandler:</code>. When this method is called, the first things your implementation needs to do are to check that:</strong><br>为了手动处理 server trust 认证需求，你需要实现协议<code>NSURLSessionDelegate</code>中的<code>URLSession:didReceiveChallenge:completionHandler:</code>方法。当这个方法被回调的时候，你需要做以下检查：</p>
+<ul>
+<li><strong>The challenge type is server trust, and not some other kind of challenge.</strong><br>这个认证需求的类型是 server trust，而不是其他类型  </li>
+<li><strong>The challenge’s host name matches the host that you want to perform manual credential evaluation for.</strong><br>这个认证需求发起的 host name ，与你想要请求的网站一致。</li>
+</ul>
+<p><strong>Listing 1 shows how to test these conditions, given the <code>challenge</code> parameter passed to the <code>URLSession:didReceiveChallenge:completionHandler:</code> callback. It gets the challenge’s <code>protectionSpace</code> and uses it to perform the two checks listed above. First, it gets the <code>authenticationMethod</code> from the protection space and checks that the type of authentication is <code>NSURLAuthenticationMethodServerTrust</code>. Then it makes sure the protection space’s <code>host</code> matches the expected name <code>example.com</code>. If either of these conditions are not met, it calls the <code>completionHandler</code> with the <code>NSURLSessionAuthChallengePerformDefaultHandling</code> disposition to allow the system to handle the challenge.</strong><br>下面的代码 例1 ，展示了怎样判断上面那些条件，并进行进一步的处理。首先获取到 <code>challenge</code>的 <code>protectionSpace</code>属性，并且获取到该属性中的<code>authenticationMethod</code>属性，判断其类型是否是<code>NSURLAuthenticationMethodServerTrust</code>，然后获取其<code>host</code>属性，判断是否跟<code>example.com</code>匹配，假如这两个判断有一个不匹配，那么调用 completionHandler block 时，disposition 参数会传入<code>NSURLSessionAuthChallengePerformDefaultHandling</code>，从而使系统处理这次认证需求。</p>
+<p><strong>Listing 1<br>Testing the challenge type and host name of a server trust authentication challenge.</strong><br>判断 challenge 的 认证类型 和 host  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">let protectionSpace = challenge.protectionSpace</span><br><span class="line">guard protectionSpace.authenticationMethod ==</span><br><span class="line">    NSURLAuthenticationMethodServerTrust,</span><br><span class="line">    protectionSpace.host.contains(&quot;example.com&quot;) else &#123;</span><br><span class="line">        completionHandler(.performDefaultHandling, nil)</span><br><span class="line">        return</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Evaluate-the-Credential-in-the-Challenge"><a href="#Evaluate-the-Credential-in-the-Challenge" class="headerlink" title="Evaluate the Credential in the Challenge"></a>Evaluate the Credential in the Challenge</h3><p>如何对 challenge 中的证书进行认证<br><strong>To access the server’s credential, get the <code>serverTrust</code>property (an instance of the <code>SecTrustRef</code> class) from the <code>protection space</code>. Listing 2 shows how to access the server trust and accept or reject it. The listing starts by attempting to get the <code>serverTrust</code> property from the protection space, and falls back to default handling if the property is <code>nil</code>. Next, it passes the server trust to a private helper method <code>checkValidity(of:)</code> that compares the certificate or public key in the server trust to known-good values stored in the app bundle.</strong><br>通过获取<code>protectionSpace</code>中的<code>serverTrust</code>属性，来获取到一个<code>SectrustRef</code>实例，例2 展示了怎样获取一个 server trust，并且信任还是拒绝它，首先获取到这个 serverTrust，假如为<code>nil</code>的话，回调 completionHandler,传入参数为默认。然后将 server trust 传入到一个私有方法 <code>checkValidity(of:)</code>中，将其公钥或证书 与存储在 bundle 中的公钥或证书进行对比</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">guard let serverTrust = protectionSpace.serverTrust else &#123;</span><br><span class="line">    completionHandler(.performDefaultHandling, nil)</span><br><span class="line">    return</span><br><span class="line">&#125;</span><br><span class="line">if checkValidity(of: serverTrust) &#123;</span><br><span class="line">    let credential = URLCredential(trust: serverTrust)</span><br><span class="line">    completionHandler(.useCredential, credential)</span><br><span class="line">&#125; else &#123;</span><br><span class="line">    // Show a UI here warning the user the server credentials are</span><br><span class="line">    // invalid, and cancel the load.</span><br><span class="line">    completionHandler(.cancelAuthenticationChallenge, nil)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>Once the code determines the validity of the server trust, it takes one of two actions:</strong><br>根据 server trust 的正确与否，将会进行合适的处理：  </p>
+<ul>
+<li><p><strong>If the server trust’s credential is valid, create a new <code>NSURLCredential</code> instance from the server trust. Then call the <code>completionHandler</code> with the <code>NSURLSessionAuthChallengeUseCredential</code> disposition, passing in the newly-created credential. This tells the system to accept the server’s credentials.</strong><br>假如 server trust 的证书通过了认证，那么根据 server trust 生成一个<code>NSURLCredential</code>对象，并在 completionHandler 中，disposition 参数传入<code>NSURLSessionAuthChallengeUseCredential</code>，credential 参数传入新创建的证书对象，来告诉系统，你已经信任了这个系统证书。</p>
+</li>
+<li><p><strong>If the challenge’s credential is invalid, call the completionHandler with the <code>NSURLSessionAuthChallengeCancelAuthenticationChallenge</code> disposition. This tells the system to reject the server’s credentials.</strong><br>假如 server trust 的证书没有通过验证，completionHandler 的 disposition 参数传入 <code>NSURLSessionAuthChallengeCancelAuthenticationChallenge</code>，证书传入 nil ，代表你拒绝了服务器的证书验证，即请求失败。</p>
+</li>
+</ul>
+<blockquote>
+<p><strong>Tip</strong> </p>
+<p><strong>See <code>Certificate, Key, and Trust Services</code> to learn more about how to evaluate a SecTrustRef instance or access certificates or public keys from it.</strong><br>为了更详细的了解怎样对一个<code>SecTrustRef</code>进行验证，你可以阅读<code>Certificate, Key, and Trust Services</code>文档</p>
+</blockquote>
+<h3 id="Create-a-Long-Term-Server-Authentication-Strategy"><a href="#Create-a-Long-Term-Server-Authentication-Strategy" class="headerlink" title="Create a Long-Term Server Authentication Strategy"></a>Create a Long-Term Server Authentication Strategy</h3><p>从长远开发的角度来看，优雅的处理服务器认证需求</p>
+<p><strong>If you determine that you need to evaluate server trust manually in some or all cases, plan for what your app will do if you need to change your server credentials. Keep the following guidelines in mind:</strong><br>在某些情况下，假如你决定手动的对认证需求进行处理，考虑一下这种情况，假如服务器的证书需要更换怎么办？你可以参考以下的方法：  </p>
+<ul>
+<li><p><strong>Compare the server’s credentials against a public key, instead of storing a single certificate in your app bundle. This will allow you to reissue a certificate for the same key and update the server, rather than needing to update the app.</strong><br>在进行证书比对时，将服务器证书与公钥进行比对，而不是在 app bundle 中存储一个证书，这样当服务器更换证书时，你仍然可以使用这个公钥，而不是更新你的 app。</p>
+</li>
+<li><p><strong>Compare the issuing certificate authority’s (CA’s) keys, rather than using the leaf key. This way, you can deploy certificates containing new keys signed by the same CA.</strong><br>比对证书时，使用根证书的 key 进行比对，而不是使用节点 key，这样你可以支持验证根证书下发的新的证书。</p>
+</li>
+<li><p><strong>Use a set of keys or CAs, so you can rotate server credentials more gracefully.</strong><br>采用一个证书或者公钥的集合，这样使你更优雅的处理证书的验证。</p>
+</li>
+</ul>
+	
+	</div>
+	
+	<div id="current-post-cover" data-scr="/img/cart_cover.jpg"></div>
+
+	<!-- relate post, comment...-->
+	<div class="investment-container">
+		<div class="investment-header">
+			<div class="investment-title-1">
+				<div class="on">相关文章</div>
+				<div>评论</div>
+				<div>分享</div>
+			</div>
+			<div class="investment-title-2">	            
+				
+	<span>
+		<a href="javascript: window.scrollTo(0, 0);">返回顶部</a>
+		
+			<a href="/2018/12/07/iOS-下的-https-单向和双向认证/" title="iOS 下的 https 单向和双向认证" rel="prev">
+				&laquo;上一篇
+			</a>
+		
+		
+			<a href="/2018/12/04/最新-SDWebImage-解读/" title="最新 SDWebImage 解读" rel="next">
+				下一篇&raquo;
+			</a>
+			
+	</span>
+
+
+      		
+			</div>	
+		</div>
+		
+		<div class="investment-content">
+			<div class="investment-content-list">
+				
+
+<div class="relate-post">
+	
+		<ul>
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2018/12/19/OAStackView/" title="OAStackView">
+								OAStackView			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								十二月 19日, 2018				
+							</p>
+							<p class="relate-post-content">
+								UIStackView 的理解UIStackView 是 iOS9 推出的新特性，允许我们线性的去布局一个界面，在之前没有用到过，但是新公司用到的地方挺多，所以写一篇文章介绍一下，也加深自己的理解。使用 UIStackView 布局，...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2018/12/19/OAStackView/" title="OAStackView">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="OAStackView">
+							</a>
+						</div>
+					</li>											
+			
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2018/12/17/NSURLProtocol/" title="NSURLProtocol">
+								NSURLProtocol			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								十二月 17日, 2018				
+							</p>
+							<p class="relate-post-content">
+								在 Apple 的文档 URL Loading System 中，详细介绍了一个请求是如何创建、发起、回传数据的，还包括了证书认证，cookie 等一系列的操作，但是好像唯独遗漏了一个特殊的类： NSURLProtocol ，其实在我...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2018/12/17/NSURLProtocol/" title="NSURLProtocol">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="NSURLProtocol">
+							</a>
+						</div>
+					</li>											
+			
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2018/12/07/iOS-下的-https-单向和双向认证/" title="iOS 下的 https 单向和双向认证">
+								iOS 下的 https 单向和双向认证			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								十二月 7日, 2018				
+							</p>
+							<p class="relate-post-content">
+								iOS 操作系统，已经对请求中的认证需求(有的文章中称为 挑战)，做了简单的处理。当我们使用NSURLSession发起一次请求时，假如服务端返回数据要求客户端进行需求认证，不管这次需求认证是 HTTP Basic 类型(例如要求输入...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2018/12/07/iOS-下的-https-单向和双向认证/" title="iOS 下的 https 单向和双向认证">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="iOS 下的 https 单向和双向认证">
+							</a>
+						</div>
+					</li>											
+			
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2018/12/04/最新-SDWebImage-解读/" title="最新 SDWebImage 解读">
+								最新 SDWebImage 解读			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								十二月 4日, 2018				
+							</p>
+							<p class="relate-post-content">
+								针对于 SDWebImage 4.0 版本的源码分析
+View 层负责 view 的 loading 控件管理，每个 view 的请求发起、取消入口。
+UIView+WebCacheOperation 分类负责管理每次请求产生的 SD...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2018/12/04/最新-SDWebImage-解读/" title="最新 SDWebImage 解读">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="最新 SDWebImage 解读">
+							</a>
+						</div>
+					</li>											
+			
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2018/11/20/RunLoop-CommonModes/" title="RunLoop-CommonModes">
+								RunLoop-CommonModes			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								十一月 20日, 2018				
+							</p>
+							<p class="relate-post-content">
+								RunLoop 的 CommonModes ，其实不是一个真正的 modes，而是一个伪 mode.. ，每个 _CFRunLoopRef 的数据结构大致是这样的：
+123456789101112131415161718 struct...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2018/11/20/RunLoop-CommonModes/" title="RunLoop-CommonModes">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="RunLoop-CommonModes">
+							</a>
+						</div>
+					</li>											
+			
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2018/11/15/NSCondition-锁/" title="NSCondition 锁">
+								NSCondition 锁			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								十一月 15日, 2018				
+							</p>
+							<p class="relate-post-content">
+								最近对于 NSCondition 感到有些疑惑，所以写点东西进行研究一下。 
+用法首先 NSCondition 有以下几个方法：
+12345- (void)wait;   让线程陷入睡眠，将锁的权利交出。- (BOOL)waitUnt...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2018/11/15/NSCondition-锁/" title="NSCondition 锁">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="NSCondition 锁">
+							</a>
+						</div>
+					</li>											
+			
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2017/03/17/iOS-的渲染机制以及-UIView-的自动布局流程/" title="iOS 的渲染机制以及 UIView 的自动布局流程">
+								iOS 的渲染机制以及 UIView 的自动布局流程			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								三月 17日, 2017				
+							</p>
+							<p class="relate-post-content">
+								iOS 的界面渲染，是跟 RunLoop 分不开的，屏幕需要更新时，会调用 CPU 协同 GPU ，将界面数据渲染到屏幕上。。。
+界面渲染原理同 PC 相似，移动设备也包含屏幕刷新与显卡刷新的概念。iOS 的显示系统，是由 VSync...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2017/03/17/iOS-的渲染机制以及-UIView-的自动布局流程/" title="iOS 的渲染机制以及 UIView 的自动布局流程">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="iOS 的渲染机制以及 UIView 的自动布局流程">
+							</a>
+						</div>
+					</li>											
+			
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2017/02/21/封装一个转场动画库/" title="封装一个转场动画库">
+								封装一个转场动画库			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								二月 21日, 2017				
+							</p>
+							<p class="relate-post-content">
+								自从 iOS 7 以后，就可以自定义跳转动画了，苹果开放了相关的 API ，在这里做一个基本的总结。 
+原理 UIViewControllerTransitioningDelegate
+1234567891011121314@prot...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2017/02/21/封装一个转场动画库/" title="封装一个转场动画库">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="封装一个转场动画库">
+							</a>
+						</div>
+					</li>											
+			
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2017/02/04/创建-CocoaPods-库并上传/" title="创建 CocoaPods 库并上传">
+								创建 CocoaPods 库并上传			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								二月 4日, 2017				
+							</p>
+							<p class="relate-post-content">
+								公司会开发多个 App ，这样创建一个公共的 pod 库是很有必要的，索性昨天趁下班时创建了一个最简单的 pod 库，就把过程记下来吧。
+注册 pods trunk 账号这一步没有什么难度，在终端中注册就好了  
+1$ pod tru...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2017/02/04/创建-CocoaPods-库并上传/" title="创建 CocoaPods 库并上传">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="创建 CocoaPods 库并上传">
+							</a>
+						</div>
+					</li>											
+			
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2018/11/15/18-11-15-面试复盘/" title="18.11.15 面试复盘">
+								18.11.15 面试复盘			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								十一月 15日, 2018				
+							</p>
+							<p class="relate-post-content">
+								今天这次记录是时间最短的一个，我提前 15 分钟到了面试地点，半个小时就面完了，面试官很温柔，应该是移动端负责人，非 iOS 出身，对技术的提问也是浅尝辄止，主要是考察被面试者的项目经验，逻辑思维等。 
+OC 的内存管理原理老生常谈，...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2018/11/15/18-11-15-面试复盘/" title="18.11.15 面试复盘">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="18.11.15 面试复盘">
+							</a>
+						</div>
+					</li>											
+			
+			
+		</ul>
+	
+</div>	
+			</div>
+			<div class="investment-content-list">
+				<div class="layout-comment">
+
+	
+
+		
+
+			<!-- I don't know !!!-->
+			<div>Please check the comment setting in config.yml of hexo-theme-Annie!</div>
+			
+		
+		
+	
+
+</div>
+			</div>
+			<div class="investment-content-list">
+				<div class="layout-share">
+	
+	
+
+		
+			
+			<!-- socialShare share -->
+			<div class="social-share"></div>
+
+<!--  css & js -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+<script async src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+			
+		
+		
+	
+</div>
+
+
+			</div>
+		</div>	
+	</div>
+	</div>
+</div>
+
+
+
+	<!-- leancloud -->
+	<!--
+	时间：2018-11-27
+	描述：
+		文章访问量：visitors
+		文章喜欢量：likes	
+		文章排行榜：topNPost
+		其他得说明：
+			01-Cookie相关的函数 
+				https://blog.csdn.net/somehow1002/article/details/78511541（Author：somehow1002）
+			02-visitors相关的函数 
+				https://blog.csdn.net/u013553529/article/details/63357382（Author：爱博客大伯）
+				https://notes.doublemine.me/2015-10-21-为NexT主题添加文章阅读量统计功能.html（Author：夏末）
+			03-topNPost相关的函数
+				https://hoxis.github.io/hexo-next-read-rank.html（Author：hoxis）
+			04-likes相关的函数，
+				参考了01 & 02进行简单的设计与实现
+-->
+
+
+	
+
+
+<!-- show math formula -->
+
+
+
+	 
+	<script src="/plugin/clipboard/clipboard.js"></script>
+	<script>
+		// Copy code !
+	    function codePreprocessing() {
+	        $("#article-content .highlight").each(function() {
+
+	            $(this).wrap('<div id="post-code"></div>');
+
+	        })
+
+	        $("#article-content #post-code").each(function() {
+
+	            $(this).prepend('<nav class="copy-nav"><span><i class="code-language"></i></span></nav>');
+
+	        })
+
+	        $("#article-content .copy-nav").each(function() {
+	            var temp = $(this).next().attr('class'),
+	                language = ((temp.length > 9) && (temp != null)) ? temp.substr(10) : "none"; //why 9? Need to check language?
+
+	            $(this).find('.code-language').text(language);
+
+	            $(this).append('<span class="copy-btn"><i class="fa fa-copy" aria-hidden="true"></i></span>');
+
+	        });
+	    }
+
+		function codeCopy() {
+		    $('#article-content #post-code').each(function(i) {
+		        var codeCopyId = 'codeCopy-' + i;
+
+		        var codeNode = $(this).find('.code'),
+		            copyButton = $(this).find('.copy-btn');
+
+		        codeNode.attr('id', codeCopyId);
+		        copyButton.attr('data-clipboard-target-id', codeCopyId);
+		    })
+
+		    
+			var clipboard = new ClipboardJS('.copy-btn', {
+					target: function(trigger) {
+						return document.getElementById(trigger.getAttribute('data-clipboard-target-id'));
+					}
+		      	});
+
+			//pure js
+			function showTooltip(elem, msg) {		   
+				elem.setAttribute('aria-label', msg);
+				elem.setAttribute('class', 'copy-btn copy-status');
+				setTimeout(function() {
+					elem.setAttribute('class', 'copy-btn');
+				}, 2000);
+			}
+
+			clipboard.on('success', function(e) {
+			    e.clearSelection();
+			    console.info('Action:', e.action);		   
+			    console.info('Trigger:', e.trigger);
+			    showTooltip(e.trigger, 'Copied!');
+			    
+			});
+			clipboard.on('error', function(e) {
+			    console.error('Action:', e.action);
+			    console.error('Trigger:', e.trigger);
+			});
+		
+
+		}
+
+		if ($('.layout-post').length) {
+		    codePreprocessing();
+		    codeCopy();
+		} 
+	</script>
+
+
+
+
+
+<link rel="stylesheet" href="/plugin/fancybox/jquery.fancybox.css">
+<script src="/plugin/fancybox/jquery.fancybox.js"></script>
+
+<script type="text/javascript">
+	var titleID = $('.article-title a'),
+		imageID = $('.article-content img'),
+		videoID = $('.article-content video');
+
+	var postTitle = titleID.text() ? titleID.text() : "No post title!";
+
+	imageID.each(function() {
+		var imgPath = $(this).attr('src'),
+			imgTitle = $(this).attr('alt') ? $(this).attr('alt') : "No image description!";
+
+		//给每个匹配的<img>元素打包, 即添加父元素<a>
+		$(this).wrap('<a data-fancybox="gallery" data-caption=" 《 ' + postTitle + ' 》 ' + imgTitle + ' "  href=" ' + imgPath + ' "> </a>');
+	});
+
+	videoID.each(function() {
+		var videoPath = $(this).attr('src');
+
+		//给每个匹配的<img>元素打包, 即添加父元素<a>
+		$(this).wrap('<a data-fancybox href=" ' + videoPath + ' "> </a>');
+	});
+	//TODO：支持html5 video
+
+	if($('#layout-post').length) {
+		$('[data-fancybox="gallery"]').fancybox({
+			loop: true,
+			buttons: [
+				"zoom",
+				"share",
+				"slideShow",
+				"fullScreen",
+				//"download",
+				"thumbs",
+				"close"
+			],
+			protect: false
+		});
+	}
+</script>
+		</main>
+
+		<!--footer-->
+		<footer>
+	<div class="social">
+		<ul>
+	
+		<li>
+			<a href="http://github.com/" target="_blank">
+				<i class="fa fa-github"></i>
+			</a>
+		</li>
+	
+		<li>
+			<a href="http://github.com/" target="_blank">
+				<i class="fa fa-weibo"></i>
+			</a>
+		</li>
+	
+		<li>
+			<a href="http://github.com/" target="_blank">
+				<i class="fa fa-pinterest"></i>
+			</a>
+		</li>
+	
+		<li>
+			<a href="http://github.com/" target="_blank">
+				<i class="fa fa-instagram"></i>
+			</a>
+		</li>
+	
+		<li>
+			<a href="http://github.com/" target="_blank">
+				<i class="fa fa-twitter"></i>
+			</a>
+		</li>
+	
+		<li>
+			<a href="/atom.xml" target="_blank">
+				<i class="fa fa-rss"></i>
+			</a>
+		</li>
+			
+</ul>
+
+	</div>
+		
+	<div class="copyright">
+		<p>
+			 
+				&copy;2017 - 2019, content by eassy. All Rights Reserved.
+			
+			
+			
+
+	<!-- busuanzi -->
+	<!-- busuanzi -->
+
+		
+	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+	
+
+		<span id="busuanzi_container_page_pv">
+	  		本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+		</span>
+
+	
+
+
+
+
+		</p>
+		<p>
+			<a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a> Theme <a href="https://github.com/Sariay/hexo-theme-Annie" title="Annie" target="_blank" rel="noopener">Annie</a> by Sariay.
+			<a href="javascript:zh_tran('s');" class="zh_click" id="zh_click_s">简体</a> 
+			<a href="javascript:zh_tran('t');" class="zh_click" id="zh_click_t">繁體</a>				
+		</p>
+	</div>		
+</footer>
+		
+	<!-- set '1' to show motto in all pages! -->
+
+	<script src="/plugin/motto/motto.js"></script>
+	
+	<script type="text/javascript">
+		$(".motto").html( getMingYanContent() );
+	</script>	
+
+
+
+
+
+<!-- love effect -->
+
+	<script src="/plugin/love/love.js"></script>
+
+
+<!-- back to top -->
+
+	
+	<div id="totop">
+  		<a href="javascript:;" name="TOTOP" class="fa fa-arrow-up"></a>
+	</div>
+
+
+
+
+<!-- site analysis -->
+
+
+	<!-- site-analysis -->
+	
+	
+	
+	
+	
+ 
+
+<script src="/plugin/vibrant/vibrant.js"></script>
+<script src="/plugin/chinese/chinese.js"></script>
+<script src="/plugin/imgLazyLoader/yall.min.js"></script>
+<script src="/plugin/imgResize/jquery.resizeimagetoparent.min.js"></script>
+<script src="/plugin/nicescroll/jquery.nicescroll.js"></script>
+<script src="/js/resizediv.js"></script>
+<script src="/js/main.js"></script>
+	</body>	
+</html>

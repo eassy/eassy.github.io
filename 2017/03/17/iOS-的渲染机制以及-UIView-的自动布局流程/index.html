@@ -1,0 +1,959 @@
+<!--
+	作者：Sariay
+	时间：2018-09-25
+	描述：There may be a bug, but don't worry, QiLing(器灵) says that it can work normally!
+-->
+<!DOCTYPE html>
+<html class="html-loading">
+		
+
+<head><meta name="generator" content="Hexo 3.8.0">
+	<meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+  <title>
+    
+      iOS 的渲染机制以及 UIView 的自动布局流程 | Eassy
+    
+  </title>
+  <meta name="author" content="eassy">
+  <meta name="keywords" content>
+  <meta name="description" content="人性就是用来质疑生活的">
+	<!-- favicon -->
+  <link rel="shortcut icon" href="/img/favicon.ico">
+
+  <!-- css -->
+  <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/Annie.css">
+  
+  <!-- jquery -->
+	<script src="/js/jquery.min.js"></script>
+
+  <!-- leancloud -->
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+<script src="/js/leancloud.js"></script>
+</head>
+	<body>
+		<!-- Preloader -->
+
+	<div id="preloader">
+		<div class="pre-container">
+			
+				<div class="spinner">
+					<div class="double-bounce1"></div>
+					<div class="double-bounce2"></div>
+				</div>
+						
+		</div>
+	</div>
+
+
+<!-- header -->
+<header class="fixbackground" data-img-mode="normal" data-normal-src="/img/1.jpg" data-random-max="110" data-random-src="https://sariay.github.io/Random-img/">
+	<div class="mask">
+		<!-- Logo and navigation -->
+		<div class="h-header">
+			<div id="logo">
+				<a href="/">
+						
+						<img src="/img/logo.png" alt="Logo">
+					
+				</a>
+			</div>
+			
+			<div id="navigation-show">
+				<ul>
+	
+		<li class="menu-home">
+			<a href="/" class="menu-item-home">主页</a>
+		</li>
+	
+		<li class="menu-archive">
+			<a href="/archives" class="menu-item-archive">归档</a>
+		</li>
+	
+		<li class="menu-categories">
+			<a href="/categories" class="menu-item-categories">分类</a>
+		</li>
+	
+		<li class="menu-tags">
+			<a href="/tags" class="menu-item-tags">标签</a>
+		</li>
+	
+		<li class="menu-about">
+			<a href="/about" class="menu-item-about">关于</a>
+		</li>
+	
+		<li class="menu-gallery">
+			<a href="/gallery" class="menu-item-gallery">相册</a>
+		</li>
+	
+
+	
+</ul>
+			</div>				
+		</div>
+
+		<!-- motto -->
+		<div class="h-body">	
+			
+				<p class="motto"></p>
+			
+		</div>
+		
+		<!-- others: such as time... -->			
+		<div class="h-footer">
+			<a href="javascript:;" id="read-more"><i class="fa fa-angle-double-down" aria-hidden="true"></i>
+			</a>
+
+			
+				<!-- 
+	This is only a demo, please go to "https://time.is" to set your city time! 
+-->
+<style type="text/css">
+	.header-date {
+		font-size: 1.6rem;
+		color: #fff;
+		position: absolute;
+		bottom: 5px;
+		right: 1rem;
+		writing-mode: tb-rl;
+	}	
+	
+	.header-date a {
+		border-bottom: none;
+	}
+
+	@media only screen and (max-width: 768 ) {
+		.header-date {
+			font-size: 1rem;
+		}			
+	}
+</style>
+<div class="header-date">
+	<a href="https://time.is/Beijing" id="time_is_link" rel="nofollow"></a>
+	<span id="Beijing_z43d"></span>
+</div>
+<script src="//widget.time.is/zh.js"></script>
+<script>
+	time_is_widget.init({
+		Beijing_z43d:{
+			template:"DATE", 
+			date_format:"year年 monthname dnum日"
+		}
+	});
+</script>
+			
+		</div>
+	</div>
+</header>
+
+<div id="navigation-hide">
+	<!-- Progress bar -->
+	<div id="progress-bar"></div>
+
+	<!-- Progress percent -->
+	<div id="progress-percentage"><h1>0.0%</h1></div>
+
+	<div class="toc-switch"><span class="switch-button">目录</span></div>
+
+	<!-- Page title -->
+	<p>
+		
+			当前文章&nbsp;:&nbsp;《iOS 的渲染机制以及 UIView 的自动布局流程》
+		
+	</p>
+
+	<!-- Nav trigger for navigation-H-->
+	<a class="nav-trigger"><span></span></a>
+</div>
+
+<!-- Navigation in div(id="navigation-H") -->
+<nav class="nav-container" id="cd-nav">
+	<div class="nav-header">
+		<h3>Navigation</h3>
+		<a href="javascript:;" class="nav-close"></a>
+	</div>
+	<div class="nav-body">
+		<ul>
+	
+		<li class="menu-home">
+			<a href="/" class="menu-item-home">主页</a>
+		</li>
+	
+		<li class="menu-archive">
+			<a href="/archives" class="menu-item-archive">归档</a>
+		</li>
+	
+		<li class="menu-categories">
+			<a href="/categories" class="menu-item-categories">分类</a>
+		</li>
+	
+		<li class="menu-tags">
+			<a href="/tags" class="menu-item-tags">标签</a>
+		</li>
+	
+		<li class="menu-about">
+			<a href="/about" class="menu-item-about">关于</a>
+		</li>
+	
+		<li class="menu-gallery">
+			<a href="/gallery" class="menu-item-gallery">相册</a>
+		</li>
+	
+
+	
+</ul>
+	</div>
+	<div class="nav-footer">
+		<ul>
+	
+		<li>
+			<a href="http://github.com/" target="_blank">
+				<i class="fa fa-github"></i>
+			</a>
+		</li>
+	
+		<li>
+			<a href="http://github.com/" target="_blank">
+				<i class="fa fa-weibo"></i>
+			</a>
+		</li>
+	
+		<li>
+			<a href="http://github.com/" target="_blank">
+				<i class="fa fa-pinterest"></i>
+			</a>
+		</li>
+	
+		<li>
+			<a href="http://github.com/" target="_blank">
+				<i class="fa fa-instagram"></i>
+			</a>
+		</li>
+	
+		<li>
+			<a href="http://github.com/" target="_blank">
+				<i class="fa fa-twitter"></i>
+			</a>
+		</li>
+	
+		<li>
+			<a href="/atom.xml" target="_blank">
+				<i class="fa fa-rss"></i>
+			</a>
+		</li>
+			
+</ul>
+
+	</div>
+</nav>
+			
+		<!--main-->
+		<main>
+			<!--
+	时间：2018-11-17
+	描述：
+		插件名称：katelog.min.js
+		插件作者：KELEN
+		插件来源: https://github.com/KELEN/katelog
+-->
+
+	
+		<div class="layout-toc">
+			<div id="layout-toc">
+				<div class="k-catelog-list" id="catelog-list" data-title="文章目录"></div>
+			</div>
+		</div>
+
+		
+		<script src="/plugin/toc/katelog.min.js"></script>
+
+		
+	 
+
+<div class="layout-post">
+	<div id="layout-post">
+	<div class="article-title">
+		<i class="fa fa-paper-plane-o" aria-hidden="true"></i>
+		
+	<a href="/2017/03/17/iOS-的渲染机制以及-UIView-的自动布局流程/" itemprop="url">
+		iOS 的渲染机制以及 UIView 的自动布局流程
+	</a>
+
+	</div>
+
+	<div class="article-meta">
+		<span>
+			<i class="fa fa-calendar"></i>
+			
+
+
+	发布于
+
+	<a href="/2017/03/17/iOS-的渲染机制以及-UIView-的自动布局流程/" itemprop="url">
+		<time datetime="2017-03-17T05:39:52.000Z" itemprop="datePublished">
+	  		2017-03-17
+	  </time>
+	</a>
+	&nbsp;
+
+
+
+
+
+			
+
+
+
+
+	更新于
+
+	<a href="/2017/03/17/iOS-的渲染机制以及-UIView-的自动布局流程/" itemprop="url">
+		<time datetime="2017-03-17T05:39:52.000Z" itemprop="dateUpdated">
+	  		2017-03-17
+	  </time>
+	</a> 
+
+
+
+		</span>
+		<span>
+			<i class="fa fa-tags"></i>
+			
+	
+		<a href="/tags/iOS/" class=" ">
+			iOS
+		</a>
+	
+		
+		</span>
+		
+		
+
+
+
+	</div>
+
+	<div class="article-content" id="article-content">
+		<p>iOS 的界面渲染，是跟 RunLoop 分不开的，屏幕需要更新时，会调用 CPU 协同 GPU ，将界面数据渲染到屏幕上。。。<a id="more"></a></p>
+<h2 id="界面渲染"><a href="#界面渲染" class="headerlink" title="界面渲染"></a>界面渲染</h2><h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><p>同 PC 相似，移动设备也包含屏幕刷新与显卡刷新的概念。iOS 的显示系统，是由 VSync 驱动的，VSync 是用来确定GPU刷新频率和屏幕刷新频率同步的机制。VSync 信号由硬件时钟生成，频率取决于硬件，iPhone 真机上通常是 59.97，有两个缓冲区，即显示缓冲区，简称A、预备缓冲区，简称B，当 VSync 信号到来时，显示器显示 A 中的数据，同时GPU 生成 B 中的数据，并且在显示器显示 A 中数据结束后，将 B 中数据拷贝到 A 中，同时开始绘制下一部分的数据到 B 中。<br>那么是怎么保证这两个频率同步的呢？<br>当屏幕刷新率低于显卡刷新率时，GPU 会进行等待，只有 A 中的数据被显示以后，GPU 才会将数据绘制到 B 中，并在下一次循环中拷贝到 A ，从而显示；<br>当屏幕刷新率高于显卡刷新率时，显卡会暂时显示 A 中的数据，只有等待 B 中数据绘制完整以后，才会将 B 中数据在下一次循环中拷贝到 A。<br>在 VSync 信号到来后，系统的图形服务会通过 CADisplayLink 等机制通知 App ，App 主线程开始执行计算，包括视图创建、布局计算、图片解码、文本绘制等等，然后 CPU 将计算好的内容提交到 GPU ，GPU 去执行变换、合成、渲染。随后 GPU 将渲染结果提交到后备缓冲区 B 。  </p>
+<h3 id="渲染时机"><a href="#渲染时机" class="headerlink" title="渲染时机"></a>渲染时机</h3><p>那么具体体现在 UIView 中是怎样的呢，在代码操作了 UI 时，比如改变了 Frame ，更新了 UIView/CALayer 层次时，或手动调用了 UIView/CALayer 的 setNeedsLayout 、setNeedsDisplay 方法后，这个 UIView/CALayer 就会被标记为待处理状态，并被提交到一个全局的容器中，当 RunLoop 监听到事件被唤醒时(事件可能有多种，比如触摸，动画，timer，或者CADisplayLink等)，CPU 会执行计算，当所有操作结束，RunLoop 即将休眠时，所有的中间状态会被提交到 GPU ，等待下一次 VSync 刷新流程时展示到屏幕上。</p>
+<h2 id="UIView-的自动布局流程-转"><a href="#UIView-的自动布局流程-转" class="headerlink" title="UIView 的自动布局流程(转)"></a>UIView 的自动布局流程(转)</h2><h3 id="大体流程"><a href="#大体流程" class="headerlink" title="大体流程"></a>大体流程</h3><p>基本上分为三步：<br>1.更新约束 (updateConstraints)<br>2.通过约束关系计算出 center 和 bounds 对 subViews 布局(layoutSubViews)<br>3.将布局好的 view 显示到屏幕上 (drawRect)</p>
+<p>与之相关的方法有如下八个：  </p>
+<h4 id="更新约束："><a href="#更新约束：" class="headerlink" title="更新约束："></a>更新约束：</h4><p>1.setNeedsUpdateConstraints：将 view 标记为需要更新约束，并在稍后触发 updateConstraintsIfNeed。<br>2.updateConstraintsIfNeed：系统会在每个布局节点自动调用此方法。只有约束被标记为需要更新才会调用 updateConstraints。此方法可以手动调用，子类不需要重写此方法。<br>3.updateConstraints：更新约束的实际方法。</p>
+<h4 id="布局："><a href="#布局：" class="headerlink" title="布局："></a>布局：</h4><p>1.setNeedsLayout：将 view 标记为需要更新布局，并在稍后触发 layoutIfNeed。当 view 的布局改变时会自动调用。<br>2.layoutIfNeed：系统会在每个布局节点自动调用此方法。只有布局被标记为需要更新时，才会调用 layoutSubViews。<br>3.layoutSubViews：实际布局。</p>
+<h4 id="绘制"><a href="#绘制" class="headerlink" title="绘制"></a>绘制</h4><p>1.setNeedsDisplay：将 view 标记为需要重绘，并在下次绘制循环触发 drawRect 。改变布局并不会触发此方法。<br>2.drawRect：绘制，不能直接调用。</p>
+<h3 id="详细过程"><a href="#详细过程" class="headerlink" title="详细过程"></a>详细过程</h3><p>当你使用 Auto Layout 去努力创造你想要的布局时，特别是同时伴随高级使用场景和动画时，放下使用场景，去回想布局过程是怎样工作的，将会带来很大的帮助。<br>相比使用frame布局，Auto Layout 在 Views 可以被显示之前引入了两个额外的处理工序：更新约束，布局视图<br>每一步都依赖前一步；显示依赖布局，布局依赖约束。</p>
+<h4 id="第一步：更新约束（updateConstraints）"><a href="#第一步：更新约束（updateConstraints）" class="headerlink" title="第一步：更新约束（updateConstraints）"></a>第一步：更新约束（updateConstraints）</h4><p>更新约束可以被认为是一个测量的过程。他从下到上 bottom-up (from subview to super view)去准备在布局时直接设置 views 的 frame 所需要的信息。<br>你可用setNeedsUpdateConstraints手动触发这个过程。也可以通过对自身约束系统的改变来自动触发这个过程。即便这样，当你在定制 views 中改变可能影响布局的的约束时通知 Auto Layout 也是有必要的。<br>说到定制的 views，你可以重写updateConstraints以添加你的 view 在这个阶段需要的局部约束。</p>
+<h4 id="第二步：布局（Layout）"><a href="#第二步：布局（Layout）" class="headerlink" title="第二步：布局（Layout）"></a>第二步：布局（Layout）</h4><p>布局是从上到下 top-down (from super view to subview)进行的。布局的过程事实上是请求约束系统的结果再通过 center 和 bounds 设置给 views。<br>你可以通过调用setNeedsLayout触发这个过程。setNeedsLayout 实际上并没有在接下来立马请求布局，而是把你的请求记录下来随后刷新。<br>通过这种方法你不用担心setNeedsLayout调用太频繁，因为所有的布局请求会被合并到一个布局过程。你可以通过调用layoutIfNeeded来立即触发更新视图层的布局过程，如果你下一步操作依赖于视图最新的布局。<br>在你的定制 view 中你可以通过重写layoutSubviews去获取布局过程的完全控制。我们将在随后展示这样的用法。</p>
+<h4 id="第三部：显示（Display）"><a href="#第三部：显示（Display）" class="headerlink" title="第三部：显示（Display）"></a>第三部：显示（Display）</h4><p>最后，显示过程将 views 渲染到屏幕，这个过程是独立的，不管你用没用 Auto Layout。<br>显示过程从上到下 top-down (from super view to subview) 进行，可以用 setNeedsDisplay 触发，并且会整合所有请求延时重绘。在你的定制 views 重写熟悉的drawRect:方法是你获得 views 在显示过程这个阶段的完全控制的途径。<br>因为每一步都依赖于前一步，所以显示过程将会触发布局过程（如果有任何布局在等待改变）。同样，布局过程将会触发新更新约束过程（如果约束系统有在等到的改变）。<br>需要记住的是，这三个过程的调用顺序并不是唯一的。<br>布局（基于约束 Constraint-based 的）是一个重复的过程。在布局过程中基于上一次布局结果改变约束，将会在下一个布局过程后再次触发约束更新。<br>这将有助于生成 views 高级定制的布局。但是你也有陷入无限循环的风险，如果每个layoutSubviews方法中调用并唤起了另外一个布局过程的话。</p>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>如果想要立即改变约束，需要在setNeedsUpdateConstraints后调用updateConstraintsIfNeeded。<br>如果想要立即改变布局，需要在setNeedsLayout后调用layoutIfNeeded。</p>
+<p>VC 布局时，会从最末级的 view 开始，更新约束，最终调用 VC 的 updateConstraints，然后从 VC 的 viewDidLayoutSubviews 开始，从根到末一级一级的调用子 view 的 layoutSubviews 进行布局，最后从根到末一级一级的调用子 view 的 drawRect 进行绘制。<br>当我们使用 masonry 创建约束以后，被更改的 view 会被调用 setNeedsLayout 标记为需要更新布局，然后 view 会调用 updateConstraints 更新约束，然后调用 layoutSubviews 进行布局。</p>
+	
+	</div>
+	
+	<div id="current-post-cover" data-scr="/img/cart_cover.jpg"></div>
+
+	<!-- relate post, comment...-->
+	<div class="investment-container">
+		<div class="investment-header">
+			<div class="investment-title-1">
+				<div class="on">相关文章</div>
+				<div>评论</div>
+				<div>分享</div>
+			</div>
+			<div class="investment-title-2">	            
+				
+	<span>
+		<a href="javascript: window.scrollTo(0, 0);">返回顶部</a>
+		
+			<a href="/2017/05/12/字符编码-转/" title="字符编码(转)" rel="prev">
+				&laquo;上一篇
+			</a>
+		
+		
+			<a href="/2017/03/16/一个简单的SceneKit场景/" title="一个简单的SceneKit场景" rel="next">
+				下一篇&raquo;
+			</a>
+			
+	</span>
+
+
+      		
+			</div>	
+		</div>
+		
+		<div class="investment-content">
+			<div class="investment-content-list">
+				
+
+<div class="relate-post">
+	
+		<ul>
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2018/12/19/OAStackView/" title="OAStackView">
+								OAStackView			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								十二月 19日, 2018				
+							</p>
+							<p class="relate-post-content">
+								UIStackView 的理解UIStackView 是 iOS9 推出的新特性，允许我们线性的去布局一个界面，在之前没有用到过，但是新公司用到的地方挺多，所以写一篇文章介绍一下，也加深自己的理解。使用 UIStackView 布局，...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2018/12/19/OAStackView/" title="OAStackView">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="OAStackView">
+							</a>
+						</div>
+					</li>											
+			
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2018/12/17/NSURLProtocol/" title="NSURLProtocol">
+								NSURLProtocol			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								十二月 17日, 2018				
+							</p>
+							<p class="relate-post-content">
+								在 Apple 的文档 URL Loading System 中，详细介绍了一个请求是如何创建、发起、回传数据的，还包括了证书认证，cookie 等一系列的操作，但是好像唯独遗漏了一个特殊的类： NSURLProtocol ，其实在我...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2018/12/17/NSURLProtocol/" title="NSURLProtocol">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="NSURLProtocol">
+							</a>
+						</div>
+					</li>											
+			
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2018/12/07/iOS-下的-https-单向和双向认证/" title="iOS 下的 https 单向和双向认证">
+								iOS 下的 https 单向和双向认证			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								十二月 7日, 2018				
+							</p>
+							<p class="relate-post-content">
+								iOS 操作系统，已经对请求中的认证需求(有的文章中称为 挑战)，做了简单的处理。当我们使用NSURLSession发起一次请求时，假如服务端返回数据要求客户端进行需求认证，不管这次需求认证是 HTTP Basic 类型(例如要求输入...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2018/12/07/iOS-下的-https-单向和双向认证/" title="iOS 下的 https 单向和双向认证">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="iOS 下的 https 单向和双向认证">
+							</a>
+						</div>
+					</li>											
+			
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2018/12/04/Apple-文档Authentication-and-Credentials-翻译/" title="Apple 文档 Authentication and Credentials 的翻译">
+								Apple 文档 Authentication and Credentials 的翻译			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								十二月 4日, 2018				
+							</p>
+							<p class="relate-post-content">
+								对 Apple 的 认证和证书 开发文档的一个翻译 
+Handling an Authentication ChallengeRespond appropriately when a server demands authentica...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2018/12/04/Apple-文档Authentication-and-Credentials-翻译/" title="Apple 文档 Authentication and Credentials 的翻译">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="Apple 文档 Authentication and Credentials 的翻译">
+							</a>
+						</div>
+					</li>											
+			
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2018/12/04/最新-SDWebImage-解读/" title="最新 SDWebImage 解读">
+								最新 SDWebImage 解读			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								十二月 4日, 2018				
+							</p>
+							<p class="relate-post-content">
+								针对于 SDWebImage 4.0 版本的源码分析
+View 层负责 view 的 loading 控件管理，每个 view 的请求发起、取消入口。
+UIView+WebCacheOperation 分类负责管理每次请求产生的 SD...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2018/12/04/最新-SDWebImage-解读/" title="最新 SDWebImage 解读">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="最新 SDWebImage 解读">
+							</a>
+						</div>
+					</li>											
+			
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2018/11/20/RunLoop-CommonModes/" title="RunLoop-CommonModes">
+								RunLoop-CommonModes			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								十一月 20日, 2018				
+							</p>
+							<p class="relate-post-content">
+								RunLoop 的 CommonModes ，其实不是一个真正的 modes，而是一个伪 mode.. ，每个 _CFRunLoopRef 的数据结构大致是这样的：
+123456789101112131415161718 struct...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2018/11/20/RunLoop-CommonModes/" title="RunLoop-CommonModes">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="RunLoop-CommonModes">
+							</a>
+						</div>
+					</li>											
+			
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2018/11/15/NSCondition-锁/" title="NSCondition 锁">
+								NSCondition 锁			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								十一月 15日, 2018				
+							</p>
+							<p class="relate-post-content">
+								最近对于 NSCondition 感到有些疑惑，所以写点东西进行研究一下。 
+用法首先 NSCondition 有以下几个方法：
+12345- (void)wait;   让线程陷入睡眠，将锁的权利交出。- (BOOL)waitUnt...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2018/11/15/NSCondition-锁/" title="NSCondition 锁">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="NSCondition 锁">
+							</a>
+						</div>
+					</li>											
+			
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2017/02/21/封装一个转场动画库/" title="封装一个转场动画库">
+								封装一个转场动画库			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								二月 21日, 2017				
+							</p>
+							<p class="relate-post-content">
+								自从 iOS 7 以后，就可以自定义跳转动画了，苹果开放了相关的 API ，在这里做一个基本的总结。 
+原理 UIViewControllerTransitioningDelegate
+1234567891011121314@prot...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2017/02/21/封装一个转场动画库/" title="封装一个转场动画库">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="封装一个转场动画库">
+							</a>
+						</div>
+					</li>											
+			
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2017/02/04/创建-CocoaPods-库并上传/" title="创建 CocoaPods 库并上传">
+								创建 CocoaPods 库并上传			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								二月 4日, 2017				
+							</p>
+							<p class="relate-post-content">
+								公司会开发多个 App ，这样创建一个公共的 pod 库是很有必要的，索性昨天趁下班时创建了一个最简单的 pod 库，就把过程记下来吧。
+注册 pods trunk 账号这一步没有什么难度，在终端中注册就好了  
+1$ pod tru...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2017/02/04/创建-CocoaPods-库并上传/" title="创建 CocoaPods 库并上传">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="创建 CocoaPods 库并上传">
+							</a>
+						</div>
+					</li>											
+			
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2018/11/15/18-11-15-面试复盘/" title="18.11.15 面试复盘">
+								18.11.15 面试复盘			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								十一月 15日, 2018				
+							</p>
+							<p class="relate-post-content">
+								今天这次记录是时间最短的一个，我提前 15 分钟到了面试地点，半个小时就面完了，面试官很温柔，应该是移动端负责人，非 iOS 出身，对技术的提问也是浅尝辄止，主要是考察被面试者的项目经验，逻辑思维等。 
+OC 的内存管理原理老生常谈，...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2018/11/15/18-11-15-面试复盘/" title="18.11.15 面试复盘">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="18.11.15 面试复盘">
+							</a>
+						</div>
+					</li>											
+			
+			
+		</ul>
+	
+</div>	
+			</div>
+			<div class="investment-content-list">
+				<div class="layout-comment">
+
+	
+
+		
+
+			<!-- I don't know !!!-->
+			<div>Please check the comment setting in config.yml of hexo-theme-Annie!</div>
+			
+		
+		
+	
+
+</div>
+			</div>
+			<div class="investment-content-list">
+				<div class="layout-share">
+	
+	
+
+		
+			
+			<!-- socialShare share -->
+			<div class="social-share"></div>
+
+<!--  css & js -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+<script async src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+			
+		
+		
+	
+</div>
+
+
+			</div>
+		</div>	
+	</div>
+	</div>
+</div>
+
+
+
+	<!-- leancloud -->
+	<!--
+	时间：2018-11-27
+	描述：
+		文章访问量：visitors
+		文章喜欢量：likes	
+		文章排行榜：topNPost
+		其他得说明：
+			01-Cookie相关的函数 
+				https://blog.csdn.net/somehow1002/article/details/78511541（Author：somehow1002）
+			02-visitors相关的函数 
+				https://blog.csdn.net/u013553529/article/details/63357382（Author：爱博客大伯）
+				https://notes.doublemine.me/2015-10-21-为NexT主题添加文章阅读量统计功能.html（Author：夏末）
+			03-topNPost相关的函数
+				https://hoxis.github.io/hexo-next-read-rank.html（Author：hoxis）
+			04-likes相关的函数，
+				参考了01 & 02进行简单的设计与实现
+-->
+
+
+	
+
+
+<!-- show math formula -->
+
+
+
+	 
+	<script src="/plugin/clipboard/clipboard.js"></script>
+	<script>
+		// Copy code !
+	    function codePreprocessing() {
+	        $("#article-content .highlight").each(function() {
+
+	            $(this).wrap('<div id="post-code"></div>');
+
+	        })
+
+	        $("#article-content #post-code").each(function() {
+
+	            $(this).prepend('<nav class="copy-nav"><span><i class="code-language"></i></span></nav>');
+
+	        })
+
+	        $("#article-content .copy-nav").each(function() {
+	            var temp = $(this).next().attr('class'),
+	                language = ((temp.length > 9) && (temp != null)) ? temp.substr(10) : "none"; //why 9? Need to check language?
+
+	            $(this).find('.code-language').text(language);
+
+	            $(this).append('<span class="copy-btn"><i class="fa fa-copy" aria-hidden="true"></i></span>');
+
+	        });
+	    }
+
+		function codeCopy() {
+		    $('#article-content #post-code').each(function(i) {
+		        var codeCopyId = 'codeCopy-' + i;
+
+		        var codeNode = $(this).find('.code'),
+		            copyButton = $(this).find('.copy-btn');
+
+		        codeNode.attr('id', codeCopyId);
+		        copyButton.attr('data-clipboard-target-id', codeCopyId);
+		    })
+
+		    
+			var clipboard = new ClipboardJS('.copy-btn', {
+					target: function(trigger) {
+						return document.getElementById(trigger.getAttribute('data-clipboard-target-id'));
+					}
+		      	});
+
+			//pure js
+			function showTooltip(elem, msg) {		   
+				elem.setAttribute('aria-label', msg);
+				elem.setAttribute('class', 'copy-btn copy-status');
+				setTimeout(function() {
+					elem.setAttribute('class', 'copy-btn');
+				}, 2000);
+			}
+
+			clipboard.on('success', function(e) {
+			    e.clearSelection();
+			    console.info('Action:', e.action);		   
+			    console.info('Trigger:', e.trigger);
+			    showTooltip(e.trigger, 'Copied!');
+			    
+			});
+			clipboard.on('error', function(e) {
+			    console.error('Action:', e.action);
+			    console.error('Trigger:', e.trigger);
+			});
+		
+
+		}
+
+		if ($('.layout-post').length) {
+		    codePreprocessing();
+		    codeCopy();
+		} 
+	</script>
+
+
+
+
+
+<link rel="stylesheet" href="/plugin/fancybox/jquery.fancybox.css">
+<script src="/plugin/fancybox/jquery.fancybox.js"></script>
+
+<script type="text/javascript">
+	var titleID = $('.article-title a'),
+		imageID = $('.article-content img'),
+		videoID = $('.article-content video');
+
+	var postTitle = titleID.text() ? titleID.text() : "No post title!";
+
+	imageID.each(function() {
+		var imgPath = $(this).attr('src'),
+			imgTitle = $(this).attr('alt') ? $(this).attr('alt') : "No image description!";
+
+		//给每个匹配的<img>元素打包, 即添加父元素<a>
+		$(this).wrap('<a data-fancybox="gallery" data-caption=" 《 ' + postTitle + ' 》 ' + imgTitle + ' "  href=" ' + imgPath + ' "> </a>');
+	});
+
+	videoID.each(function() {
+		var videoPath = $(this).attr('src');
+
+		//给每个匹配的<img>元素打包, 即添加父元素<a>
+		$(this).wrap('<a data-fancybox href=" ' + videoPath + ' "> </a>');
+	});
+	//TODO：支持html5 video
+
+	if($('#layout-post').length) {
+		$('[data-fancybox="gallery"]').fancybox({
+			loop: true,
+			buttons: [
+				"zoom",
+				"share",
+				"slideShow",
+				"fullScreen",
+				//"download",
+				"thumbs",
+				"close"
+			],
+			protect: false
+		});
+	}
+</script>
+		</main>
+
+		<!--footer-->
+		<footer>
+	<div class="social">
+		<ul>
+	
+		<li>
+			<a href="http://github.com/" target="_blank">
+				<i class="fa fa-github"></i>
+			</a>
+		</li>
+	
+		<li>
+			<a href="http://github.com/" target="_blank">
+				<i class="fa fa-weibo"></i>
+			</a>
+		</li>
+	
+		<li>
+			<a href="http://github.com/" target="_blank">
+				<i class="fa fa-pinterest"></i>
+			</a>
+		</li>
+	
+		<li>
+			<a href="http://github.com/" target="_blank">
+				<i class="fa fa-instagram"></i>
+			</a>
+		</li>
+	
+		<li>
+			<a href="http://github.com/" target="_blank">
+				<i class="fa fa-twitter"></i>
+			</a>
+		</li>
+	
+		<li>
+			<a href="/atom.xml" target="_blank">
+				<i class="fa fa-rss"></i>
+			</a>
+		</li>
+			
+</ul>
+
+	</div>
+		
+	<div class="copyright">
+		<p>
+			 
+				&copy;2017 - 2019, content by eassy. All Rights Reserved.
+			
+			
+			
+
+	<!-- busuanzi -->
+	<!-- busuanzi -->
+
+		
+	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+	
+
+		<span id="busuanzi_container_page_pv">
+	  		本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+		</span>
+
+	
+
+
+
+
+		</p>
+		<p>
+			<a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a> Theme <a href="https://github.com/Sariay/hexo-theme-Annie" title="Annie" target="_blank" rel="noopener">Annie</a> by Sariay.
+			<a href="javascript:zh_tran('s');" class="zh_click" id="zh_click_s">简体</a> 
+			<a href="javascript:zh_tran('t');" class="zh_click" id="zh_click_t">繁體</a>				
+		</p>
+	</div>		
+</footer>
+		
+	<!-- set '1' to show motto in all pages! -->
+
+	<script src="/plugin/motto/motto.js"></script>
+	
+	<script type="text/javascript">
+		$(".motto").html( getMingYanContent() );
+	</script>	
+
+
+
+
+
+<!-- love effect -->
+
+	<script src="/plugin/love/love.js"></script>
+
+
+<!-- back to top -->
+
+	
+	<div id="totop">
+  		<a href="javascript:;" name="TOTOP" class="fa fa-arrow-up"></a>
+	</div>
+
+
+
+
+<!-- site analysis -->
+
+
+	<!-- site-analysis -->
+	
+	
+	
+	
+	
+ 
+
+<script src="/plugin/vibrant/vibrant.js"></script>
+<script src="/plugin/chinese/chinese.js"></script>
+<script src="/plugin/imgLazyLoader/yall.min.js"></script>
+<script src="/plugin/imgResize/jquery.resizeimagetoparent.min.js"></script>
+<script src="/plugin/nicescroll/jquery.nicescroll.js"></script>
+<script src="/js/resizediv.js"></script>
+<script src="/js/main.js"></script>
+	</body>	
+</html>
